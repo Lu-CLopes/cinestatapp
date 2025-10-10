@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "798752324745",
+    "project_id": "cinestat-384ba",
+    "storage_bucket": "cinestat-384ba.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798752324745:android:30603fb19b451ba3c61a58",
+        "android_client_info": {
+          "package_name": "com.example.cinestatapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgkS-d5p1vZTh_tcSY0g45Z3V4ekl0cgk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
