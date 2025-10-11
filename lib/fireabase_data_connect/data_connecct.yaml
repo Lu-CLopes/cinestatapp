@@ -1,0 +1,6 @@
+# Configuração do Firebase Data Connect
+schema:
+  - schema/users.sql
+database:
+  provider: firestore
+  name: cinema_stat_data
