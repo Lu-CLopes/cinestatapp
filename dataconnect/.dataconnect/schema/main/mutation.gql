@@ -1,0 +1,1122 @@
+extend type Mutation {
+  """
+  ✨ Insert a single `Audience` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  audience_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: Audience_Data!
+  ): Audience_KeyOutput! @fdc_generated(from: "Audience", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `AudienceProfile` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  audienceProfile_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: AudienceProfile_Data!
+  ): AudienceProfile_KeyOutput! @fdc_generated(from: "AudienceProfile", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `Indicator` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  indicator_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: Indicator_Data!
+  ): Indicator_KeyOutput! @fdc_generated(from: "Indicator", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `Movie` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  movie_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: Movie_Data!
+  ): Movie_KeyOutput! @fdc_generated(from: "Movie", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `Product` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  product_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: Product_Data!
+  ): Product_KeyOutput! @fdc_generated(from: "Product", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `Sale` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  sale_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: Sale_Data!
+  ): Sale_KeyOutput! @fdc_generated(from: "Sale", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `Session` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  session_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: Session_Data!
+  ): Session_KeyOutput! @fdc_generated(from: "Session", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `Simulation` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  simulation_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: Simulation_Data!
+  ): Simulation_KeyOutput! @fdc_generated(from: "Simulation", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `Unit` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  unit_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: Unit_Data!
+  ): Unit_KeyOutput! @fdc_generated(from: "Unit", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert a single `User` into the table and return its key. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  user_insert(
+    """
+    Data object to insert into the table.
+    """
+    data: User_Data!
+  ): User_KeyOutput! @fdc_generated(from: "User", purpose: INSERT_SINGLE)
+  """
+  ✨ Insert `Audience` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  audience_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [Audience_Data!]!
+  ): [Audience_KeyOutput!]! @fdc_generated(from: "Audience", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `AudienceProfile` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  audienceProfile_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [AudienceProfile_Data!]!
+  ): [AudienceProfile_KeyOutput!]! @fdc_generated(from: "AudienceProfile", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `Indicator` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  indicator_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [Indicator_Data!]!
+  ): [Indicator_KeyOutput!]! @fdc_generated(from: "Indicator", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `Movie` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  movie_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [Movie_Data!]!
+  ): [Movie_KeyOutput!]! @fdc_generated(from: "Movie", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `Product` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  product_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [Product_Data!]!
+  ): [Product_KeyOutput!]! @fdc_generated(from: "Product", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `Sale` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  sale_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [Sale_Data!]!
+  ): [Sale_KeyOutput!]! @fdc_generated(from: "Sale", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `Session` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  session_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [Session_Data!]!
+  ): [Session_KeyOutput!]! @fdc_generated(from: "Session", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `Simulation` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  simulation_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [Simulation_Data!]!
+  ): [Simulation_KeyOutput!]! @fdc_generated(from: "Simulation", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `Unit` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  unit_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [Unit_Data!]!
+  ): [Unit_KeyOutput!]! @fdc_generated(from: "Unit", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert `User` objects into the table and return their keys. Columns not specified in `data` will receive defaults (e.g. `null`).
+  """
+  user_insertMany(
+    """
+    List of data objects to insert into the table.
+    """
+    data: [User_Data!]!
+  ): [User_KeyOutput!]! @fdc_generated(from: "User", purpose: INSERT_MULTIPLE)
+  """
+  ✨ Insert or update a single `Audience` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Audience`.
+  """
+  audience_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: Audience_Data!
+  ): Audience_KeyOutput! @fdc_generated(from: "Audience", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `AudienceProfile` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `AudienceProfile`.
+  """
+  audienceProfile_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: AudienceProfile_Data!
+  ): AudienceProfile_KeyOutput! @fdc_generated(from: "AudienceProfile", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `Indicator` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Indicator`.
+  """
+  indicator_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: Indicator_Data!
+  ): Indicator_KeyOutput! @fdc_generated(from: "Indicator", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `Movie` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Movie`.
+  """
+  movie_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: Movie_Data!
+  ): Movie_KeyOutput! @fdc_generated(from: "Movie", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `Product` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Product`.
+  """
+  product_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: Product_Data!
+  ): Product_KeyOutput! @fdc_generated(from: "Product", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `Sale` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Sale`.
+  """
+  sale_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: Sale_Data!
+  ): Sale_KeyOutput! @fdc_generated(from: "Sale", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `Session` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Session`.
+  """
+  session_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: Session_Data!
+  ): Session_KeyOutput! @fdc_generated(from: "Session", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `Simulation` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Simulation`.
+  """
+  simulation_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: Simulation_Data!
+  ): Simulation_KeyOutput! @fdc_generated(from: "Simulation", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `Unit` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Unit`.
+  """
+  unit_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: Unit_Data!
+  ): Unit_KeyOutput! @fdc_generated(from: "Unit", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update a single `User` into the table, based on the primary key. Returns the key of the newly inserted or existing updated `User`.
+  """
+  user_upsert(
+    """
+    Data object to insert or update if it already exists.
+    """
+    data: User_Data!
+  ): User_KeyOutput! @fdc_generated(from: "User", purpose: UPSERT_SINGLE)
+  """
+  ✨ Insert or update `Audience` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Audience`.
+  """
+  audience_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [Audience_Data!]!
+  ): [Audience_KeyOutput!]! @fdc_generated(from: "Audience", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `AudienceProfile` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `AudienceProfile`.
+  """
+  audienceProfile_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [AudienceProfile_Data!]!
+  ): [AudienceProfile_KeyOutput!]! @fdc_generated(from: "AudienceProfile", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `Indicator` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Indicator`.
+  """
+  indicator_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [Indicator_Data!]!
+  ): [Indicator_KeyOutput!]! @fdc_generated(from: "Indicator", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `Movie` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Movie`.
+  """
+  movie_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [Movie_Data!]!
+  ): [Movie_KeyOutput!]! @fdc_generated(from: "Movie", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `Product` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Product`.
+  """
+  product_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [Product_Data!]!
+  ): [Product_KeyOutput!]! @fdc_generated(from: "Product", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `Sale` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Sale`.
+  """
+  sale_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [Sale_Data!]!
+  ): [Sale_KeyOutput!]! @fdc_generated(from: "Sale", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `Session` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Session`.
+  """
+  session_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [Session_Data!]!
+  ): [Session_KeyOutput!]! @fdc_generated(from: "Session", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `Simulation` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Simulation`.
+  """
+  simulation_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [Simulation_Data!]!
+  ): [Simulation_KeyOutput!]! @fdc_generated(from: "Simulation", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `Unit` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `Unit`.
+  """
+  unit_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [Unit_Data!]!
+  ): [Unit_KeyOutput!]! @fdc_generated(from: "Unit", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Insert or update `User` objects into the table, based on the primary key. Returns the key of the newly inserted or existing updated `User`.
+  """
+  user_upsertMany(
+    """
+    List of data objects to insert or update if it already exists.
+    """
+    data: [User_Data!]!
+  ): [User_KeyOutput!]! @fdc_generated(from: "User", purpose: UPSERT_MULTIPLE)
+  """
+  ✨ Update a single `Audience` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Audience` or `null` if not found.
+  """
+  audience_update(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Audience_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Audience_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: Audience_Data!
+  ): Audience_KeyOutput @fdc_generated(from: "Audience", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `AudienceProfile` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `AudienceProfile` or `null` if not found.
+  """
+  audienceProfile_update(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: AudienceProfile_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: AudienceProfile_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: AudienceProfile_Data!
+  ): AudienceProfile_KeyOutput @fdc_generated(from: "AudienceProfile", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `Indicator` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Indicator` or `null` if not found.
+  """
+  indicator_update(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Indicator_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Indicator_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: Indicator_Data!
+  ): Indicator_KeyOutput @fdc_generated(from: "Indicator", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `Movie` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Movie` or `null` if not found.
+  """
+  movie_update(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Movie_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Movie_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: Movie_Data!
+  ): Movie_KeyOutput @fdc_generated(from: "Movie", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `Product` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Product` or `null` if not found.
+  """
+  product_update(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Product_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Product_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: Product_Data!
+  ): Product_KeyOutput @fdc_generated(from: "Product", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `Sale` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Sale` or `null` if not found.
+  """
+  sale_update(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Sale_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Sale_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: Sale_Data!
+  ): Sale_KeyOutput @fdc_generated(from: "Sale", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `Session` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Session` or `null` if not found.
+  """
+  session_update(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Session_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Session_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: Session_Data!
+  ): Session_KeyOutput @fdc_generated(from: "Session", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `Simulation` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Simulation` or `null` if not found.
+  """
+  simulation_update(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Simulation_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Simulation_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: Simulation_Data!
+  ): Simulation_KeyOutput @fdc_generated(from: "Simulation", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `Unit` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `Unit` or `null` if not found.
+  """
+  unit_update(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Unit_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Unit_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: Unit_Data!
+  ): Unit_KeyOutput @fdc_generated(from: "Unit", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update a single `User` based on `id`, `key` or `first`, setting columns specified in `data`. Returns the key of the updated `User` or `null` if not found.
+  """
+  user_update(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: User_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: User_FirstRow
+
+    """
+    Data object containing fields to be updated.
+    """
+    data: User_Data!
+  ): User_KeyOutput @fdc_generated(from: "User", purpose: UPDATE_SINGLE)
+  """
+  ✨ Update `Audience` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  audience_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: Audience_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: Audience_Data!
+  ): Int! @fdc_generated(from: "Audience", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `AudienceProfile` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  audienceProfile_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: AudienceProfile_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: AudienceProfile_Data!
+  ): Int! @fdc_generated(from: "AudienceProfile", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `Indicator` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  indicator_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: Indicator_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: Indicator_Data!
+  ): Int! @fdc_generated(from: "Indicator", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `Movie` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  movie_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: Movie_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: Movie_Data!
+  ): Int! @fdc_generated(from: "Movie", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `Product` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  product_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: Product_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: Product_Data!
+  ): Int! @fdc_generated(from: "Product", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `Sale` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  sale_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: Sale_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: Sale_Data!
+  ): Int! @fdc_generated(from: "Sale", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `Session` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  session_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: Session_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: Session_Data!
+  ): Int! @fdc_generated(from: "Session", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `Simulation` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  simulation_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: Simulation_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: Simulation_Data!
+  ): Int! @fdc_generated(from: "Simulation", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `Unit` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  unit_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: Unit_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: Unit_Data!
+  ): Int! @fdc_generated(from: "Unit", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Update `User` objects matching `where` conditions (or `all`, if true) according to `data`. Returns the number of rows updated.
+  """
+  user_updateMany(
+    """
+    Filter condition to specify which rows to update.
+    """
+    where: User_Filter
+
+    """
+    Set to true to update all rows.
+    """
+    all: Boolean = false
+
+    """
+    Data object containing fields to update.
+    """
+    data: User_Data!
+  ): Int! @fdc_generated(from: "User", purpose: UPDATE_MULTIPLE)
+  """
+  ✨ Delete a single `Audience` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  audience_delete(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Audience_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Audience_FirstRow
+  ): Audience_KeyOutput @fdc_generated(from: "Audience", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `AudienceProfile` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  audienceProfile_delete(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: AudienceProfile_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: AudienceProfile_FirstRow
+  ): AudienceProfile_KeyOutput @fdc_generated(from: "AudienceProfile", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `Indicator` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  indicator_delete(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Indicator_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Indicator_FirstRow
+  ): Indicator_KeyOutput @fdc_generated(from: "Indicator", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `Movie` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  movie_delete(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Movie_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Movie_FirstRow
+  ): Movie_KeyOutput @fdc_generated(from: "Movie", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `Product` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  product_delete(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Product_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Product_FirstRow
+  ): Product_KeyOutput @fdc_generated(from: "Product", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `Sale` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  sale_delete(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Sale_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Sale_FirstRow
+  ): Sale_KeyOutput @fdc_generated(from: "Sale", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `Session` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  session_delete(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Session_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Session_FirstRow
+  ): Session_KeyOutput @fdc_generated(from: "Session", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `Simulation` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  simulation_delete(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Simulation_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Simulation_FirstRow
+  ): Simulation_KeyOutput @fdc_generated(from: "Simulation", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `Unit` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  unit_delete(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Unit_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Unit_FirstRow
+  ): Unit_KeyOutput @fdc_generated(from: "Unit", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete a single `User` based on `id`, `key` or `first` and return its key (or `null` if not found).
+  """
+  user_delete(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: User_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: User_FirstRow
+  ): User_KeyOutput @fdc_generated(from: "User", purpose: DELETE_SINGLE)
+  """
+  ✨ Delete `Audience` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  audience_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: Audience_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "Audience", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `AudienceProfile` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  audienceProfile_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: AudienceProfile_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "AudienceProfile", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `Indicator` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  indicator_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: Indicator_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "Indicator", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `Movie` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  movie_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: Movie_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "Movie", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `Product` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  product_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: Product_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "Product", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `Sale` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  sale_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: Sale_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "Sale", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `Session` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  session_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: Session_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "Session", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `Simulation` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  simulation_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: Simulation_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "Simulation", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `Unit` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  unit_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: Unit_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "Unit", purpose: DELETE_MULTIPLE)
+  """
+  ✨ Delete `User` objects matching `where` conditions (or `all`, if true). Returns the number of rows deleted.
+  """
+  user_deleteMany(
+    """
+    Filter condition to specify which rows to delete.
+    """
+    where: User_Filter
+
+    """
+    Set to true to delete all rows.
+    """
+    all: Boolean = false
+  ): Int! @fdc_generated(from: "User", purpose: DELETE_MULTIPLE)
+}
