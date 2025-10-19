@@ -1,0 +1,13 @@
+specVersion: "v1"
+serviceId: "cinestat-384ba-service"
+location: "us-east4"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "cinestat-384ba-database"
+      cloudSql:
+        instanceId: "cinestat-384ba-instance"
+        # schemaValidation: "STRICT"     # STRICT mode makes Postgres schema match Data Connect exactly.
+        # schemaValidation: "COMPATIBLE" # COMPATIBLE mode makes Postgres schema compatible with Data Connect.
+connectorDirs: ["./example"]
