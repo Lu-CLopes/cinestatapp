@@ -1,0 +1,37 @@
+mutation CreateUser(
+    $userCreatedAt: Date!, 
+    $userName: String!, 
+    $userEmail: String!) 
+    @auth(level: USER)
+{ 
+  user_insert(
+    data: { 
+        userCreatedAt: $userCreatedAt, 
+        userEmail: $userEmail, 
+        userId: "auth.uid", 
+        userName: $userName
+    }
+  ) 
+}
+
+mutation CreateUnit(
+    $unitName: String!, 
+    $unitLocal: String!, 
+    $unitMacCapacity: Int!, 
+    $unitManagerId: UUID!, 
+    $unitActive: Boolean!) 
+    @auth(level: USER)
+{ 
+  unit_insert(
+    data: { 
+        unitActive: $unitActive, 
+        unitLocal: $unitLocal, 
+        unitMacCapacity: $unitMacCapacity, 
+        unitManagerId: $unitManagerId, 
+        unitName: $unitName
+    }
+  ) 
+}
+#mutation DeleteUser($id: UUID!) @auth(level: USER) {
+#  user_delete(id: $id)
+#}

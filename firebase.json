@@ -1,1 +1,10 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"cinestat-384ba","appId":"1:798752324745:android:30603fb19b451ba3c61a58","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"cinestat-384ba","configurations":{"android":"1:798752324745:android:30603fb19b451ba3c61a58"}}}}}}
+{
+  "emulators": {
+    "dataconnect": {
+      "dataDir": "dataconnect/.dataconnect/pgliteData"
+    }
+  },
+  "dataconnect": {
+    "source": "dataconnect"
+  }
+}

@@ -1,0 +1,7 @@
+# This is a file for you to write an un-named mutation. 
+# Only one un-named mutation is allowed per file.
+mutation {
+  unit_insert(
+    data: {id: "11111111222233334444555555555555", unitManagerId: "11111111222233334444555555555555", unitActive: false, unitLocal: "Campinas-SP", unitMacCapacity: 120, unitName: "CIneStat"}
+  )
+}
