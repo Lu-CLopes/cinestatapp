@@ -35,15 +35,6 @@ extend type Audience {
     distinct: Boolean = false
   ): Int! @fdc_generated(from: "Audience.audienceGender", purpose: QUERY_COUNT)
   """
-  ✨ Count the number of rows in the `Audience` table where the `audienceId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
-  """
-  audienceId_count(
-    """
-    Set to true to count the number of distinct values.
-    """
-    distinct: Boolean = false
-  ): Int! @fdc_generated(from: "Audience.audienceId", purpose: QUERY_COUNT)
-  """
   ✨ Count the number of rows in the `Audience` table where the `audienceUnitId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
   """
   audienceUnitId_count(
@@ -143,15 +134,6 @@ extend type AudienceProfile {
     distinct: Boolean = false
   ): Int! @fdc_generated(from: "AudienceProfile.profileGenre", purpose: QUERY_COUNT)
   """
-  ✨ Count the number of rows in the `AudienceProfile` table where the `profileId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
-  """
-  profileId_count(
-    """
-    Set to true to count the number of distinct values.
-    """
-    distinct: Boolean = false
-  ): Int! @fdc_generated(from: "AudienceProfile.profileId", purpose: QUERY_COUNT)
-  """
   ✨ Count the number of rows in the `AudienceProfile` table where the `profileUnitId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
   """
   profileUnitId_count(
@@ -249,15 +231,6 @@ extend type Indicator {
     """
     distinct: Boolean = false
   ): Int! @fdc_generated(from: "Indicator.indicatorEnd", purpose: QUERY_COUNT)
-  """
-  ✨ Count the number of rows in the `Indicator` table where the `indicatorId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
-  """
-  indicatorId_count(
-    """
-    Set to true to count the number of distinct values.
-    """
-    distinct: Boolean = false
-  ): Int! @fdc_generated(from: "Indicator.indicatorId", purpose: QUERY_COUNT)
   """
   ✨ Count the number of rows in the `Indicator` table where the `indicatorInit` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
   """
@@ -566,15 +539,6 @@ extend type Movie {
     distinct: Boolean = false
   ): Int! @fdc_generated(from: "Movie.movieGenre", purpose: QUERY_COUNT)
   """
-  ✨ Count the number of rows in the `Movie` table where the `movieId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
-  """
-  movieId_count(
-    """
-    Set to true to count the number of distinct values.
-    """
-    distinct: Boolean = false
-  ): Int! @fdc_generated(from: "Movie.movieId", purpose: QUERY_COUNT)
-  """
   ✨ Count the number of rows in the `Movie` table where the `movieTitle` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
   """
   movieTitle_count(
@@ -672,15 +636,6 @@ extend type Product {
     distinct: Boolean = false
   ): Int! @fdc_generated(from: "Product.productActive", purpose: QUERY_COUNT)
   """
-  ✨ Count the number of rows in the `Product` table where the `productId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
-  """
-  productId_count(
-    """
-    Set to true to count the number of distinct values.
-    """
-    distinct: Boolean = false
-  ): Int! @fdc_generated(from: "Product.productId", purpose: QUERY_COUNT)
-  """
   ✨ Count the number of rows in the `Product` table where the `productName` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
   """
   productName_count(
@@ -761,15 +716,6 @@ extend type Sale {
     """
     distinct: Boolean = false
   ): Int! @fdc_generated(from: "Sale.saleDate", purpose: QUERY_COUNT)
-  """
-  ✨ Count the number of rows in the `Sale` table where the `saleId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
-  """
-  saleId_count(
-    """
-    Set to true to count the number of distinct values.
-    """
-    distinct: Boolean = false
-  ): Int! @fdc_generated(from: "Sale.saleId", purpose: QUERY_COUNT)
   """
   ✨ Count the number of rows in the `Sale` table where the `saleNetValue` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
   """
@@ -937,15 +883,6 @@ extend type Session {
     """
     distinct: Boolean = false
   ): Int! @fdc_generated(from: "Session.sessionHour", purpose: QUERY_COUNT)
-  """
-  ✨ Count the number of rows in the `Session` table where the `sessionId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
-  """
-  sessionId_count(
-    """
-    Set to true to count the number of distinct values.
-    """
-    distinct: Boolean = false
-  ): Int! @fdc_generated(from: "Session.sessionId", purpose: QUERY_COUNT)
   """
   ✨ Count the number of rows in the `Session` table where the `sessionMovieId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
   """
@@ -1131,15 +1068,6 @@ extend type Simulation {
     """
     distinct: Boolean = false
   ): Int! @fdc_generated(from: "Simulation.simulationExpcIncome", purpose: QUERY_COUNT)
-  """
-  ✨ Count the number of rows in the `Simulation` table where the `simulationId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
-  """
-  simulationId_count(
-    """
-    Set to true to count the number of distinct values.
-    """
-    distinct: Boolean = false
-  ): Int! @fdc_generated(from: "Simulation.simulationId", purpose: QUERY_COUNT)
   """
   ✨ Count the number of rows in the `Simulation` table where the `simulationMovieId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
   """
@@ -1416,15 +1344,6 @@ extend type Unit {
     """
     distinct: Boolean = false
   ): Int! @fdc_generated(from: "Unit.unitActive", purpose: QUERY_COUNT)
-  """
-  ✨ Count the number of rows in the `Unit` table where the `unitId` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
-  """
-  unitId_count(
-    """
-    Set to true to count the number of distinct values.
-    """
-    distinct: Boolean = false
-  ): Int! @fdc_generated(from: "Unit.unitId", purpose: QUERY_COUNT)
   """
   ✨ Count the number of rows in the `Unit` table where the `unitLocal` field is non-null. Pass the `distinct` argument to instead count the number of distinct values.
   """

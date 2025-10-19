@@ -5,11 +5,12 @@ type User @table {
   userEmail: String! 
   # senha_hash is managed by Firebase Auth and not stored directly in Data Connect's database
   userCreatedAt: Date! 
+
 }
 
 # Unit
 type Unit @table {
-  unitId: UUID! @default(expr: "uuidV4()") @col(name: "unitId")
+  #unitId: UUID! @index @default(expr: "uuidV4()") @col(name: "unitId")
   unitName: String! 
   unitLocal: String 
   unitMacCapacity: Int 
@@ -19,7 +20,7 @@ type Unit @table {
 
 # Movie
 type Movie @table {
-  movieId: UUID! @default(expr: "uuidV4()") @col(name: "movieId")
+  #movieId: UUID! @index @default(expr: "uuidV4()") @col(name: "movieId")
   movieTitle: String!
   movieGenre: String 
   movieAgeClass: String 
@@ -32,7 +33,7 @@ type Movie @table {
 
 # Session
 type Session @table {
-  sessionId: UUID! @default(expr: "uuidV4()") @col(name: "sessionId")
+  #sessionId: UUID! @index @default(expr: "uuidV4()") @col(name: "sessionId")
   sessionMovie: Movie! @ref 
   sessionUnit: Unit! @ref 
   sessionDate: Date! 
@@ -44,7 +45,7 @@ type Session @table {
 
 # AudienceInfo
 type Audience @table {
-  audienceId: UUID! @default(expr: "uuidV4()") 
+  #audienceId: UUID! @index @default(expr: "uuidV4()") 
   audienceUnit: Unit! @ref
   audienceAge: Int 
   audienceGender: String 
@@ -53,7 +54,7 @@ type Audience @table {
 }
 # AudienceProfile
 type AudienceProfile @table {
-  profileId: UUID! @default(expr: "uuidV4()") 
+  #profileId: UUID! @index @default(expr: "uuidV4()") 
   profileUnit: Unit! @ref 
   profileAge: Int 
   profileGenre: String 
@@ -63,7 +64,7 @@ type AudienceProfile @table {
 
 # Product 
 type Product @table {
-  productId: UUID! @default(expr: "uuidV4()") 
+  #productId: UUID! @index @default(expr: "uuidV4()") 
   productName: String! 
   productType: String 
   productPrice: Float 
@@ -72,7 +73,7 @@ type Product @table {
 
 # Sale
 type Sale @table {
-  saleId: UUID! @default(expr: "uuidV4()") 
+  #saleId: UUID! @index @default(expr: "uuidV4()") 
   saleSession: Session! @ref 
   saleProduct: Product! @ref 
   saleQuant: Int 
@@ -82,7 +83,7 @@ type Sale @table {
 
 # Simulation
 type Simulation @table {
-  simulationId: UUID! @default(expr: "uuidV4()") @col(name: "id_simulacao")
+  #simulationId: UUID! @index @default(expr: "uuidV4()") @col(name: "id_simulacao")
   simulationMovie: Movie! @ref 
   simulationUnit: Unit! @ref 
   dataSimulacao: Date! 
@@ -92,7 +93,7 @@ type Simulation @table {
 
 # Indicator
 type Indicator @table {
-  indicatorId: UUID! @default(expr: "uuidV4()") 
+  #indicatorId: UUID! @index @default(expr: "uuidV4()") 
   indicatorUnit: Unit! @ref 
   indicatorInit: Date 
   indicatorEnd: Date 

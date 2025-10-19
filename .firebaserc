@@ -1,7 +1,5 @@
 {
   "projects": {
     "default": "cinestat-384ba"
-  },
-  "targets": {},
-  "etags": {}
+  }
 }
