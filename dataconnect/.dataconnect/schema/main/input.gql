@@ -1,0 +1,3498 @@
+"""
+✨ `Audience_KeyOutput` returns the primary key fields of table type `Audience`.
+
+It has the same format as `Audience_Key`, but is only used as mutation return value.
+"""
+scalar Audience_KeyOutput
+"""
+✨ `AudienceProfile_KeyOutput` returns the primary key fields of table type `AudienceProfile`.
+
+It has the same format as `AudienceProfile_Key`, but is only used as mutation return value.
+"""
+scalar AudienceProfile_KeyOutput
+"""
+✨ `Indicator_KeyOutput` returns the primary key fields of table type `Indicator`.
+
+It has the same format as `Indicator_Key`, but is only used as mutation return value.
+"""
+scalar Indicator_KeyOutput
+"""
+✨ `Movie_KeyOutput` returns the primary key fields of table type `Movie`.
+
+It has the same format as `Movie_Key`, but is only used as mutation return value.
+"""
+scalar Movie_KeyOutput
+"""
+✨ `Product_KeyOutput` returns the primary key fields of table type `Product`.
+
+It has the same format as `Product_Key`, but is only used as mutation return value.
+"""
+scalar Product_KeyOutput
+"""
+✨ `Sale_KeyOutput` returns the primary key fields of table type `Sale`.
+
+It has the same format as `Sale_Key`, but is only used as mutation return value.
+"""
+scalar Sale_KeyOutput
+"""
+✨ `Session_KeyOutput` returns the primary key fields of table type `Session`.
+
+It has the same format as `Session_Key`, but is only used as mutation return value.
+"""
+scalar Session_KeyOutput
+"""
+✨ `Simulation_KeyOutput` returns the primary key fields of table type `Simulation`.
+
+It has the same format as `Simulation_Key`, but is only used as mutation return value.
+"""
+scalar Simulation_KeyOutput
+"""
+✨ `Unit_KeyOutput` returns the primary key fields of table type `Unit`.
+
+It has the same format as `Unit_Key`, but is only used as mutation return value.
+"""
+scalar Unit_KeyOutput
+"""
+✨ `User_KeyOutput` returns the primary key fields of table type `User`.
+
+It has the same format as `User_Key`, but is only used as mutation return value.
+"""
+scalar User_KeyOutput
+"""
+✨ Generated data input type for table 'Audience'. It includes all necessary fields for creating or upserting rows into table.
+"""
+input Audience_Data {
+  """
+  ✨ Generated from Field `Audience`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `Audience`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Audience`.`audienceUnitId` of type `UUID!`
+  """
+  audienceUnitId: UUID
+  """
+  ✨ `_expr` server value variant of `audienceUnitId` (✨ Generated from Field `Audience`.`audienceUnitId` of type `UUID!`)
+  """
+  audienceUnitId_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Audience`.`audienceUnit` of type `Unit!`
+  """
+  audienceUnit: Unit_Key
+  """
+  ✨ Generated from Field `Audience`.`audienceAge` of type `Int`
+  """
+  audienceAge: Int
+  """
+  ✨ `_expr` server value variant of `audienceAge` (✨ Generated from Field `Audience`.`audienceAge` of type `Int`)
+  """
+  audienceAge_expr: Int_Expr
+  """
+  ✨ `_update` server value variant of `audienceAge` (✨ Generated from Field `Audience`.`audienceAge` of type `Int`)
+  """
+  audienceAge_update: [Int_Update!]
+  """
+  ✨ Generated from Field `Audience`.`audienceFormat` of type `String`
+  """
+  audienceFormat: String
+  """
+  ✨ `_expr` server value variant of `audienceFormat` (✨ Generated from Field `Audience`.`audienceFormat` of type `String`)
+  """
+  audienceFormat_expr: String_Expr
+  """
+  ✨ Generated from Field `Audience`.`audienceGender` of type `String`
+  """
+  audienceGender: String
+  """
+  ✨ `_expr` server value variant of `audienceGender` (✨ Generated from Field `Audience`.`audienceGender` of type `String`)
+  """
+  audienceGender_expr: String_Expr
+}
+"""
+✨ Generated filter input type for table 'Audience'. This input allows filtering objects using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input Audience_Filter {
+  """
+  Apply multiple filter conditions using `AND` logic.
+  """
+  _and: [Audience_Filter!]
+  """
+  Negate the result of the provided filter condition.
+  """
+  _not: Audience_Filter
+  """
+  Apply multiple filter conditions using `OR` logic.
+  """
+  _or: [Audience_Filter!]
+  """
+  ✨ Generated from Field `Audience`.`id` of type `UUID!`
+  """
+  id: UUID_Filter
+  """
+  ✨ Generated from Field `Audience`.`audienceUnitId` of type `UUID!`
+  """
+  audienceUnitId: UUID_Filter
+  """
+  ✨ Generated from Field `Audience`.`audienceUnit` of type `Unit!`
+  """
+  audienceUnit: Unit_Filter
+  """
+  ✨ Generated from Field `Audience`.`audienceAge` of type `Int`
+  """
+  audienceAge: Int_Filter
+  """
+  ✨ Generated from Field `Audience`.`audienceFormat` of type `String`
+  """
+  audienceFormat: String_Filter
+  """
+  ✨ Generated from Field `Audience`.`audienceGender` of type `String`
+  """
+  audienceGender: String_Filter
+}
+"""
+✨ Generated first-row input type for table 'Audience'. This input selects the first row matching the filter criteria, ordered according to the specified conditions.
+"""
+input Audience_FirstRow {
+  """
+  Order the result by the specified fields.
+  """
+  orderBy: [Audience_Order!]
+  """
+  Filters rows based on the specified conditions.
+  """
+  where: Audience_Filter
+}
+"""
+✨ Generated having input type for table 'Audience'. This input allows you to filter groups during aggregate queries using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input Audience_Having {
+  """
+  Apply multiple Having conditions using `AND` logic.
+  """
+  _and: [Audience_Having!]
+  """
+  Whether to apply DISTINCT to the aggregate function.
+  """
+  _distinct: Boolean
+  """
+  Negate the result of the provided Having condition.
+  """
+  _not: Audience_Having
+  """
+  Apply multiple Having conditions using `OR` logic.
+  """
+  _or: [Audience_Having!]
+  """
+  ✨ Generated from Field `Audience`.`_count` of type `Int!`
+  """
+  _count: Int_Filter
+  """
+  ✨ Generated from Field `Audience`.`audienceAge_count` of type `Int!`
+  """
+  audienceAge_count: Int_Filter
+  """
+  ✨ Generated from Field `Audience`.`audienceFormat_count` of type `Int!`
+  """
+  audienceFormat_count: Int_Filter
+  """
+  ✨ Generated from Field `Audience`.`audienceGender_count` of type `Int!`
+  """
+  audienceGender_count: Int_Filter
+  """
+  ✨ Generated from Field `Audience`.`audienceUnitId_count` of type `Int!`
+  """
+  audienceUnitId_count: Int_Filter
+  """
+  ✨ Generated from Field `Audience`.`id_count` of type `Int!`
+  """
+  id_count: Int_Filter
+  """
+  ✨ Generated from Field `Audience`.`audienceAge_sum` of type `Int`
+  """
+  audienceAge_sum: Int_Filter
+  """
+  ✨ Generated from Field `Audience`.`audienceAge_avg` of type `Float`
+  """
+  audienceAge_avg: Float_Filter
+  """
+  ✨ Generated from Field `Audience`.`audienceAge_min` of type `Int`
+  """
+  audienceAge_min: Int_Filter
+  """
+  ✨ Generated from Field `Audience`.`audienceAge_max` of type `Int`
+  """
+  audienceAge_max: Int_Filter
+}
+"""
+✨ Generated key input type for table 'Audience'. It represents the primary key fields used to uniquely identify a row in the table.
+"""
+input Audience_Key {
+  """
+  ✨ Generated from Field `Audience`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `Audience`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+}
+"""
+✨ Generated list filter input type for table 'Audience'. This input applies filtering logic based on the count or existence of related objects that matches certain criteria.
+"""
+input Audience_ListFilter {
+  """
+  The desired number of objects that match the condition (defaults to at least one).
+  """
+  count: Int_Filter = {gt:0}
+  """
+  Condition of the related objects to filter for.
+  """
+  exist: Audience_Filter
+}
+"""
+✨ Generated order input type for table 'Audience'. This input defines the sorting order of rows in query results based on one or more fields.
+"""
+input Audience_Order {
+  """
+  ✨ Generated from Field `Audience`.`id` of type `UUID!`
+  """
+  id: OrderDirection
+  """
+  ✨ Generated from Field `Audience`.`audienceUnitId` of type `UUID!`
+  """
+  audienceUnitId: OrderDirection
+  """
+  ✨ Generated from Field `Audience`.`audienceUnit` of type `Unit!`
+  """
+  audienceUnit: Unit_Order
+  """
+  ✨ Generated from Field `Audience`.`audienceAge` of type `Int`
+  """
+  audienceAge: OrderDirection
+  """
+  ✨ Generated from Field `Audience`.`audienceFormat` of type `String`
+  """
+  audienceFormat: OrderDirection
+  """
+  ✨ Generated from Field `Audience`.`audienceGender` of type `String`
+  """
+  audienceGender: OrderDirection
+  """
+  ✨ Generated from Field `Audience`.`_count` of type `Int!`
+  """
+  _count: OrderDirection
+  """
+  ✨ Generated from Field `Audience`.`audienceAge_count` of type `Int!`
+  """
+  audienceAge_count: OrderDirection
+  """
+  ✨ Generated from Field `Audience`.`audienceFormat_count` of type `Int!`
+  """
+  audienceFormat_count: OrderDirection
+  """
+  ✨ Generated from Field `Audience`.`audienceGender_count` of type `Int!`
+  """
+  audienceGender_count: OrderDirection
+  """
+  ✨ Generated from Field `Audience`.`audienceUnitId_count` of type `Int!`
+  """
+  audienceUnitId_count: OrderDirection
+  """
+  ✨ Generated from Field `Audience`.`id_count` of type `Int!`
+  """
+  id_count: OrderDirection
+  """
+  ✨ Generated from Field `Audience`.`audienceAge_sum` of type `Int`
+  """
+  audienceAge_sum: OrderDirection
+  """
+  ✨ Generated from Field `Audience`.`audienceAge_avg` of type `Float`
+  """
+  audienceAge_avg: OrderDirection
+  """
+  ✨ Generated from Field `Audience`.`audienceAge_min` of type `Int`
+  """
+  audienceAge_min: OrderDirection
+  """
+  ✨ Generated from Field `Audience`.`audienceAge_max` of type `Int`
+  """
+  audienceAge_max: OrderDirection
+}
+"""
+✨ Generated data input type for table 'AudienceProfile'. It includes all necessary fields for creating or upserting rows into table.
+"""
+input AudienceProfile_Data {
+  """
+  ✨ Generated from Field `AudienceProfile`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `AudienceProfile`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileUnitId` of type `UUID!`
+  """
+  profileUnitId: UUID
+  """
+  ✨ `_expr` server value variant of `profileUnitId` (✨ Generated from Field `AudienceProfile`.`profileUnitId` of type `UUID!`)
+  """
+  profileUnitId_expr: UUID_Expr
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileUnit` of type `Unit!`
+  """
+  profileUnit: Unit_Key
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAge` of type `Int`
+  """
+  profileAge: Int
+  """
+  ✨ `_expr` server value variant of `profileAge` (✨ Generated from Field `AudienceProfile`.`profileAge` of type `Int`)
+  """
+  profileAge_expr: Int_Expr
+  """
+  ✨ `_update` server value variant of `profileAge` (✨ Generated from Field `AudienceProfile`.`profileAge` of type `Int`)
+  """
+  profileAge_update: [Int_Update!]
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAverageValue` of type `Float`
+  """
+  profileAverageValue: Float
+  """
+  ✨ `_expr` server value variant of `profileAverageValue` (✨ Generated from Field `AudienceProfile`.`profileAverageValue` of type `Float`)
+  """
+  profileAverageValue_expr: Float_Expr
+  """
+  ✨ `_update` server value variant of `profileAverageValue` (✨ Generated from Field `AudienceProfile`.`profileAverageValue` of type `Float`)
+  """
+  profileAverageValue_update: [Float_Update!]
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileFormat` of type `String`
+  """
+  profileFormat: String
+  """
+  ✨ `_expr` server value variant of `profileFormat` (✨ Generated from Field `AudienceProfile`.`profileFormat` of type `String`)
+  """
+  profileFormat_expr: String_Expr
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileGenre` of type `String`
+  """
+  profileGenre: String
+  """
+  ✨ `_expr` server value variant of `profileGenre` (✨ Generated from Field `AudienceProfile`.`profileGenre` of type `String`)
+  """
+  profileGenre_expr: String_Expr
+}
+"""
+✨ Generated filter input type for table 'AudienceProfile'. This input allows filtering objects using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input AudienceProfile_Filter {
+  """
+  Apply multiple filter conditions using `AND` logic.
+  """
+  _and: [AudienceProfile_Filter!]
+  """
+  Negate the result of the provided filter condition.
+  """
+  _not: AudienceProfile_Filter
+  """
+  Apply multiple filter conditions using `OR` logic.
+  """
+  _or: [AudienceProfile_Filter!]
+  """
+  ✨ Generated from Field `AudienceProfile`.`id` of type `UUID!`
+  """
+  id: UUID_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileUnitId` of type `UUID!`
+  """
+  profileUnitId: UUID_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileUnit` of type `Unit!`
+  """
+  profileUnit: Unit_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAge` of type `Int`
+  """
+  profileAge: Int_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAverageValue` of type `Float`
+  """
+  profileAverageValue: Float_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileFormat` of type `String`
+  """
+  profileFormat: String_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileGenre` of type `String`
+  """
+  profileGenre: String_Filter
+}
+"""
+✨ Generated first-row input type for table 'AudienceProfile'. This input selects the first row matching the filter criteria, ordered according to the specified conditions.
+"""
+input AudienceProfile_FirstRow {
+  """
+  Order the result by the specified fields.
+  """
+  orderBy: [AudienceProfile_Order!]
+  """
+  Filters rows based on the specified conditions.
+  """
+  where: AudienceProfile_Filter
+}
+"""
+✨ Generated having input type for table 'AudienceProfile'. This input allows you to filter groups during aggregate queries using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input AudienceProfile_Having {
+  """
+  Apply multiple Having conditions using `AND` logic.
+  """
+  _and: [AudienceProfile_Having!]
+  """
+  Whether to apply DISTINCT to the aggregate function.
+  """
+  _distinct: Boolean
+  """
+  Negate the result of the provided Having condition.
+  """
+  _not: AudienceProfile_Having
+  """
+  Apply multiple Having conditions using `OR` logic.
+  """
+  _or: [AudienceProfile_Having!]
+  """
+  ✨ Generated from Field `AudienceProfile`.`_count` of type `Int!`
+  """
+  _count: Int_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`id_count` of type `Int!`
+  """
+  id_count: Int_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAge_count` of type `Int!`
+  """
+  profileAge_count: Int_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAverageValue_count` of type `Int!`
+  """
+  profileAverageValue_count: Int_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileFormat_count` of type `Int!`
+  """
+  profileFormat_count: Int_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileGenre_count` of type `Int!`
+  """
+  profileGenre_count: Int_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileUnitId_count` of type `Int!`
+  """
+  profileUnitId_count: Int_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAge_sum` of type `Int`
+  """
+  profileAge_sum: Int_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAverageValue_sum` of type `Float`
+  """
+  profileAverageValue_sum: Float_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAge_avg` of type `Float`
+  """
+  profileAge_avg: Float_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAverageValue_avg` of type `Float`
+  """
+  profileAverageValue_avg: Float_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAge_min` of type `Int`
+  """
+  profileAge_min: Int_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAverageValue_min` of type `Float`
+  """
+  profileAverageValue_min: Float_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAge_max` of type `Int`
+  """
+  profileAge_max: Int_Filter
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAverageValue_max` of type `Float`
+  """
+  profileAverageValue_max: Float_Filter
+}
+"""
+✨ Generated key input type for table 'AudienceProfile'. It represents the primary key fields used to uniquely identify a row in the table.
+"""
+input AudienceProfile_Key {
+  """
+  ✨ Generated from Field `AudienceProfile`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `AudienceProfile`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+}
+"""
+✨ Generated list filter input type for table 'AudienceProfile'. This input applies filtering logic based on the count or existence of related objects that matches certain criteria.
+"""
+input AudienceProfile_ListFilter {
+  """
+  The desired number of objects that match the condition (defaults to at least one).
+  """
+  count: Int_Filter = {gt:0}
+  """
+  Condition of the related objects to filter for.
+  """
+  exist: AudienceProfile_Filter
+}
+"""
+✨ Generated order input type for table 'AudienceProfile'. This input defines the sorting order of rows in query results based on one or more fields.
+"""
+input AudienceProfile_Order {
+  """
+  ✨ Generated from Field `AudienceProfile`.`id` of type `UUID!`
+  """
+  id: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileUnitId` of type `UUID!`
+  """
+  profileUnitId: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileUnit` of type `Unit!`
+  """
+  profileUnit: Unit_Order
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAge` of type `Int`
+  """
+  profileAge: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAverageValue` of type `Float`
+  """
+  profileAverageValue: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileFormat` of type `String`
+  """
+  profileFormat: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileGenre` of type `String`
+  """
+  profileGenre: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`_count` of type `Int!`
+  """
+  _count: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`id_count` of type `Int!`
+  """
+  id_count: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAge_count` of type `Int!`
+  """
+  profileAge_count: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAverageValue_count` of type `Int!`
+  """
+  profileAverageValue_count: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileFormat_count` of type `Int!`
+  """
+  profileFormat_count: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileGenre_count` of type `Int!`
+  """
+  profileGenre_count: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileUnitId_count` of type `Int!`
+  """
+  profileUnitId_count: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAge_sum` of type `Int`
+  """
+  profileAge_sum: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAverageValue_sum` of type `Float`
+  """
+  profileAverageValue_sum: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAge_avg` of type `Float`
+  """
+  profileAge_avg: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAverageValue_avg` of type `Float`
+  """
+  profileAverageValue_avg: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAge_min` of type `Int`
+  """
+  profileAge_min: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAverageValue_min` of type `Float`
+  """
+  profileAverageValue_min: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAge_max` of type `Int`
+  """
+  profileAge_max: OrderDirection
+  """
+  ✨ Generated from Field `AudienceProfile`.`profileAverageValue_max` of type `Float`
+  """
+  profileAverageValue_max: OrderDirection
+}
+"""
+✨ Generated data input type for table 'Indicator'. It includes all necessary fields for creating or upserting rows into table.
+"""
+input Indicator_Data {
+  """
+  ✨ Generated from Field `Indicator`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `Indicator`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Indicator`.`indicatorUnitId` of type `UUID!`
+  """
+  indicatorUnitId: UUID
+  """
+  ✨ `_expr` server value variant of `indicatorUnitId` (✨ Generated from Field `Indicator`.`indicatorUnitId` of type `UUID!`)
+  """
+  indicatorUnitId_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Indicator`.`indicatorUnit` of type `Unit!`
+  """
+  indicatorUnit: Unit_Key
+  """
+  ✨ Generated from Field `Indicator`.`indicatorAverageOcupancy` of type `Float`
+  """
+  indicatorAverageOcupancy: Float
+  """
+  ✨ `_expr` server value variant of `indicatorAverageOcupancy` (✨ Generated from Field `Indicator`.`indicatorAverageOcupancy` of type `Float`)
+  """
+  indicatorAverageOcupancy_expr: Float_Expr
+  """
+  ✨ `_update` server value variant of `indicatorAverageOcupancy` (✨ Generated from Field `Indicator`.`indicatorAverageOcupancy` of type `Float`)
+  """
+  indicatorAverageOcupancy_update: [Float_Update!]
+  """
+  ✨ Generated from Field `Indicator`.`indicatorEnd` of type `Date`
+  """
+  indicatorEnd: Date
+  """
+  ✨ `_date` server value variant of `indicatorEnd` (✨ Generated from Field `Indicator`.`indicatorEnd` of type `Date`)
+  """
+  indicatorEnd_date: Date_Relative
+  """
+  ✨ `_expr` server value variant of `indicatorEnd` (✨ Generated from Field `Indicator`.`indicatorEnd` of type `Date`)
+  """
+  indicatorEnd_expr: Date_Expr
+  """
+  ✨ `_update` server value variant of `indicatorEnd` (✨ Generated from Field `Indicator`.`indicatorEnd` of type `Date`)
+  """
+  indicatorEnd_update: [Date_Update!]
+  """
+  ✨ Generated from Field `Indicator`.`indicatorInit` of type `Date`
+  """
+  indicatorInit: Date
+  """
+  ✨ `_date` server value variant of `indicatorInit` (✨ Generated from Field `Indicator`.`indicatorInit` of type `Date`)
+  """
+  indicatorInit_date: Date_Relative
+  """
+  ✨ `_expr` server value variant of `indicatorInit` (✨ Generated from Field `Indicator`.`indicatorInit` of type `Date`)
+  """
+  indicatorInit_expr: Date_Expr
+  """
+  ✨ `_update` server value variant of `indicatorInit` (✨ Generated from Field `Indicator`.`indicatorInit` of type `Date`)
+  """
+  indicatorInit_update: [Date_Update!]
+  """
+  ✨ Generated from Field `Indicator`.`indicatorLowPerformance` of type `Boolean`
+  """
+  indicatorLowPerformance: Boolean
+  """
+  ✨ `_expr` server value variant of `indicatorLowPerformance` (✨ Generated from Field `Indicator`.`indicatorLowPerformance` of type `Boolean`)
+  """
+  indicatorLowPerformance_expr: Boolean_Expr
+  """
+  ✨ Generated from Field `Indicator`.`indicatorProductsIncome` of type `Float`
+  """
+  indicatorProductsIncome: Float
+  """
+  ✨ `_expr` server value variant of `indicatorProductsIncome` (✨ Generated from Field `Indicator`.`indicatorProductsIncome` of type `Float`)
+  """
+  indicatorProductsIncome_expr: Float_Expr
+  """
+  ✨ `_update` server value variant of `indicatorProductsIncome` (✨ Generated from Field `Indicator`.`indicatorProductsIncome` of type `Float`)
+  """
+  indicatorProductsIncome_update: [Float_Update!]
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTicketsIncome` of type `Float`
+  """
+  indicatorTicketsIncome: Float
+  """
+  ✨ `_expr` server value variant of `indicatorTicketsIncome` (✨ Generated from Field `Indicator`.`indicatorTicketsIncome` of type `Float`)
+  """
+  indicatorTicketsIncome_expr: Float_Expr
+  """
+  ✨ `_update` server value variant of `indicatorTicketsIncome` (✨ Generated from Field `Indicator`.`indicatorTicketsIncome` of type `Float`)
+  """
+  indicatorTicketsIncome_update: [Float_Update!]
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTopFilm` of type `String`
+  """
+  indicatorTopFilm: String
+  """
+  ✨ `_expr` server value variant of `indicatorTopFilm` (✨ Generated from Field `Indicator`.`indicatorTopFilm` of type `String`)
+  """
+  indicatorTopFilm_expr: String_Expr
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTopGenre` of type `String`
+  """
+  indicatorTopGenre: String
+  """
+  ✨ `_expr` server value variant of `indicatorTopGenre` (✨ Generated from Field `Indicator`.`indicatorTopGenre` of type `String`)
+  """
+  indicatorTopGenre_expr: String_Expr
+}
+"""
+✨ Generated filter input type for table 'Indicator'. This input allows filtering objects using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input Indicator_Filter {
+  """
+  Apply multiple filter conditions using `AND` logic.
+  """
+  _and: [Indicator_Filter!]
+  """
+  Negate the result of the provided filter condition.
+  """
+  _not: Indicator_Filter
+  """
+  Apply multiple filter conditions using `OR` logic.
+  """
+  _or: [Indicator_Filter!]
+  """
+  ✨ Generated from Field `Indicator`.`id` of type `UUID!`
+  """
+  id: UUID_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorUnitId` of type `UUID!`
+  """
+  indicatorUnitId: UUID_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorUnit` of type `Unit!`
+  """
+  indicatorUnit: Unit_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorAverageOcupancy` of type `Float`
+  """
+  indicatorAverageOcupancy: Float_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorEnd` of type `Date`
+  """
+  indicatorEnd: Date_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorInit` of type `Date`
+  """
+  indicatorInit: Date_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorLowPerformance` of type `Boolean`
+  """
+  indicatorLowPerformance: Boolean_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorProductsIncome` of type `Float`
+  """
+  indicatorProductsIncome: Float_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTicketsIncome` of type `Float`
+  """
+  indicatorTicketsIncome: Float_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTopFilm` of type `String`
+  """
+  indicatorTopFilm: String_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTopGenre` of type `String`
+  """
+  indicatorTopGenre: String_Filter
+}
+"""
+✨ Generated first-row input type for table 'Indicator'. This input selects the first row matching the filter criteria, ordered according to the specified conditions.
+"""
+input Indicator_FirstRow {
+  """
+  Order the result by the specified fields.
+  """
+  orderBy: [Indicator_Order!]
+  """
+  Filters rows based on the specified conditions.
+  """
+  where: Indicator_Filter
+}
+"""
+✨ Generated having input type for table 'Indicator'. This input allows you to filter groups during aggregate queries using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input Indicator_Having {
+  """
+  Apply multiple Having conditions using `AND` logic.
+  """
+  _and: [Indicator_Having!]
+  """
+  Whether to apply DISTINCT to the aggregate function.
+  """
+  _distinct: Boolean
+  """
+  Negate the result of the provided Having condition.
+  """
+  _not: Indicator_Having
+  """
+  Apply multiple Having conditions using `OR` logic.
+  """
+  _or: [Indicator_Having!]
+  """
+  ✨ Generated from Field `Indicator`.`_count` of type `Int!`
+  """
+  _count: Int_Filter
+  """
+  ✨ Generated from Field `Indicator`.`id_count` of type `Int!`
+  """
+  id_count: Int_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorAverageOcupancy_count` of type `Int!`
+  """
+  indicatorAverageOcupancy_count: Int_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorEnd_count` of type `Int!`
+  """
+  indicatorEnd_count: Int_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorInit_count` of type `Int!`
+  """
+  indicatorInit_count: Int_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorLowPerformance_count` of type `Int!`
+  """
+  indicatorLowPerformance_count: Int_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorProductsIncome_count` of type `Int!`
+  """
+  indicatorProductsIncome_count: Int_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTicketsIncome_count` of type `Int!`
+  """
+  indicatorTicketsIncome_count: Int_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTopFilm_count` of type `Int!`
+  """
+  indicatorTopFilm_count: Int_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTopGenre_count` of type `Int!`
+  """
+  indicatorTopGenre_count: Int_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorUnitId_count` of type `Int!`
+  """
+  indicatorUnitId_count: Int_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorAverageOcupancy_sum` of type `Float`
+  """
+  indicatorAverageOcupancy_sum: Float_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorProductsIncome_sum` of type `Float`
+  """
+  indicatorProductsIncome_sum: Float_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTicketsIncome_sum` of type `Float`
+  """
+  indicatorTicketsIncome_sum: Float_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorAverageOcupancy_avg` of type `Float`
+  """
+  indicatorAverageOcupancy_avg: Float_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorProductsIncome_avg` of type `Float`
+  """
+  indicatorProductsIncome_avg: Float_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTicketsIncome_avg` of type `Float`
+  """
+  indicatorTicketsIncome_avg: Float_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorAverageOcupancy_min` of type `Float`
+  """
+  indicatorAverageOcupancy_min: Float_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorEnd_min` of type `Date`
+  """
+  indicatorEnd_min: Date_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorInit_min` of type `Date`
+  """
+  indicatorInit_min: Date_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorProductsIncome_min` of type `Float`
+  """
+  indicatorProductsIncome_min: Float_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTicketsIncome_min` of type `Float`
+  """
+  indicatorTicketsIncome_min: Float_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorAverageOcupancy_max` of type `Float`
+  """
+  indicatorAverageOcupancy_max: Float_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorEnd_max` of type `Date`
+  """
+  indicatorEnd_max: Date_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorInit_max` of type `Date`
+  """
+  indicatorInit_max: Date_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorProductsIncome_max` of type `Float`
+  """
+  indicatorProductsIncome_max: Float_Filter
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTicketsIncome_max` of type `Float`
+  """
+  indicatorTicketsIncome_max: Float_Filter
+}
+"""
+✨ Generated key input type for table 'Indicator'. It represents the primary key fields used to uniquely identify a row in the table.
+"""
+input Indicator_Key {
+  """
+  ✨ Generated from Field `Indicator`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `Indicator`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+}
+"""
+✨ Generated list filter input type for table 'Indicator'. This input applies filtering logic based on the count or existence of related objects that matches certain criteria.
+"""
+input Indicator_ListFilter {
+  """
+  The desired number of objects that match the condition (defaults to at least one).
+  """
+  count: Int_Filter = {gt:0}
+  """
+  Condition of the related objects to filter for.
+  """
+  exist: Indicator_Filter
+}
+"""
+✨ Generated order input type for table 'Indicator'. This input defines the sorting order of rows in query results based on one or more fields.
+"""
+input Indicator_Order {
+  """
+  ✨ Generated from Field `Indicator`.`id` of type `UUID!`
+  """
+  id: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorUnitId` of type `UUID!`
+  """
+  indicatorUnitId: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorUnit` of type `Unit!`
+  """
+  indicatorUnit: Unit_Order
+  """
+  ✨ Generated from Field `Indicator`.`indicatorAverageOcupancy` of type `Float`
+  """
+  indicatorAverageOcupancy: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorEnd` of type `Date`
+  """
+  indicatorEnd: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorInit` of type `Date`
+  """
+  indicatorInit: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorLowPerformance` of type `Boolean`
+  """
+  indicatorLowPerformance: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorProductsIncome` of type `Float`
+  """
+  indicatorProductsIncome: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTicketsIncome` of type `Float`
+  """
+  indicatorTicketsIncome: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTopFilm` of type `String`
+  """
+  indicatorTopFilm: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTopGenre` of type `String`
+  """
+  indicatorTopGenre: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`_count` of type `Int!`
+  """
+  _count: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`id_count` of type `Int!`
+  """
+  id_count: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorAverageOcupancy_count` of type `Int!`
+  """
+  indicatorAverageOcupancy_count: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorEnd_count` of type `Int!`
+  """
+  indicatorEnd_count: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorInit_count` of type `Int!`
+  """
+  indicatorInit_count: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorLowPerformance_count` of type `Int!`
+  """
+  indicatorLowPerformance_count: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorProductsIncome_count` of type `Int!`
+  """
+  indicatorProductsIncome_count: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTicketsIncome_count` of type `Int!`
+  """
+  indicatorTicketsIncome_count: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTopFilm_count` of type `Int!`
+  """
+  indicatorTopFilm_count: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTopGenre_count` of type `Int!`
+  """
+  indicatorTopGenre_count: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorUnitId_count` of type `Int!`
+  """
+  indicatorUnitId_count: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorAverageOcupancy_sum` of type `Float`
+  """
+  indicatorAverageOcupancy_sum: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorProductsIncome_sum` of type `Float`
+  """
+  indicatorProductsIncome_sum: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTicketsIncome_sum` of type `Float`
+  """
+  indicatorTicketsIncome_sum: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorAverageOcupancy_avg` of type `Float`
+  """
+  indicatorAverageOcupancy_avg: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorProductsIncome_avg` of type `Float`
+  """
+  indicatorProductsIncome_avg: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTicketsIncome_avg` of type `Float`
+  """
+  indicatorTicketsIncome_avg: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorAverageOcupancy_min` of type `Float`
+  """
+  indicatorAverageOcupancy_min: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorEnd_min` of type `Date`
+  """
+  indicatorEnd_min: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorInit_min` of type `Date`
+  """
+  indicatorInit_min: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorProductsIncome_min` of type `Float`
+  """
+  indicatorProductsIncome_min: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTicketsIncome_min` of type `Float`
+  """
+  indicatorTicketsIncome_min: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorAverageOcupancy_max` of type `Float`
+  """
+  indicatorAverageOcupancy_max: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorEnd_max` of type `Date`
+  """
+  indicatorEnd_max: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorInit_max` of type `Date`
+  """
+  indicatorInit_max: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorProductsIncome_max` of type `Float`
+  """
+  indicatorProductsIncome_max: OrderDirection
+  """
+  ✨ Generated from Field `Indicator`.`indicatorTicketsIncome_max` of type `Float`
+  """
+  indicatorTicketsIncome_max: OrderDirection
+}
+"""
+✨ Generated data input type for table 'Movie'. It includes all necessary fields for creating or upserting rows into table.
+"""
+input Movie_Data {
+  """
+  ✨ Generated from Field `Movie`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `Movie`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Movie`.`movieActive` of type `Boolean`
+  """
+  movieActive: Boolean
+  """
+  ✨ `_expr` server value variant of `movieActive` (✨ Generated from Field `Movie`.`movieActive` of type `Boolean`)
+  """
+  movieActive_expr: Boolean_Expr
+  """
+  ✨ Generated from Field `Movie`.`movieAgeClass` of type `String`
+  """
+  movieAgeClass: String
+  """
+  ✨ `_expr` server value variant of `movieAgeClass` (✨ Generated from Field `Movie`.`movieAgeClass` of type `String`)
+  """
+  movieAgeClass_expr: String_Expr
+  """
+  ✨ Generated from Field `Movie`.`movieDirector` of type `String`
+  """
+  movieDirector: String
+  """
+  ✨ `_expr` server value variant of `movieDirector` (✨ Generated from Field `Movie`.`movieDirector` of type `String`)
+  """
+  movieDirector_expr: String_Expr
+  """
+  ✨ Generated from Field `Movie`.`movieDistrib` of type `String`
+  """
+  movieDistrib: String
+  """
+  ✨ `_expr` server value variant of `movieDistrib` (✨ Generated from Field `Movie`.`movieDistrib` of type `String`)
+  """
+  movieDistrib_expr: String_Expr
+  """
+  ✨ Generated from Field `Movie`.`movieDuration` of type `Int`
+  """
+  movieDuration: Int
+  """
+  ✨ `_expr` server value variant of `movieDuration` (✨ Generated from Field `Movie`.`movieDuration` of type `Int`)
+  """
+  movieDuration_expr: Int_Expr
+  """
+  ✨ `_update` server value variant of `movieDuration` (✨ Generated from Field `Movie`.`movieDuration` of type `Int`)
+  """
+  movieDuration_update: [Int_Update!]
+  """
+  ✨ Generated from Field `Movie`.`movieFormat` of type `String`
+  """
+  movieFormat: String
+  """
+  ✨ `_expr` server value variant of `movieFormat` (✨ Generated from Field `Movie`.`movieFormat` of type `String`)
+  """
+  movieFormat_expr: String_Expr
+  """
+  ✨ Generated from Field `Movie`.`movieGenre` of type `String`
+  """
+  movieGenre: String
+  """
+  ✨ `_expr` server value variant of `movieGenre` (✨ Generated from Field `Movie`.`movieGenre` of type `String`)
+  """
+  movieGenre_expr: String_Expr
+  """
+  ✨ Generated from Field `Movie`.`movieTitle` of type `String!`
+  """
+  movieTitle: String
+  """
+  ✨ `_expr` server value variant of `movieTitle` (✨ Generated from Field `Movie`.`movieTitle` of type `String!`)
+  """
+  movieTitle_expr: String_Expr
+}
+"""
+✨ Generated filter input type for table 'Movie'. This input allows filtering objects using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input Movie_Filter {
+  """
+  Apply multiple filter conditions using `AND` logic.
+  """
+  _and: [Movie_Filter!]
+  """
+  Negate the result of the provided filter condition.
+  """
+  _not: Movie_Filter
+  """
+  Apply multiple filter conditions using `OR` logic.
+  """
+  _or: [Movie_Filter!]
+  """
+  ✨ Generated from Field `Movie`.`id` of type `UUID!`
+  """
+  id: UUID_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieActive` of type `Boolean`
+  """
+  movieActive: Boolean_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieAgeClass` of type `String`
+  """
+  movieAgeClass: String_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieDirector` of type `String`
+  """
+  movieDirector: String_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieDistrib` of type `String`
+  """
+  movieDistrib: String_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieDuration` of type `Int`
+  """
+  movieDuration: Int_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieFormat` of type `String`
+  """
+  movieFormat: String_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieGenre` of type `String`
+  """
+  movieGenre: String_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieTitle` of type `String!`
+  """
+  movieTitle: String_Filter
+  """
+  ✨ Generated from Field `Movie`.`sessions_on_sessionMovie` of type `[Session!]!`
+  """
+  sessions_on_sessionMovie: Session_ListFilter
+  """
+  ✨ Generated from Field `Movie`.`simulations_on_simulationMovie` of type `[Simulation!]!`
+  """
+  simulations_on_simulationMovie: Simulation_ListFilter
+}
+"""
+✨ Generated first-row input type for table 'Movie'. This input selects the first row matching the filter criteria, ordered according to the specified conditions.
+"""
+input Movie_FirstRow {
+  """
+  Order the result by the specified fields.
+  """
+  orderBy: [Movie_Order!]
+  """
+  Filters rows based on the specified conditions.
+  """
+  where: Movie_Filter
+}
+"""
+✨ Generated having input type for table 'Movie'. This input allows you to filter groups during aggregate queries using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input Movie_Having {
+  """
+  Apply multiple Having conditions using `AND` logic.
+  """
+  _and: [Movie_Having!]
+  """
+  Whether to apply DISTINCT to the aggregate function.
+  """
+  _distinct: Boolean
+  """
+  Negate the result of the provided Having condition.
+  """
+  _not: Movie_Having
+  """
+  Apply multiple Having conditions using `OR` logic.
+  """
+  _or: [Movie_Having!]
+  """
+  ✨ Generated from Field `Movie`.`_count` of type `Int!`
+  """
+  _count: Int_Filter
+  """
+  ✨ Generated from Field `Movie`.`id_count` of type `Int!`
+  """
+  id_count: Int_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieActive_count` of type `Int!`
+  """
+  movieActive_count: Int_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieAgeClass_count` of type `Int!`
+  """
+  movieAgeClass_count: Int_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieDirector_count` of type `Int!`
+  """
+  movieDirector_count: Int_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieDistrib_count` of type `Int!`
+  """
+  movieDistrib_count: Int_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieDuration_count` of type `Int!`
+  """
+  movieDuration_count: Int_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieFormat_count` of type `Int!`
+  """
+  movieFormat_count: Int_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieGenre_count` of type `Int!`
+  """
+  movieGenre_count: Int_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieTitle_count` of type `Int!`
+  """
+  movieTitle_count: Int_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieDuration_sum` of type `Int`
+  """
+  movieDuration_sum: Int_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieDuration_avg` of type `Float`
+  """
+  movieDuration_avg: Float_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieDuration_min` of type `Int`
+  """
+  movieDuration_min: Int_Filter
+  """
+  ✨ Generated from Field `Movie`.`movieDuration_max` of type `Int`
+  """
+  movieDuration_max: Int_Filter
+}
+"""
+✨ Generated key input type for table 'Movie'. It represents the primary key fields used to uniquely identify a row in the table.
+"""
+input Movie_Key {
+  """
+  ✨ Generated from Field `Movie`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `Movie`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+}
+"""
+✨ Generated list filter input type for table 'Movie'. This input applies filtering logic based on the count or existence of related objects that matches certain criteria.
+"""
+input Movie_ListFilter {
+  """
+  The desired number of objects that match the condition (defaults to at least one).
+  """
+  count: Int_Filter = {gt:0}
+  """
+  Condition of the related objects to filter for.
+  """
+  exist: Movie_Filter
+}
+"""
+✨ Generated order input type for table 'Movie'. This input defines the sorting order of rows in query results based on one or more fields.
+"""
+input Movie_Order {
+  """
+  ✨ Generated from Field `Movie`.`id` of type `UUID!`
+  """
+  id: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieActive` of type `Boolean`
+  """
+  movieActive: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieAgeClass` of type `String`
+  """
+  movieAgeClass: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieDirector` of type `String`
+  """
+  movieDirector: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieDistrib` of type `String`
+  """
+  movieDistrib: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieDuration` of type `Int`
+  """
+  movieDuration: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieFormat` of type `String`
+  """
+  movieFormat: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieGenre` of type `String`
+  """
+  movieGenre: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieTitle` of type `String!`
+  """
+  movieTitle: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`_count` of type `Int!`
+  """
+  _count: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`id_count` of type `Int!`
+  """
+  id_count: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieActive_count` of type `Int!`
+  """
+  movieActive_count: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieAgeClass_count` of type `Int!`
+  """
+  movieAgeClass_count: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieDirector_count` of type `Int!`
+  """
+  movieDirector_count: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieDistrib_count` of type `Int!`
+  """
+  movieDistrib_count: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieDuration_count` of type `Int!`
+  """
+  movieDuration_count: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieFormat_count` of type `Int!`
+  """
+  movieFormat_count: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieGenre_count` of type `Int!`
+  """
+  movieGenre_count: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieTitle_count` of type `Int!`
+  """
+  movieTitle_count: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieDuration_sum` of type `Int`
+  """
+  movieDuration_sum: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieDuration_avg` of type `Float`
+  """
+  movieDuration_avg: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieDuration_min` of type `Int`
+  """
+  movieDuration_min: OrderDirection
+  """
+  ✨ Generated from Field `Movie`.`movieDuration_max` of type `Int`
+  """
+  movieDuration_max: OrderDirection
+}
+"""
+✨ Generated data input type for table 'Product'. It includes all necessary fields for creating or upserting rows into table.
+"""
+input Product_Data {
+  """
+  ✨ Generated from Field `Product`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `Product`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Product`.`productActive` of type `Boolean`
+  """
+  productActive: Boolean
+  """
+  ✨ `_expr` server value variant of `productActive` (✨ Generated from Field `Product`.`productActive` of type `Boolean`)
+  """
+  productActive_expr: Boolean_Expr
+  """
+  ✨ Generated from Field `Product`.`productName` of type `String!`
+  """
+  productName: String
+  """
+  ✨ `_expr` server value variant of `productName` (✨ Generated from Field `Product`.`productName` of type `String!`)
+  """
+  productName_expr: String_Expr
+  """
+  ✨ Generated from Field `Product`.`productPrice` of type `Float`
+  """
+  productPrice: Float
+  """
+  ✨ `_expr` server value variant of `productPrice` (✨ Generated from Field `Product`.`productPrice` of type `Float`)
+  """
+  productPrice_expr: Float_Expr
+  """
+  ✨ `_update` server value variant of `productPrice` (✨ Generated from Field `Product`.`productPrice` of type `Float`)
+  """
+  productPrice_update: [Float_Update!]
+  """
+  ✨ Generated from Field `Product`.`productType` of type `String`
+  """
+  productType: String
+  """
+  ✨ `_expr` server value variant of `productType` (✨ Generated from Field `Product`.`productType` of type `String`)
+  """
+  productType_expr: String_Expr
+}
+"""
+✨ Generated filter input type for table 'Product'. This input allows filtering objects using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input Product_Filter {
+  """
+  Apply multiple filter conditions using `AND` logic.
+  """
+  _and: [Product_Filter!]
+  """
+  Negate the result of the provided filter condition.
+  """
+  _not: Product_Filter
+  """
+  Apply multiple filter conditions using `OR` logic.
+  """
+  _or: [Product_Filter!]
+  """
+  ✨ Generated from Field `Product`.`id` of type `UUID!`
+  """
+  id: UUID_Filter
+  """
+  ✨ Generated from Field `Product`.`productActive` of type `Boolean`
+  """
+  productActive: Boolean_Filter
+  """
+  ✨ Generated from Field `Product`.`productName` of type `String!`
+  """
+  productName: String_Filter
+  """
+  ✨ Generated from Field `Product`.`productPrice` of type `Float`
+  """
+  productPrice: Float_Filter
+  """
+  ✨ Generated from Field `Product`.`productType` of type `String`
+  """
+  productType: String_Filter
+  """
+  ✨ Generated from Field `Product`.`sales_on_saleProduct` of type `[Sale!]!`
+  """
+  sales_on_saleProduct: Sale_ListFilter
+}
+"""
+✨ Generated first-row input type for table 'Product'. This input selects the first row matching the filter criteria, ordered according to the specified conditions.
+"""
+input Product_FirstRow {
+  """
+  Order the result by the specified fields.
+  """
+  orderBy: [Product_Order!]
+  """
+  Filters rows based on the specified conditions.
+  """
+  where: Product_Filter
+}
+"""
+✨ Generated having input type for table 'Product'. This input allows you to filter groups during aggregate queries using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input Product_Having {
+  """
+  Apply multiple Having conditions using `AND` logic.
+  """
+  _and: [Product_Having!]
+  """
+  Whether to apply DISTINCT to the aggregate function.
+  """
+  _distinct: Boolean
+  """
+  Negate the result of the provided Having condition.
+  """
+  _not: Product_Having
+  """
+  Apply multiple Having conditions using `OR` logic.
+  """
+  _or: [Product_Having!]
+  """
+  ✨ Generated from Field `Product`.`_count` of type `Int!`
+  """
+  _count: Int_Filter
+  """
+  ✨ Generated from Field `Product`.`id_count` of type `Int!`
+  """
+  id_count: Int_Filter
+  """
+  ✨ Generated from Field `Product`.`productActive_count` of type `Int!`
+  """
+  productActive_count: Int_Filter
+  """
+  ✨ Generated from Field `Product`.`productName_count` of type `Int!`
+  """
+  productName_count: Int_Filter
+  """
+  ✨ Generated from Field `Product`.`productPrice_count` of type `Int!`
+  """
+  productPrice_count: Int_Filter
+  """
+  ✨ Generated from Field `Product`.`productType_count` of type `Int!`
+  """
+  productType_count: Int_Filter
+  """
+  ✨ Generated from Field `Product`.`productPrice_sum` of type `Float`
+  """
+  productPrice_sum: Float_Filter
+  """
+  ✨ Generated from Field `Product`.`productPrice_avg` of type `Float`
+  """
+  productPrice_avg: Float_Filter
+  """
+  ✨ Generated from Field `Product`.`productPrice_min` of type `Float`
+  """
+  productPrice_min: Float_Filter
+  """
+  ✨ Generated from Field `Product`.`productPrice_max` of type `Float`
+  """
+  productPrice_max: Float_Filter
+}
+"""
+✨ Generated key input type for table 'Product'. It represents the primary key fields used to uniquely identify a row in the table.
+"""
+input Product_Key {
+  """
+  ✨ Generated from Field `Product`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `Product`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+}
+"""
+✨ Generated list filter input type for table 'Product'. This input applies filtering logic based on the count or existence of related objects that matches certain criteria.
+"""
+input Product_ListFilter {
+  """
+  The desired number of objects that match the condition (defaults to at least one).
+  """
+  count: Int_Filter = {gt:0}
+  """
+  Condition of the related objects to filter for.
+  """
+  exist: Product_Filter
+}
+"""
+✨ Generated order input type for table 'Product'. This input defines the sorting order of rows in query results based on one or more fields.
+"""
+input Product_Order {
+  """
+  ✨ Generated from Field `Product`.`id` of type `UUID!`
+  """
+  id: OrderDirection
+  """
+  ✨ Generated from Field `Product`.`productActive` of type `Boolean`
+  """
+  productActive: OrderDirection
+  """
+  ✨ Generated from Field `Product`.`productName` of type `String!`
+  """
+  productName: OrderDirection
+  """
+  ✨ Generated from Field `Product`.`productPrice` of type `Float`
+  """
+  productPrice: OrderDirection
+  """
+  ✨ Generated from Field `Product`.`productType` of type `String`
+  """
+  productType: OrderDirection
+  """
+  ✨ Generated from Field `Product`.`_count` of type `Int!`
+  """
+  _count: OrderDirection
+  """
+  ✨ Generated from Field `Product`.`id_count` of type `Int!`
+  """
+  id_count: OrderDirection
+  """
+  ✨ Generated from Field `Product`.`productActive_count` of type `Int!`
+  """
+  productActive_count: OrderDirection
+  """
+  ✨ Generated from Field `Product`.`productName_count` of type `Int!`
+  """
+  productName_count: OrderDirection
+  """
+  ✨ Generated from Field `Product`.`productPrice_count` of type `Int!`
+  """
+  productPrice_count: OrderDirection
+  """
+  ✨ Generated from Field `Product`.`productType_count` of type `Int!`
+  """
+  productType_count: OrderDirection
+  """
+  ✨ Generated from Field `Product`.`productPrice_sum` of type `Float`
+  """
+  productPrice_sum: OrderDirection
+  """
+  ✨ Generated from Field `Product`.`productPrice_avg` of type `Float`
+  """
+  productPrice_avg: OrderDirection
+  """
+  ✨ Generated from Field `Product`.`productPrice_min` of type `Float`
+  """
+  productPrice_min: OrderDirection
+  """
+  ✨ Generated from Field `Product`.`productPrice_max` of type `Float`
+  """
+  productPrice_max: OrderDirection
+}
+"""
+✨ Generated data input type for table 'Sale'. It includes all necessary fields for creating or upserting rows into table.
+"""
+input Sale_Data {
+  """
+  ✨ Generated from Field `Sale`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `Sale`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Sale`.`saleProductId` of type `UUID!`
+  """
+  saleProductId: UUID
+  """
+  ✨ `_expr` server value variant of `saleProductId` (✨ Generated from Field `Sale`.`saleProductId` of type `UUID!`)
+  """
+  saleProductId_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Sale`.`saleSessionId` of type `UUID!`
+  """
+  saleSessionId: UUID
+  """
+  ✨ `_expr` server value variant of `saleSessionId` (✨ Generated from Field `Sale`.`saleSessionId` of type `UUID!`)
+  """
+  saleSessionId_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Sale`.`saleProduct` of type `Product!`
+  """
+  saleProduct: Product_Key
+  """
+  ✨ Generated from Field `Sale`.`saleSession` of type `Session!`
+  """
+  saleSession: Session_Key
+  """
+  ✨ Generated from Field `Sale`.`saleDate` of type `Date!`
+  """
+  saleDate: Date
+  """
+  ✨ `_date` server value variant of `saleDate` (✨ Generated from Field `Sale`.`saleDate` of type `Date!`)
+  """
+  saleDate_date: Date_Relative
+  """
+  ✨ `_expr` server value variant of `saleDate` (✨ Generated from Field `Sale`.`saleDate` of type `Date!`)
+  """
+  saleDate_expr: Date_Expr
+  """
+  ✨ `_update` server value variant of `saleDate` (✨ Generated from Field `Sale`.`saleDate` of type `Date!`)
+  """
+  saleDate_update: [Date_Update!]
+  """
+  ✨ Generated from Field `Sale`.`saleNetValue` of type `Float`
+  """
+  saleNetValue: Float
+  """
+  ✨ `_expr` server value variant of `saleNetValue` (✨ Generated from Field `Sale`.`saleNetValue` of type `Float`)
+  """
+  saleNetValue_expr: Float_Expr
+  """
+  ✨ `_update` server value variant of `saleNetValue` (✨ Generated from Field `Sale`.`saleNetValue` of type `Float`)
+  """
+  saleNetValue_update: [Float_Update!]
+  """
+  ✨ Generated from Field `Sale`.`saleQuant` of type `Int`
+  """
+  saleQuant: Int
+  """
+  ✨ `_expr` server value variant of `saleQuant` (✨ Generated from Field `Sale`.`saleQuant` of type `Int`)
+  """
+  saleQuant_expr: Int_Expr
+  """
+  ✨ `_update` server value variant of `saleQuant` (✨ Generated from Field `Sale`.`saleQuant` of type `Int`)
+  """
+  saleQuant_update: [Int_Update!]
+}
+"""
+✨ Generated filter input type for table 'Sale'. This input allows filtering objects using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input Sale_Filter {
+  """
+  Apply multiple filter conditions using `AND` logic.
+  """
+  _and: [Sale_Filter!]
+  """
+  Negate the result of the provided filter condition.
+  """
+  _not: Sale_Filter
+  """
+  Apply multiple filter conditions using `OR` logic.
+  """
+  _or: [Sale_Filter!]
+  """
+  ✨ Generated from Field `Sale`.`id` of type `UUID!`
+  """
+  id: UUID_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleProductId` of type `UUID!`
+  """
+  saleProductId: UUID_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleSessionId` of type `UUID!`
+  """
+  saleSessionId: UUID_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleProduct` of type `Product!`
+  """
+  saleProduct: Product_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleSession` of type `Session!`
+  """
+  saleSession: Session_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleDate` of type `Date!`
+  """
+  saleDate: Date_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleNetValue` of type `Float`
+  """
+  saleNetValue: Float_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleQuant` of type `Int`
+  """
+  saleQuant: Int_Filter
+}
+"""
+✨ Generated first-row input type for table 'Sale'. This input selects the first row matching the filter criteria, ordered according to the specified conditions.
+"""
+input Sale_FirstRow {
+  """
+  Order the result by the specified fields.
+  """
+  orderBy: [Sale_Order!]
+  """
+  Filters rows based on the specified conditions.
+  """
+  where: Sale_Filter
+}
+"""
+✨ Generated having input type for table 'Sale'. This input allows you to filter groups during aggregate queries using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input Sale_Having {
+  """
+  Apply multiple Having conditions using `AND` logic.
+  """
+  _and: [Sale_Having!]
+  """
+  Whether to apply DISTINCT to the aggregate function.
+  """
+  _distinct: Boolean
+  """
+  Negate the result of the provided Having condition.
+  """
+  _not: Sale_Having
+  """
+  Apply multiple Having conditions using `OR` logic.
+  """
+  _or: [Sale_Having!]
+  """
+  ✨ Generated from Field `Sale`.`_count` of type `Int!`
+  """
+  _count: Int_Filter
+  """
+  ✨ Generated from Field `Sale`.`id_count` of type `Int!`
+  """
+  id_count: Int_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleDate_count` of type `Int!`
+  """
+  saleDate_count: Int_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleNetValue_count` of type `Int!`
+  """
+  saleNetValue_count: Int_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleProductId_count` of type `Int!`
+  """
+  saleProductId_count: Int_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleQuant_count` of type `Int!`
+  """
+  saleQuant_count: Int_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleSessionId_count` of type `Int!`
+  """
+  saleSessionId_count: Int_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleNetValue_sum` of type `Float`
+  """
+  saleNetValue_sum: Float_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleQuant_sum` of type `Int`
+  """
+  saleQuant_sum: Int_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleNetValue_avg` of type `Float`
+  """
+  saleNetValue_avg: Float_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleQuant_avg` of type `Float`
+  """
+  saleQuant_avg: Float_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleDate_min` of type `Date`
+  """
+  saleDate_min: Date_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleNetValue_min` of type `Float`
+  """
+  saleNetValue_min: Float_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleQuant_min` of type `Int`
+  """
+  saleQuant_min: Int_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleDate_max` of type `Date`
+  """
+  saleDate_max: Date_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleNetValue_max` of type `Float`
+  """
+  saleNetValue_max: Float_Filter
+  """
+  ✨ Generated from Field `Sale`.`saleQuant_max` of type `Int`
+  """
+  saleQuant_max: Int_Filter
+}
+"""
+✨ Generated key input type for table 'Sale'. It represents the primary key fields used to uniquely identify a row in the table.
+"""
+input Sale_Key {
+  """
+  ✨ Generated from Field `Sale`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `Sale`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+}
+"""
+✨ Generated list filter input type for table 'Sale'. This input applies filtering logic based on the count or existence of related objects that matches certain criteria.
+"""
+input Sale_ListFilter {
+  """
+  The desired number of objects that match the condition (defaults to at least one).
+  """
+  count: Int_Filter = {gt:0}
+  """
+  Condition of the related objects to filter for.
+  """
+  exist: Sale_Filter
+}
+"""
+✨ Generated order input type for table 'Sale'. This input defines the sorting order of rows in query results based on one or more fields.
+"""
+input Sale_Order {
+  """
+  ✨ Generated from Field `Sale`.`id` of type `UUID!`
+  """
+  id: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleProductId` of type `UUID!`
+  """
+  saleProductId: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleSessionId` of type `UUID!`
+  """
+  saleSessionId: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleProduct` of type `Product!`
+  """
+  saleProduct: Product_Order
+  """
+  ✨ Generated from Field `Sale`.`saleSession` of type `Session!`
+  """
+  saleSession: Session_Order
+  """
+  ✨ Generated from Field `Sale`.`saleDate` of type `Date!`
+  """
+  saleDate: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleNetValue` of type `Float`
+  """
+  saleNetValue: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleQuant` of type `Int`
+  """
+  saleQuant: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`_count` of type `Int!`
+  """
+  _count: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`id_count` of type `Int!`
+  """
+  id_count: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleDate_count` of type `Int!`
+  """
+  saleDate_count: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleNetValue_count` of type `Int!`
+  """
+  saleNetValue_count: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleProductId_count` of type `Int!`
+  """
+  saleProductId_count: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleQuant_count` of type `Int!`
+  """
+  saleQuant_count: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleSessionId_count` of type `Int!`
+  """
+  saleSessionId_count: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleNetValue_sum` of type `Float`
+  """
+  saleNetValue_sum: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleQuant_sum` of type `Int`
+  """
+  saleQuant_sum: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleNetValue_avg` of type `Float`
+  """
+  saleNetValue_avg: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleQuant_avg` of type `Float`
+  """
+  saleQuant_avg: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleDate_min` of type `Date`
+  """
+  saleDate_min: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleNetValue_min` of type `Float`
+  """
+  saleNetValue_min: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleQuant_min` of type `Int`
+  """
+  saleQuant_min: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleDate_max` of type `Date`
+  """
+  saleDate_max: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleNetValue_max` of type `Float`
+  """
+  saleNetValue_max: OrderDirection
+  """
+  ✨ Generated from Field `Sale`.`saleQuant_max` of type `Int`
+  """
+  saleQuant_max: OrderDirection
+}
+"""
+✨ Generated data input type for table 'Session'. It includes all necessary fields for creating or upserting rows into table.
+"""
+input Session_Data {
+  """
+  ✨ Generated from Field `Session`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `Session`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Session`.`sessionMovieId` of type `UUID!`
+  """
+  sessionMovieId: UUID
+  """
+  ✨ `_expr` server value variant of `sessionMovieId` (✨ Generated from Field `Session`.`sessionMovieId` of type `UUID!`)
+  """
+  sessionMovieId_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Session`.`sessionUnitId` of type `UUID!`
+  """
+  sessionUnitId: UUID
+  """
+  ✨ `_expr` server value variant of `sessionUnitId` (✨ Generated from Field `Session`.`sessionUnitId` of type `UUID!`)
+  """
+  sessionUnitId_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Session`.`sessionMovie` of type `Movie!`
+  """
+  sessionMovie: Movie_Key
+  """
+  ✨ Generated from Field `Session`.`sessionUnit` of type `Unit!`
+  """
+  sessionUnit: Unit_Key
+  """
+  ✨ Generated from Field `Session`.`sessionDate` of type `Date!`
+  """
+  sessionDate: Date
+  """
+  ✨ `_date` server value variant of `sessionDate` (✨ Generated from Field `Session`.`sessionDate` of type `Date!`)
+  """
+  sessionDate_date: Date_Relative
+  """
+  ✨ `_expr` server value variant of `sessionDate` (✨ Generated from Field `Session`.`sessionDate` of type `Date!`)
+  """
+  sessionDate_expr: Date_Expr
+  """
+  ✨ `_update` server value variant of `sessionDate` (✨ Generated from Field `Session`.`sessionDate` of type `Date!`)
+  """
+  sessionDate_update: [Date_Update!]
+  """
+  ✨ Generated from Field `Session`.`sessionHour` of type `Date!`
+  """
+  sessionHour: Date
+  """
+  ✨ `_date` server value variant of `sessionHour` (✨ Generated from Field `Session`.`sessionHour` of type `Date!`)
+  """
+  sessionHour_date: Date_Relative
+  """
+  ✨ `_expr` server value variant of `sessionHour` (✨ Generated from Field `Session`.`sessionHour` of type `Date!`)
+  """
+  sessionHour_expr: Date_Expr
+  """
+  ✨ `_update` server value variant of `sessionHour` (✨ Generated from Field `Session`.`sessionHour` of type `Date!`)
+  """
+  sessionHour_update: [Date_Update!]
+  """
+  ✨ Generated from Field `Session`.`sessionNetValue` of type `Float`
+  """
+  sessionNetValue: Float
+  """
+  ✨ `_expr` server value variant of `sessionNetValue` (✨ Generated from Field `Session`.`sessionNetValue` of type `Float`)
+  """
+  sessionNetValue_expr: Float_Expr
+  """
+  ✨ `_update` server value variant of `sessionNetValue` (✨ Generated from Field `Session`.`sessionNetValue` of type `Float`)
+  """
+  sessionNetValue_update: [Float_Update!]
+  """
+  ✨ Generated from Field `Session`.`sessionOcupation` of type `Float`
+  """
+  sessionOcupation: Float
+  """
+  ✨ `_expr` server value variant of `sessionOcupation` (✨ Generated from Field `Session`.`sessionOcupation` of type `Float`)
+  """
+  sessionOcupation_expr: Float_Expr
+  """
+  ✨ `_update` server value variant of `sessionOcupation` (✨ Generated from Field `Session`.`sessionOcupation` of type `Float`)
+  """
+  sessionOcupation_update: [Float_Update!]
+  """
+  ✨ Generated from Field `Session`.`sessionTicketsSold` of type `Int`
+  """
+  sessionTicketsSold: Int
+  """
+  ✨ `_expr` server value variant of `sessionTicketsSold` (✨ Generated from Field `Session`.`sessionTicketsSold` of type `Int`)
+  """
+  sessionTicketsSold_expr: Int_Expr
+  """
+  ✨ `_update` server value variant of `sessionTicketsSold` (✨ Generated from Field `Session`.`sessionTicketsSold` of type `Int`)
+  """
+  sessionTicketsSold_update: [Int_Update!]
+}
+"""
+✨ Generated filter input type for table 'Session'. This input allows filtering objects using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input Session_Filter {
+  """
+  Apply multiple filter conditions using `AND` logic.
+  """
+  _and: [Session_Filter!]
+  """
+  Negate the result of the provided filter condition.
+  """
+  _not: Session_Filter
+  """
+  Apply multiple filter conditions using `OR` logic.
+  """
+  _or: [Session_Filter!]
+  """
+  ✨ Generated from Field `Session`.`id` of type `UUID!`
+  """
+  id: UUID_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionMovieId` of type `UUID!`
+  """
+  sessionMovieId: UUID_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionUnitId` of type `UUID!`
+  """
+  sessionUnitId: UUID_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionMovie` of type `Movie!`
+  """
+  sessionMovie: Movie_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionUnit` of type `Unit!`
+  """
+  sessionUnit: Unit_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionDate` of type `Date!`
+  """
+  sessionDate: Date_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionHour` of type `Date!`
+  """
+  sessionHour: Date_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionNetValue` of type `Float`
+  """
+  sessionNetValue: Float_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionOcupation` of type `Float`
+  """
+  sessionOcupation: Float_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionTicketsSold` of type `Int`
+  """
+  sessionTicketsSold: Int_Filter
+  """
+  ✨ Generated from Field `Session`.`sales_on_saleSession` of type `[Sale!]!`
+  """
+  sales_on_saleSession: Sale_ListFilter
+}
+"""
+✨ Generated first-row input type for table 'Session'. This input selects the first row matching the filter criteria, ordered according to the specified conditions.
+"""
+input Session_FirstRow {
+  """
+  Order the result by the specified fields.
+  """
+  orderBy: [Session_Order!]
+  """
+  Filters rows based on the specified conditions.
+  """
+  where: Session_Filter
+}
+"""
+✨ Generated having input type for table 'Session'. This input allows you to filter groups during aggregate queries using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input Session_Having {
+  """
+  Apply multiple Having conditions using `AND` logic.
+  """
+  _and: [Session_Having!]
+  """
+  Whether to apply DISTINCT to the aggregate function.
+  """
+  _distinct: Boolean
+  """
+  Negate the result of the provided Having condition.
+  """
+  _not: Session_Having
+  """
+  Apply multiple Having conditions using `OR` logic.
+  """
+  _or: [Session_Having!]
+  """
+  ✨ Generated from Field `Session`.`_count` of type `Int!`
+  """
+  _count: Int_Filter
+  """
+  ✨ Generated from Field `Session`.`id_count` of type `Int!`
+  """
+  id_count: Int_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionDate_count` of type `Int!`
+  """
+  sessionDate_count: Int_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionHour_count` of type `Int!`
+  """
+  sessionHour_count: Int_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionMovieId_count` of type `Int!`
+  """
+  sessionMovieId_count: Int_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionNetValue_count` of type `Int!`
+  """
+  sessionNetValue_count: Int_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionOcupation_count` of type `Int!`
+  """
+  sessionOcupation_count: Int_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionTicketsSold_count` of type `Int!`
+  """
+  sessionTicketsSold_count: Int_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionUnitId_count` of type `Int!`
+  """
+  sessionUnitId_count: Int_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionNetValue_sum` of type `Float`
+  """
+  sessionNetValue_sum: Float_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionOcupation_sum` of type `Float`
+  """
+  sessionOcupation_sum: Float_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionTicketsSold_sum` of type `Int`
+  """
+  sessionTicketsSold_sum: Int_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionNetValue_avg` of type `Float`
+  """
+  sessionNetValue_avg: Float_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionOcupation_avg` of type `Float`
+  """
+  sessionOcupation_avg: Float_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionTicketsSold_avg` of type `Float`
+  """
+  sessionTicketsSold_avg: Float_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionDate_min` of type `Date`
+  """
+  sessionDate_min: Date_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionHour_min` of type `Date`
+  """
+  sessionHour_min: Date_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionNetValue_min` of type `Float`
+  """
+  sessionNetValue_min: Float_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionOcupation_min` of type `Float`
+  """
+  sessionOcupation_min: Float_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionTicketsSold_min` of type `Int`
+  """
+  sessionTicketsSold_min: Int_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionDate_max` of type `Date`
+  """
+  sessionDate_max: Date_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionHour_max` of type `Date`
+  """
+  sessionHour_max: Date_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionNetValue_max` of type `Float`
+  """
+  sessionNetValue_max: Float_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionOcupation_max` of type `Float`
+  """
+  sessionOcupation_max: Float_Filter
+  """
+  ✨ Generated from Field `Session`.`sessionTicketsSold_max` of type `Int`
+  """
+  sessionTicketsSold_max: Int_Filter
+}
+"""
+✨ Generated key input type for table 'Session'. It represents the primary key fields used to uniquely identify a row in the table.
+"""
+input Session_Key {
+  """
+  ✨ Generated from Field `Session`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `Session`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+}
+"""
+✨ Generated list filter input type for table 'Session'. This input applies filtering logic based on the count or existence of related objects that matches certain criteria.
+"""
+input Session_ListFilter {
+  """
+  The desired number of objects that match the condition (defaults to at least one).
+  """
+  count: Int_Filter = {gt:0}
+  """
+  Condition of the related objects to filter for.
+  """
+  exist: Session_Filter
+}
+"""
+✨ Generated order input type for table 'Session'. This input defines the sorting order of rows in query results based on one or more fields.
+"""
+input Session_Order {
+  """
+  ✨ Generated from Field `Session`.`id` of type `UUID!`
+  """
+  id: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionMovieId` of type `UUID!`
+  """
+  sessionMovieId: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionUnitId` of type `UUID!`
+  """
+  sessionUnitId: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionMovie` of type `Movie!`
+  """
+  sessionMovie: Movie_Order
+  """
+  ✨ Generated from Field `Session`.`sessionUnit` of type `Unit!`
+  """
+  sessionUnit: Unit_Order
+  """
+  ✨ Generated from Field `Session`.`sessionDate` of type `Date!`
+  """
+  sessionDate: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionHour` of type `Date!`
+  """
+  sessionHour: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionNetValue` of type `Float`
+  """
+  sessionNetValue: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionOcupation` of type `Float`
+  """
+  sessionOcupation: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionTicketsSold` of type `Int`
+  """
+  sessionTicketsSold: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`_count` of type `Int!`
+  """
+  _count: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`id_count` of type `Int!`
+  """
+  id_count: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionDate_count` of type `Int!`
+  """
+  sessionDate_count: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionHour_count` of type `Int!`
+  """
+  sessionHour_count: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionMovieId_count` of type `Int!`
+  """
+  sessionMovieId_count: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionNetValue_count` of type `Int!`
+  """
+  sessionNetValue_count: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionOcupation_count` of type `Int!`
+  """
+  sessionOcupation_count: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionTicketsSold_count` of type `Int!`
+  """
+  sessionTicketsSold_count: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionUnitId_count` of type `Int!`
+  """
+  sessionUnitId_count: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionNetValue_sum` of type `Float`
+  """
+  sessionNetValue_sum: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionOcupation_sum` of type `Float`
+  """
+  sessionOcupation_sum: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionTicketsSold_sum` of type `Int`
+  """
+  sessionTicketsSold_sum: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionNetValue_avg` of type `Float`
+  """
+  sessionNetValue_avg: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionOcupation_avg` of type `Float`
+  """
+  sessionOcupation_avg: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionTicketsSold_avg` of type `Float`
+  """
+  sessionTicketsSold_avg: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionDate_min` of type `Date`
+  """
+  sessionDate_min: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionHour_min` of type `Date`
+  """
+  sessionHour_min: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionNetValue_min` of type `Float`
+  """
+  sessionNetValue_min: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionOcupation_min` of type `Float`
+  """
+  sessionOcupation_min: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionTicketsSold_min` of type `Int`
+  """
+  sessionTicketsSold_min: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionDate_max` of type `Date`
+  """
+  sessionDate_max: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionHour_max` of type `Date`
+  """
+  sessionHour_max: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionNetValue_max` of type `Float`
+  """
+  sessionNetValue_max: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionOcupation_max` of type `Float`
+  """
+  sessionOcupation_max: OrderDirection
+  """
+  ✨ Generated from Field `Session`.`sessionTicketsSold_max` of type `Int`
+  """
+  sessionTicketsSold_max: OrderDirection
+}
+"""
+✨ Generated data input type for table 'Simulation'. It includes all necessary fields for creating or upserting rows into table.
+"""
+input Simulation_Data {
+  """
+  ✨ Generated from Field `Simulation`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `Simulation`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Simulation`.`simulationMovieId` of type `UUID!`
+  """
+  simulationMovieId: UUID
+  """
+  ✨ `_expr` server value variant of `simulationMovieId` (✨ Generated from Field `Simulation`.`simulationMovieId` of type `UUID!`)
+  """
+  simulationMovieId_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Simulation`.`simulationUnitId` of type `UUID!`
+  """
+  simulationUnitId: UUID
+  """
+  ✨ `_expr` server value variant of `simulationUnitId` (✨ Generated from Field `Simulation`.`simulationUnitId` of type `UUID!`)
+  """
+  simulationUnitId_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Simulation`.`simulationMovie` of type `Movie!`
+  """
+  simulationMovie: Movie_Key
+  """
+  ✨ Generated from Field `Simulation`.`simulationUnit` of type `Unit!`
+  """
+  simulationUnit: Unit_Key
+  """
+  ✨ Generated from Field `Simulation`.`dataSimulacao` of type `Date!`
+  """
+  dataSimulacao: Date
+  """
+  ✨ `_date` server value variant of `dataSimulacao` (✨ Generated from Field `Simulation`.`dataSimulacao` of type `Date!`)
+  """
+  dataSimulacao_date: Date_Relative
+  """
+  ✨ `_expr` server value variant of `dataSimulacao` (✨ Generated from Field `Simulation`.`dataSimulacao` of type `Date!`)
+  """
+  dataSimulacao_expr: Date_Expr
+  """
+  ✨ `_update` server value variant of `dataSimulacao` (✨ Generated from Field `Simulation`.`dataSimulacao` of type `Date!`)
+  """
+  dataSimulacao_update: [Date_Update!]
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcAudience` of type `Int`
+  """
+  simulationExpcAudience: Int
+  """
+  ✨ `_expr` server value variant of `simulationExpcAudience` (✨ Generated from Field `Simulation`.`simulationExpcAudience` of type `Int`)
+  """
+  simulationExpcAudience_expr: Int_Expr
+  """
+  ✨ `_update` server value variant of `simulationExpcAudience` (✨ Generated from Field `Simulation`.`simulationExpcAudience` of type `Int`)
+  """
+  simulationExpcAudience_update: [Int_Update!]
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcIncome` of type `Float`
+  """
+  simulationExpcIncome: Float
+  """
+  ✨ `_expr` server value variant of `simulationExpcIncome` (✨ Generated from Field `Simulation`.`simulationExpcIncome` of type `Float`)
+  """
+  simulationExpcIncome_expr: Float_Expr
+  """
+  ✨ `_update` server value variant of `simulationExpcIncome` (✨ Generated from Field `Simulation`.`simulationExpcIncome` of type `Float`)
+  """
+  simulationExpcIncome_update: [Float_Update!]
+}
+"""
+✨ Generated filter input type for table 'Simulation'. This input allows filtering objects using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input Simulation_Filter {
+  """
+  Apply multiple filter conditions using `AND` logic.
+  """
+  _and: [Simulation_Filter!]
+  """
+  Negate the result of the provided filter condition.
+  """
+  _not: Simulation_Filter
+  """
+  Apply multiple filter conditions using `OR` logic.
+  """
+  _or: [Simulation_Filter!]
+  """
+  ✨ Generated from Field `Simulation`.`id` of type `UUID!`
+  """
+  id: UUID_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationMovieId` of type `UUID!`
+  """
+  simulationMovieId: UUID_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationUnitId` of type `UUID!`
+  """
+  simulationUnitId: UUID_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationMovie` of type `Movie!`
+  """
+  simulationMovie: Movie_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationUnit` of type `Unit!`
+  """
+  simulationUnit: Unit_Filter
+  """
+  ✨ Generated from Field `Simulation`.`dataSimulacao` of type `Date!`
+  """
+  dataSimulacao: Date_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcAudience` of type `Int`
+  """
+  simulationExpcAudience: Int_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcIncome` of type `Float`
+  """
+  simulationExpcIncome: Float_Filter
+}
+"""
+✨ Generated first-row input type for table 'Simulation'. This input selects the first row matching the filter criteria, ordered according to the specified conditions.
+"""
+input Simulation_FirstRow {
+  """
+  Order the result by the specified fields.
+  """
+  orderBy: [Simulation_Order!]
+  """
+  Filters rows based on the specified conditions.
+  """
+  where: Simulation_Filter
+}
+"""
+✨ Generated having input type for table 'Simulation'. This input allows you to filter groups during aggregate queries using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input Simulation_Having {
+  """
+  Apply multiple Having conditions using `AND` logic.
+  """
+  _and: [Simulation_Having!]
+  """
+  Whether to apply DISTINCT to the aggregate function.
+  """
+  _distinct: Boolean
+  """
+  Negate the result of the provided Having condition.
+  """
+  _not: Simulation_Having
+  """
+  Apply multiple Having conditions using `OR` logic.
+  """
+  _or: [Simulation_Having!]
+  """
+  ✨ Generated from Field `Simulation`.`_count` of type `Int!`
+  """
+  _count: Int_Filter
+  """
+  ✨ Generated from Field `Simulation`.`dataSimulacao_count` of type `Int!`
+  """
+  dataSimulacao_count: Int_Filter
+  """
+  ✨ Generated from Field `Simulation`.`id_count` of type `Int!`
+  """
+  id_count: Int_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcAudience_count` of type `Int!`
+  """
+  simulationExpcAudience_count: Int_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcIncome_count` of type `Int!`
+  """
+  simulationExpcIncome_count: Int_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationMovieId_count` of type `Int!`
+  """
+  simulationMovieId_count: Int_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationUnitId_count` of type `Int!`
+  """
+  simulationUnitId_count: Int_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcAudience_sum` of type `Int`
+  """
+  simulationExpcAudience_sum: Int_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcIncome_sum` of type `Float`
+  """
+  simulationExpcIncome_sum: Float_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcAudience_avg` of type `Float`
+  """
+  simulationExpcAudience_avg: Float_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcIncome_avg` of type `Float`
+  """
+  simulationExpcIncome_avg: Float_Filter
+  """
+  ✨ Generated from Field `Simulation`.`dataSimulacao_min` of type `Date`
+  """
+  dataSimulacao_min: Date_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcAudience_min` of type `Int`
+  """
+  simulationExpcAudience_min: Int_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcIncome_min` of type `Float`
+  """
+  simulationExpcIncome_min: Float_Filter
+  """
+  ✨ Generated from Field `Simulation`.`dataSimulacao_max` of type `Date`
+  """
+  dataSimulacao_max: Date_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcAudience_max` of type `Int`
+  """
+  simulationExpcAudience_max: Int_Filter
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcIncome_max` of type `Float`
+  """
+  simulationExpcIncome_max: Float_Filter
+}
+"""
+✨ Generated key input type for table 'Simulation'. It represents the primary key fields used to uniquely identify a row in the table.
+"""
+input Simulation_Key {
+  """
+  ✨ Generated from Field `Simulation`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `Simulation`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+}
+"""
+✨ Generated list filter input type for table 'Simulation'. This input applies filtering logic based on the count or existence of related objects that matches certain criteria.
+"""
+input Simulation_ListFilter {
+  """
+  The desired number of objects that match the condition (defaults to at least one).
+  """
+  count: Int_Filter = {gt:0}
+  """
+  Condition of the related objects to filter for.
+  """
+  exist: Simulation_Filter
+}
+"""
+✨ Generated order input type for table 'Simulation'. This input defines the sorting order of rows in query results based on one or more fields.
+"""
+input Simulation_Order {
+  """
+  ✨ Generated from Field `Simulation`.`id` of type `UUID!`
+  """
+  id: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationMovieId` of type `UUID!`
+  """
+  simulationMovieId: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationUnitId` of type `UUID!`
+  """
+  simulationUnitId: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationMovie` of type `Movie!`
+  """
+  simulationMovie: Movie_Order
+  """
+  ✨ Generated from Field `Simulation`.`simulationUnit` of type `Unit!`
+  """
+  simulationUnit: Unit_Order
+  """
+  ✨ Generated from Field `Simulation`.`dataSimulacao` of type `Date!`
+  """
+  dataSimulacao: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcAudience` of type `Int`
+  """
+  simulationExpcAudience: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcIncome` of type `Float`
+  """
+  simulationExpcIncome: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`_count` of type `Int!`
+  """
+  _count: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`dataSimulacao_count` of type `Int!`
+  """
+  dataSimulacao_count: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`id_count` of type `Int!`
+  """
+  id_count: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcAudience_count` of type `Int!`
+  """
+  simulationExpcAudience_count: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcIncome_count` of type `Int!`
+  """
+  simulationExpcIncome_count: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationMovieId_count` of type `Int!`
+  """
+  simulationMovieId_count: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationUnitId_count` of type `Int!`
+  """
+  simulationUnitId_count: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcAudience_sum` of type `Int`
+  """
+  simulationExpcAudience_sum: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcIncome_sum` of type `Float`
+  """
+  simulationExpcIncome_sum: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcAudience_avg` of type `Float`
+  """
+  simulationExpcAudience_avg: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcIncome_avg` of type `Float`
+  """
+  simulationExpcIncome_avg: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`dataSimulacao_min` of type `Date`
+  """
+  dataSimulacao_min: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcAudience_min` of type `Int`
+  """
+  simulationExpcAudience_min: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcIncome_min` of type `Float`
+  """
+  simulationExpcIncome_min: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`dataSimulacao_max` of type `Date`
+  """
+  dataSimulacao_max: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcAudience_max` of type `Int`
+  """
+  simulationExpcAudience_max: OrderDirection
+  """
+  ✨ Generated from Field `Simulation`.`simulationExpcIncome_max` of type `Float`
+  """
+  simulationExpcIncome_max: OrderDirection
+}
+"""
+✨ Generated data input type for table 'Unit'. It includes all necessary fields for creating or upserting rows into table.
+"""
+input Unit_Data {
+  """
+  ✨ Generated from Field `Unit`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `Unit`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Unit`.`unitManagerId` of type `UUID`
+  """
+  unitManagerId: UUID
+  """
+  ✨ `_expr` server value variant of `unitManagerId` (✨ Generated from Field `Unit`.`unitManagerId` of type `UUID`)
+  """
+  unitManagerId_expr: UUID_Expr
+  """
+  ✨ Generated from Field `Unit`.`unitManager` of type `User`
+  """
+  unitManager: User_Key
+  """
+  ✨ Generated from Field `Unit`.`unitActive` of type `Boolean`
+  """
+  unitActive: Boolean
+  """
+  ✨ `_expr` server value variant of `unitActive` (✨ Generated from Field `Unit`.`unitActive` of type `Boolean`)
+  """
+  unitActive_expr: Boolean_Expr
+  """
+  ✨ Generated from Field `Unit`.`unitLocal` of type `String`
+  """
+  unitLocal: String
+  """
+  ✨ `_expr` server value variant of `unitLocal` (✨ Generated from Field `Unit`.`unitLocal` of type `String`)
+  """
+  unitLocal_expr: String_Expr
+  """
+  ✨ Generated from Field `Unit`.`unitMacCapacity` of type `Int`
+  """
+  unitMacCapacity: Int
+  """
+  ✨ `_expr` server value variant of `unitMacCapacity` (✨ Generated from Field `Unit`.`unitMacCapacity` of type `Int`)
+  """
+  unitMacCapacity_expr: Int_Expr
+  """
+  ✨ `_update` server value variant of `unitMacCapacity` (✨ Generated from Field `Unit`.`unitMacCapacity` of type `Int`)
+  """
+  unitMacCapacity_update: [Int_Update!]
+  """
+  ✨ Generated from Field `Unit`.`unitName` of type `String!`
+  """
+  unitName: String
+  """
+  ✨ `_expr` server value variant of `unitName` (✨ Generated from Field `Unit`.`unitName` of type `String!`)
+  """
+  unitName_expr: String_Expr
+}
+"""
+✨ Generated filter input type for table 'Unit'. This input allows filtering objects using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input Unit_Filter {
+  """
+  Apply multiple filter conditions using `AND` logic.
+  """
+  _and: [Unit_Filter!]
+  """
+  Negate the result of the provided filter condition.
+  """
+  _not: Unit_Filter
+  """
+  Apply multiple filter conditions using `OR` logic.
+  """
+  _or: [Unit_Filter!]
+  """
+  ✨ Generated from Field `Unit`.`id` of type `UUID!`
+  """
+  id: UUID_Filter
+  """
+  ✨ Generated from Field `Unit`.`unitManagerId` of type `UUID`
+  """
+  unitManagerId: UUID_Filter
+  """
+  ✨ Generated from Field `Unit`.`unitManager` of type `User`
+  """
+  unitManager: User_Filter
+  """
+  ✨ Generated from Field `Unit`.`unitActive` of type `Boolean`
+  """
+  unitActive: Boolean_Filter
+  """
+  ✨ Generated from Field `Unit`.`unitLocal` of type `String`
+  """
+  unitLocal: String_Filter
+  """
+  ✨ Generated from Field `Unit`.`unitMacCapacity` of type `Int`
+  """
+  unitMacCapacity: Int_Filter
+  """
+  ✨ Generated from Field `Unit`.`unitName` of type `String!`
+  """
+  unitName: String_Filter
+  """
+  ✨ Generated from Field `Unit`.`audiences_on_audienceUnit` of type `[Audience!]!`
+  """
+  audiences_on_audienceUnit: Audience_ListFilter
+  """
+  ✨ Generated from Field `Unit`.`audienceProfiles_on_profileUnit` of type `[AudienceProfile!]!`
+  """
+  audienceProfiles_on_profileUnit: AudienceProfile_ListFilter
+  """
+  ✨ Generated from Field `Unit`.`indicators_on_indicatorUnit` of type `[Indicator!]!`
+  """
+  indicators_on_indicatorUnit: Indicator_ListFilter
+  """
+  ✨ Generated from Field `Unit`.`sessions_on_sessionUnit` of type `[Session!]!`
+  """
+  sessions_on_sessionUnit: Session_ListFilter
+  """
+  ✨ Generated from Field `Unit`.`simulations_on_simulationUnit` of type `[Simulation!]!`
+  """
+  simulations_on_simulationUnit: Simulation_ListFilter
+}
+"""
+✨ Generated first-row input type for table 'Unit'. This input selects the first row matching the filter criteria, ordered according to the specified conditions.
+"""
+input Unit_FirstRow {
+  """
+  Order the result by the specified fields.
+  """
+  orderBy: [Unit_Order!]
+  """
+  Filters rows based on the specified conditions.
+  """
+  where: Unit_Filter
+}
+"""
+✨ Generated having input type for table 'Unit'. This input allows you to filter groups during aggregate queries using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input Unit_Having {
+  """
+  Apply multiple Having conditions using `AND` logic.
+  """
+  _and: [Unit_Having!]
+  """
+  Whether to apply DISTINCT to the aggregate function.
+  """
+  _distinct: Boolean
+  """
+  Negate the result of the provided Having condition.
+  """
+  _not: Unit_Having
+  """
+  Apply multiple Having conditions using `OR` logic.
+  """
+  _or: [Unit_Having!]
+  """
+  ✨ Generated from Field `Unit`.`_count` of type `Int!`
+  """
+  _count: Int_Filter
+  """
+  ✨ Generated from Field `Unit`.`id_count` of type `Int!`
+  """
+  id_count: Int_Filter
+  """
+  ✨ Generated from Field `Unit`.`unitActive_count` of type `Int!`
+  """
+  unitActive_count: Int_Filter
+  """
+  ✨ Generated from Field `Unit`.`unitLocal_count` of type `Int!`
+  """
+  unitLocal_count: Int_Filter
+  """
+  ✨ Generated from Field `Unit`.`unitMacCapacity_count` of type `Int!`
+  """
+  unitMacCapacity_count: Int_Filter
+  """
+  ✨ Generated from Field `Unit`.`unitManagerId_count` of type `Int!`
+  """
+  unitManagerId_count: Int_Filter
+  """
+  ✨ Generated from Field `Unit`.`unitName_count` of type `Int!`
+  """
+  unitName_count: Int_Filter
+  """
+  ✨ Generated from Field `Unit`.`unitMacCapacity_sum` of type `Int`
+  """
+  unitMacCapacity_sum: Int_Filter
+  """
+  ✨ Generated from Field `Unit`.`unitMacCapacity_avg` of type `Float`
+  """
+  unitMacCapacity_avg: Float_Filter
+  """
+  ✨ Generated from Field `Unit`.`unitMacCapacity_min` of type `Int`
+  """
+  unitMacCapacity_min: Int_Filter
+  """
+  ✨ Generated from Field `Unit`.`unitMacCapacity_max` of type `Int`
+  """
+  unitMacCapacity_max: Int_Filter
+}
+"""
+✨ Generated key input type for table 'Unit'. It represents the primary key fields used to uniquely identify a row in the table.
+"""
+input Unit_Key {
+  """
+  ✨ Generated from Field `Unit`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `Unit`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+}
+"""
+✨ Generated list filter input type for table 'Unit'. This input applies filtering logic based on the count or existence of related objects that matches certain criteria.
+"""
+input Unit_ListFilter {
+  """
+  The desired number of objects that match the condition (defaults to at least one).
+  """
+  count: Int_Filter = {gt:0}
+  """
+  Condition of the related objects to filter for.
+  """
+  exist: Unit_Filter
+}
+"""
+✨ Generated order input type for table 'Unit'. This input defines the sorting order of rows in query results based on one or more fields.
+"""
+input Unit_Order {
+  """
+  ✨ Generated from Field `Unit`.`id` of type `UUID!`
+  """
+  id: OrderDirection
+  """
+  ✨ Generated from Field `Unit`.`unitManagerId` of type `UUID`
+  """
+  unitManagerId: OrderDirection
+  """
+  ✨ Generated from Field `Unit`.`unitManager` of type `User`
+  """
+  unitManager: User_Order
+  """
+  ✨ Generated from Field `Unit`.`unitActive` of type `Boolean`
+  """
+  unitActive: OrderDirection
+  """
+  ✨ Generated from Field `Unit`.`unitLocal` of type `String`
+  """
+  unitLocal: OrderDirection
+  """
+  ✨ Generated from Field `Unit`.`unitMacCapacity` of type `Int`
+  """
+  unitMacCapacity: OrderDirection
+  """
+  ✨ Generated from Field `Unit`.`unitName` of type `String!`
+  """
+  unitName: OrderDirection
+  """
+  ✨ Generated from Field `Unit`.`_count` of type `Int!`
+  """
+  _count: OrderDirection
+  """
+  ✨ Generated from Field `Unit`.`id_count` of type `Int!`
+  """
+  id_count: OrderDirection
+  """
+  ✨ Generated from Field `Unit`.`unitActive_count` of type `Int!`
+  """
+  unitActive_count: OrderDirection
+  """
+  ✨ Generated from Field `Unit`.`unitLocal_count` of type `Int!`
+  """
+  unitLocal_count: OrderDirection
+  """
+  ✨ Generated from Field `Unit`.`unitMacCapacity_count` of type `Int!`
+  """
+  unitMacCapacity_count: OrderDirection
+  """
+  ✨ Generated from Field `Unit`.`unitManagerId_count` of type `Int!`
+  """
+  unitManagerId_count: OrderDirection
+  """
+  ✨ Generated from Field `Unit`.`unitName_count` of type `Int!`
+  """
+  unitName_count: OrderDirection
+  """
+  ✨ Generated from Field `Unit`.`unitMacCapacity_sum` of type `Int`
+  """
+  unitMacCapacity_sum: OrderDirection
+  """
+  ✨ Generated from Field `Unit`.`unitMacCapacity_avg` of type `Float`
+  """
+  unitMacCapacity_avg: OrderDirection
+  """
+  ✨ Generated from Field `Unit`.`unitMacCapacity_min` of type `Int`
+  """
+  unitMacCapacity_min: OrderDirection
+  """
+  ✨ Generated from Field `Unit`.`unitMacCapacity_max` of type `Int`
+  """
+  unitMacCapacity_max: OrderDirection
+}
+"""
+✨ Generated data input type for table 'User'. It includes all necessary fields for creating or upserting rows into table.
+"""
+input User_Data {
+  """
+  ✨ Generated from Field `User`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `User`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+  """
+  ✨ Generated from Field `User`.`userCreatedAt` of type `Date!`
+  """
+  userCreatedAt: Date
+  """
+  ✨ `_date` server value variant of `userCreatedAt` (✨ Generated from Field `User`.`userCreatedAt` of type `Date!`)
+  """
+  userCreatedAt_date: Date_Relative
+  """
+  ✨ `_expr` server value variant of `userCreatedAt` (✨ Generated from Field `User`.`userCreatedAt` of type `Date!`)
+  """
+  userCreatedAt_expr: Date_Expr
+  """
+  ✨ `_update` server value variant of `userCreatedAt` (✨ Generated from Field `User`.`userCreatedAt` of type `Date!`)
+  """
+  userCreatedAt_update: [Date_Update!]
+  """
+  ✨ Generated from Field `User`.`userEmail` of type `String!`
+  """
+  userEmail: String
+  """
+  ✨ `_expr` server value variant of `userEmail` (✨ Generated from Field `User`.`userEmail` of type `String!`)
+  """
+  userEmail_expr: String_Expr
+  """
+  ✨ Generated from Field `User`.`userId` of type `String!`
+  """
+  userId: String
+  """
+  ✨ `_expr` server value variant of `userId` (✨ Generated from Field `User`.`userId` of type `String!`)
+  """
+  userId_expr: String_Expr
+  """
+  ✨ Generated from Field `User`.`userName` of type `String!`
+  """
+  userName: String
+  """
+  ✨ `_expr` server value variant of `userName` (✨ Generated from Field `User`.`userName` of type `String!`)
+  """
+  userName_expr: String_Expr
+}
+"""
+✨ Generated filter input type for table 'User'. This input allows filtering objects using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input User_Filter {
+  """
+  Apply multiple filter conditions using `AND` logic.
+  """
+  _and: [User_Filter!]
+  """
+  Negate the result of the provided filter condition.
+  """
+  _not: User_Filter
+  """
+  Apply multiple filter conditions using `OR` logic.
+  """
+  _or: [User_Filter!]
+  """
+  ✨ Generated from Field `User`.`id` of type `UUID!`
+  """
+  id: UUID_Filter
+  """
+  ✨ Generated from Field `User`.`userCreatedAt` of type `Date!`
+  """
+  userCreatedAt: Date_Filter
+  """
+  ✨ Generated from Field `User`.`userEmail` of type `String!`
+  """
+  userEmail: String_Filter
+  """
+  ✨ Generated from Field `User`.`userId` of type `String!`
+  """
+  userId: String_Filter
+  """
+  ✨ Generated from Field `User`.`userName` of type `String!`
+  """
+  userName: String_Filter
+  """
+  ✨ Generated from Field `User`.`units_on_unitManager` of type `[Unit!]!`
+  """
+  units_on_unitManager: Unit_ListFilter
+}
+"""
+✨ Generated first-row input type for table 'User'. This input selects the first row matching the filter criteria, ordered according to the specified conditions.
+"""
+input User_FirstRow {
+  """
+  Order the result by the specified fields.
+  """
+  orderBy: [User_Order!]
+  """
+  Filters rows based on the specified conditions.
+  """
+  where: User_Filter
+}
+"""
+✨ Generated having input type for table 'User'. This input allows you to filter groups during aggregate queries using various conditions. Use `_or`, `_and`, and `_not` to compose complex filters.
+"""
+input User_Having {
+  """
+  Apply multiple Having conditions using `AND` logic.
+  """
+  _and: [User_Having!]
+  """
+  Whether to apply DISTINCT to the aggregate function.
+  """
+  _distinct: Boolean
+  """
+  Negate the result of the provided Having condition.
+  """
+  _not: User_Having
+  """
+  Apply multiple Having conditions using `OR` logic.
+  """
+  _or: [User_Having!]
+  """
+  ✨ Generated from Field `User`.`_count` of type `Int!`
+  """
+  _count: Int_Filter
+  """
+  ✨ Generated from Field `User`.`id_count` of type `Int!`
+  """
+  id_count: Int_Filter
+  """
+  ✨ Generated from Field `User`.`userCreatedAt_count` of type `Int!`
+  """
+  userCreatedAt_count: Int_Filter
+  """
+  ✨ Generated from Field `User`.`userEmail_count` of type `Int!`
+  """
+  userEmail_count: Int_Filter
+  """
+  ✨ Generated from Field `User`.`userId_count` of type `Int!`
+  """
+  userId_count: Int_Filter
+  """
+  ✨ Generated from Field `User`.`userName_count` of type `Int!`
+  """
+  userName_count: Int_Filter
+  """
+  ✨ Generated from Field `User`.`userCreatedAt_min` of type `Date`
+  """
+  userCreatedAt_min: Date_Filter
+  """
+  ✨ Generated from Field `User`.`userCreatedAt_max` of type `Date`
+  """
+  userCreatedAt_max: Date_Filter
+}
+"""
+✨ Generated key input type for table 'User'. It represents the primary key fields used to uniquely identify a row in the table.
+"""
+input User_Key {
+  """
+  ✨ Generated from Field `User`.`id` of type `UUID!`
+  """
+  id: UUID
+  """
+  ✨ `_expr` server value variant of `id` (✨ Generated from Field `User`.`id` of type `UUID!`)
+  """
+  id_expr: UUID_Expr
+}
+"""
+✨ Generated list filter input type for table 'User'. This input applies filtering logic based on the count or existence of related objects that matches certain criteria.
+"""
+input User_ListFilter {
+  """
+  The desired number of objects that match the condition (defaults to at least one).
+  """
+  count: Int_Filter = {gt:0}
+  """
+  Condition of the related objects to filter for.
+  """
+  exist: User_Filter
+}
+"""
+✨ Generated order input type for table 'User'. This input defines the sorting order of rows in query results based on one or more fields.
+"""
+input User_Order {
+  """
+  ✨ Generated from Field `User`.`id` of type `UUID!`
+  """
+  id: OrderDirection
+  """
+  ✨ Generated from Field `User`.`userCreatedAt` of type `Date!`
+  """
+  userCreatedAt: OrderDirection
+  """
+  ✨ Generated from Field `User`.`userEmail` of type `String!`
+  """
+  userEmail: OrderDirection
+  """
+  ✨ Generated from Field `User`.`userId` of type `String!`
+  """
+  userId: OrderDirection
+  """
+  ✨ Generated from Field `User`.`userName` of type `String!`
+  """
+  userName: OrderDirection
+  """
+  ✨ Generated from Field `User`.`_count` of type `Int!`
+  """
+  _count: OrderDirection
+  """
+  ✨ Generated from Field `User`.`id_count` of type `Int!`
+  """
+  id_count: OrderDirection
+  """
+  ✨ Generated from Field `User`.`userCreatedAt_count` of type `Int!`
+  """
+  userCreatedAt_count: OrderDirection
+  """
+  ✨ Generated from Field `User`.`userEmail_count` of type `Int!`
+  """
+  userEmail_count: OrderDirection
+  """
+  ✨ Generated from Field `User`.`userId_count` of type `Int!`
+  """
+  userId_count: OrderDirection
+  """
+  ✨ Generated from Field `User`.`userName_count` of type `Int!`
+  """
+  userName_count: OrderDirection
+  """
+  ✨ Generated from Field `User`.`userCreatedAt_min` of type `Date`
+  """
+  userCreatedAt_min: OrderDirection
+  """
+  ✨ Generated from Field `User`.`userCreatedAt_max` of type `Date`
+  """
+  userCreatedAt_max: OrderDirection
+}

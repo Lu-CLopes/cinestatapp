@@ -1,0 +1,106 @@
+# User - w auth 
+type User @table {
+  userId: String! @default(expr: "auth.uid") @col(name: "userId")# mapping w fireabse auth 
+  userName: String! 
+  userEmail: String! 
+  # senha_hash is managed by Firebase Auth and not stored directly in Data Connect's database
+  userCreatedAt: Date! 
+
+}
+
+# Unit
+type Unit @table {
+  #unitId: UUID! @index @default(expr: "uuidV4()") @col(name: "unitId")
+  unitName: String! 
+  unitLocal: String 
+  unitMacCapacity: Int 
+  unitManager: User @ref 
+  unitActive: Boolean 
+}
+
+# Movie
+type Movie @table {
+  #movieId: UUID! @index @default(expr: "uuidV4()") @col(name: "movieId")
+  movieTitle: String!
+  movieGenre: String 
+  movieAgeClass: String 
+  movieDuration: Int 
+  movieDistrib: String 
+  movieFormat: String 
+  movieDirector: String 
+  movieActive: Boolean 
+}
+
+# Session
+type Session @table {
+  #sessionId: UUID! @index @default(expr: "uuidV4()") @col(name: "sessionId")
+  sessionMovie: Movie! @ref 
+  sessionUnit: Unit! @ref 
+  sessionDate: Date! 
+  sessionHour: Date! 
+  sessionTicketsSold: Int 
+  sessionOcupation: Float 
+  sessionNetValue: Float    
+}
+
+# AudienceInfo
+type Audience @table {
+  #audienceId: UUID! @index @default(expr: "uuidV4()") 
+  audienceUnit: Unit! @ref
+  audienceAge: Int 
+  audienceGender: String 
+  audienceFormat: String 
+  
+}
+# AudienceProfile
+type AudienceProfile @table {
+  #profileId: UUID! @index @default(expr: "uuidV4()") 
+  profileUnit: Unit! @ref 
+  profileAge: Int 
+  profileGenre: String 
+  profileFormat: String 
+  profileAverageValue: Float 
+}
+
+# Product 
+type Product @table {
+  #productId: UUID! @index @default(expr: "uuidV4()") 
+  productName: String! 
+  productType: String 
+  productPrice: Float 
+  productActive: Boolean 
+}
+
+# Sale
+type Sale @table {
+  #saleId: UUID! @index @default(expr: "uuidV4()") 
+  saleSession: Session! @ref 
+  saleProduct: Product! @ref 
+  saleQuant: Int 
+  saleNetValue: Float 
+  saleDate: Date! 
+}
+
+# Simulation
+type Simulation @table {
+  #simulationId: UUID! @index @default(expr: "uuidV4()") @col(name: "id_simulacao")
+  simulationMovie: Movie! @ref 
+  simulationUnit: Unit! @ref 
+  dataSimulacao: Date! 
+  simulationExpcAudience: Int 
+  simulationExpcIncome: Float 
+}
+
+# Indicator
+type Indicator @table {
+  #indicatorId: UUID! @index @default(expr: "uuidV4()") 
+  indicatorUnit: Unit! @ref 
+  indicatorInit: Date 
+  indicatorEnd: Date 
+  indicatorAverageOcupancy: Float 
+  indicatorTicketsIncome: Float 
+  indicatorProductsIncome: Float 
+  indicatorTopFilm: String 
+  indicatorTopGenre: String 
+  indicatorLowPerformance: Boolean 
+}
