@@ -1,0 +1,33 @@
+query ReadAllUsers @auth(level: USER){
+  users {
+    userId
+    userName
+    userEmail
+    userCreatedAt
+  }
+}
+
+query ReadSingleUser($id: UUID!) @auth(level: USER) {
+  user(id : $id) {
+    userId
+    userName
+    userEmail
+    userCreatedAt
+  }
+}
+query ReadManagerUnits ($managerId: UUID!) @auth(level: USER){
+  units (where: { unitManager: { id: { eq: $managerId } } }) {
+    unitName
+    unitLocal
+    unitMacCapacity
+    unitManager {
+      userName
+    }
+    unitActive
+  }
+}
+
+
+
+
+
