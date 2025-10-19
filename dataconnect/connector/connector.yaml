@@ -1,4 +1,4 @@
-connectorId: example
+connectorId: cinestat-384ba
 generate:
   dartSdk:
     - outputDir: ../../lib/dataconnect_generated
