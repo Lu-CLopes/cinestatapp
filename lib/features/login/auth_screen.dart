@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'login_page.dart';
-import 'wave_clipper.dart'; // Importando o clipper
+import '../../wave_clipper.dart'; // Importando o clipper
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -10,7 +9,8 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Column( // Removido o SafeArea para o clipper ir até o topo
+      body: Column(
+        // Removido o SafeArea para o clipper ir até o topo
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Header com a nova curva
@@ -26,10 +26,19 @@ class AuthScreen extends StatelessWidget {
                 children: [
                   RichText(
                     text: const TextSpan(
-                      style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                      ),
                       children: <TextSpan>[
-                        TextSpan(text: 'c', style: TextStyle(color: Colors.white)),
-                        TextSpan(text: 'ine', style: TextStyle(color: Colors.red)),
+                        TextSpan(
+                          text: 'c',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        TextSpan(
+                          text: 'ine',
+                          style: TextStyle(color: Colors.red),
+                        ),
                       ],
                     ),
                   ),
@@ -45,10 +54,7 @@ class AuthScreen extends StatelessWidget {
           const Spacer(),
 
           // Imagem central
-          Image.asset(
-            'assets/images/img.png',
-            height: 250,
-          ),
+          Image.asset('assets/images/img.png', height: 250),
 
           const Spacer(),
 
@@ -61,7 +67,9 @@ class AuthScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const LoginPage()),
+                      MaterialPageRoute(
+                        builder: (context) => const LoginPage(),
+                      ),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -71,7 +79,10 @@ class AuthScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  child: const Text('Login', style: TextStyle(fontSize: 18, color: Colors.white)),
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
@@ -85,7 +96,10 @@ class AuthScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  child: const Text('Cadastrar', style: TextStyle(fontSize: 18, color: Colors.white)),
+                  child: const Text(
+                    'Cadastrar',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
                 ),
               ],
             ),
@@ -96,10 +110,7 @@ class AuthScreen extends StatelessWidget {
           // Rodapé com a nova curva
           ClipPath(
             clipper: BottomWaveClipper(),
-            child: Container(
-              color: const Color(0xFF9B0000),
-              height: 100,
-            ),
+            child: Container(color: const Color(0xFF9B0000), height: 100),
           ),
         ],
       ),
