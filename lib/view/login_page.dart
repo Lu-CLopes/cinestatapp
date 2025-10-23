@@ -2,7 +2,7 @@ import 'package:cinestatapp/components/widgets/cine_button_componente.dart';
 import 'package:cinestatapp/view/controller/login_controller.dart';
 import 'package:flutter/material.dart';
 import '../wave_clipper.dart'; // Importando o clipper
-
+//remove this line
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
