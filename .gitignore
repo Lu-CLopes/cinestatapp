@@ -12,6 +12,10 @@
 .swiftpm/
 migrate_working_dir/
 
+# Personal documentation files
+EXPLICACAO_IMPLEMENTACAO.md
+RESUMO_ALTERACOES.md
+
 # IntelliJ related
 *.iml
 *.ipr
