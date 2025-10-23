@@ -1,0 +1,100 @@
+extend type Audience {
+  """
+  ✨ Implicit primary key field. It's a UUID column default to a generated new value. See `@table` for how to customize it.
+  """
+  id: UUID! @default(expr: "uuidV4()") @fdc_generated(from: "Audience", purpose: IMPLICIT_KEY_FIELD)
+  """
+  ✨ Implicit foreign key field based on `Audience`.`audienceUnit`. It must match the value of `Unit`.`id`. See `@ref` for how to customize it.
+  """
+  audienceUnitId: UUID! @fdc_generated(from: "Audience.audienceUnit", purpose: IMPLICIT_REF_FIELD)
+}
+extend type AudienceProfile {
+  """
+  ✨ Implicit primary key field. It's a UUID column default to a generated new value. See `@table` for how to customize it.
+  """
+  id: UUID! @default(expr: "uuidV4()") @fdc_generated(from: "AudienceProfile", purpose: IMPLICIT_KEY_FIELD)
+  """
+  ✨ Implicit foreign key field based on `AudienceProfile`.`profileUnit`. It must match the value of `Unit`.`id`. See `@ref` for how to customize it.
+  """
+  profileUnitId: UUID! @fdc_generated(from: "AudienceProfile.profileUnit", purpose: IMPLICIT_REF_FIELD)
+}
+extend type Indicator {
+  """
+  ✨ Implicit primary key field. It's a UUID column default to a generated new value. See `@table` for how to customize it.
+  """
+  id: UUID! @default(expr: "uuidV4()") @fdc_generated(from: "Indicator", purpose: IMPLICIT_KEY_FIELD)
+  """
+  ✨ Implicit foreign key field based on `Indicator`.`indicatorUnit`. It must match the value of `Unit`.`id`. See `@ref` for how to customize it.
+  """
+  indicatorUnitId: UUID! @fdc_generated(from: "Indicator.indicatorUnit", purpose: IMPLICIT_REF_FIELD)
+}
+extend type Movie {
+  """
+  ✨ Implicit primary key field. It's a UUID column default to a generated new value. See `@table` for how to customize it.
+  """
+  id: UUID! @default(expr: "uuidV4()") @fdc_generated(from: "Movie", purpose: IMPLICIT_KEY_FIELD)
+}
+extend type Product {
+  """
+  ✨ Implicit primary key field. It's a UUID column default to a generated new value. See `@table` for how to customize it.
+  """
+  id: UUID! @default(expr: "uuidV4()") @fdc_generated(from: "Product", purpose: IMPLICIT_KEY_FIELD)
+}
+extend type Sale {
+  """
+  ✨ Implicit primary key field. It's a UUID column default to a generated new value. See `@table` for how to customize it.
+  """
+  id: UUID! @default(expr: "uuidV4()") @fdc_generated(from: "Sale", purpose: IMPLICIT_KEY_FIELD)
+  """
+  ✨ Implicit foreign key field based on `Sale`.`saleProduct`. It must match the value of `Product`.`id`. See `@ref` for how to customize it.
+  """
+  saleProductId: UUID! @fdc_generated(from: "Sale.saleProduct", purpose: IMPLICIT_REF_FIELD)
+  """
+  ✨ Implicit foreign key field based on `Sale`.`saleSession`. It must match the value of `Session`.`id`. See `@ref` for how to customize it.
+  """
+  saleSessionId: UUID! @fdc_generated(from: "Sale.saleSession", purpose: IMPLICIT_REF_FIELD)
+}
+extend type Session {
+  """
+  ✨ Implicit primary key field. It's a UUID column default to a generated new value. See `@table` for how to customize it.
+  """
+  id: UUID! @default(expr: "uuidV4()") @fdc_generated(from: "Session", purpose: IMPLICIT_KEY_FIELD)
+  """
+  ✨ Implicit foreign key field based on `Session`.`sessionMovie`. It must match the value of `Movie`.`id`. See `@ref` for how to customize it.
+  """
+  sessionMovieId: UUID! @fdc_generated(from: "Session.sessionMovie", purpose: IMPLICIT_REF_FIELD)
+  """
+  ✨ Implicit foreign key field based on `Session`.`sessionUnit`. It must match the value of `Unit`.`id`. See `@ref` for how to customize it.
+  """
+  sessionUnitId: UUID! @fdc_generated(from: "Session.sessionUnit", purpose: IMPLICIT_REF_FIELD)
+}
+extend type Simulation {
+  """
+  ✨ Implicit primary key field. It's a UUID column default to a generated new value. See `@table` for how to customize it.
+  """
+  id: UUID! @default(expr: "uuidV4()") @fdc_generated(from: "Simulation", purpose: IMPLICIT_KEY_FIELD)
+  """
+  ✨ Implicit foreign key field based on `Simulation`.`simulationMovie`. It must match the value of `Movie`.`id`. See `@ref` for how to customize it.
+  """
+  simulationMovieId: UUID! @fdc_generated(from: "Simulation.simulationMovie", purpose: IMPLICIT_REF_FIELD)
+  """
+  ✨ Implicit foreign key field based on `Simulation`.`simulationUnit`. It must match the value of `Unit`.`id`. See `@ref` for how to customize it.
+  """
+  simulationUnitId: UUID! @fdc_generated(from: "Simulation.simulationUnit", purpose: IMPLICIT_REF_FIELD)
+}
+extend type Unit {
+  """
+  ✨ Implicit primary key field. It's a UUID column default to a generated new value. See `@table` for how to customize it.
+  """
+  id: UUID! @default(expr: "uuidV4()") @fdc_generated(from: "Unit", purpose: IMPLICIT_KEY_FIELD)
+  """
+  ✨ Implicit foreign key field based on `Unit`.`unitManager`. It must match the value of `User`.`id`. See `@ref` for how to customize it.
+  """
+  unitManagerId: UUID @fdc_generated(from: "Unit.unitManager", purpose: IMPLICIT_REF_FIELD)
+}
+extend type User {
+  """
+  ✨ Implicit primary key field. It's a UUID column default to a generated new value. See `@table` for how to customize it.
+  """
+  id: UUID! @default(expr: "uuidV4()") @fdc_generated(from: "User", purpose: IMPLICIT_KEY_FIELD)
+}

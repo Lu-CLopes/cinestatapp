@@ -1,0 +1,532 @@
+extend type Query {
+  """
+  ✨ Look up a single `Audience` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  audience(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Audience_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Audience_FirstRow
+  ): Audience @fdc_generated(from: "Audience", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `AudienceProfile` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  audienceProfile(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: AudienceProfile_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: AudienceProfile_FirstRow
+  ): AudienceProfile @fdc_generated(from: "AudienceProfile", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `Indicator` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  indicator(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Indicator_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Indicator_FirstRow
+  ): Indicator @fdc_generated(from: "Indicator", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `Movie` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  movie(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Movie_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Movie_FirstRow
+  ): Movie @fdc_generated(from: "Movie", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `Product` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  product(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Product_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Product_FirstRow
+  ): Product @fdc_generated(from: "Product", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `Sale` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  sale(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Sale_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Sale_FirstRow
+  ): Sale @fdc_generated(from: "Sale", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `Session` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  session(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Session_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Session_FirstRow
+  ): Session @fdc_generated(from: "Session", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `Simulation` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  simulation(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Simulation_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Simulation_FirstRow
+  ): Simulation @fdc_generated(from: "Simulation", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `Unit` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  unit(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: Unit_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: Unit_FirstRow
+  ): Unit @fdc_generated(from: "Unit", purpose: QUERY_SINGLE)
+  """
+  ✨ Look up a single `User` based on `id`, `key` or `first` and return selected fields (or `null` if not found).
+  """
+  user(
+    """
+    The unique ID of the object.
+    """
+    id: UUID
+
+    """
+    The key used to identify the object.
+    """
+    key: User_Key
+
+    """
+    Fetch the first row based on the filters and ordering.
+    """
+    first: User_FirstRow
+  ): User @fdc_generated(from: "User", purpose: QUERY_SINGLE)
+  """
+  ✨ List `Audience` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  audiences(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: Audience_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [Audience_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: Audience_Having
+  ): [Audience!]! @fdc_generated(from: "Audience", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `AudienceProfile` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  audienceProfiles(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: AudienceProfile_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [AudienceProfile_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: AudienceProfile_Having
+  ): [AudienceProfile!]! @fdc_generated(from: "AudienceProfile", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `Indicator` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  indicators(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: Indicator_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [Indicator_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: Indicator_Having
+  ): [Indicator!]! @fdc_generated(from: "Indicator", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `Movie` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  movies(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: Movie_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [Movie_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: Movie_Having
+  ): [Movie!]! @fdc_generated(from: "Movie", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `Product` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  products(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: Product_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [Product_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: Product_Having
+  ): [Product!]! @fdc_generated(from: "Product", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `Sale` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  sales(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: Sale_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [Sale_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: Sale_Having
+  ): [Sale!]! @fdc_generated(from: "Sale", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `Session` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  sessions(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: Session_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [Session_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: Session_Having
+  ): [Session!]! @fdc_generated(from: "Session", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `Simulation` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  simulations(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: Simulation_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [Simulation_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: Simulation_Having
+  ): [Simulation!]! @fdc_generated(from: "Simulation", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `Unit` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  units(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: Unit_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [Unit_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: Unit_Having
+  ): [Unit!]! @fdc_generated(from: "Unit", purpose: QUERY_MULTIPLE)
+  """
+  ✨ List `User` objects in the table and return selected fields, optionally filtered by `where` conditions
+  """
+  users(
+    """
+    Filter condition to narrow down the query results.
+    """
+    where: User_Filter
+
+    """
+    Order the query results by specific fields.
+    """
+    orderBy: [User_Order!]
+
+    """
+    Number of rows to skip before starting to return the results.
+    """
+    offset: Int
+
+    """
+    Maximum number of rows to return (defaults to 100 rows).
+    """
+    limit: Int = 100
+
+    """
+    Set to true to return distinct results.
+    """
+    distinct: Boolean = false
+
+    """
+    Filter condition to apply to the groups of aggregate queries.
+    """
+    having: User_Having
+  ): [User!]! @fdc_generated(from: "User", purpose: QUERY_MULTIPLE)
+}
