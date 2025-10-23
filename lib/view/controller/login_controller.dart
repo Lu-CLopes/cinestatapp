@@ -1,4 +1,5 @@
 //import 'package:cinestatapp/dataconnect_generated/example.dart';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -28,12 +29,12 @@ class LoginController {
       final user = cred.user;
 
       if (user != null) {
-        print('User validated');
+        log('User validated');
 
         return user.uid;
       }
     } on FirebaseAuthException catch (e) {
-      print('Erro de Login: ${e.message}'); // if not validated we send an error
+      log('Erro de Login: ${e.message}'); // if not validated we send an error
     }
 
     return "-1";

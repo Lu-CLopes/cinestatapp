@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
-import '../../wave_clipper.dart'; // Importando o clipper
+import 'signup_page.dart';
+import '../wave_clipper.dart'; // Importando o clipper
+import '../components/widgets/cine_button_componente.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -63,7 +65,8 @@ class AuthScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 50.0),
             child: Column(
               children: [
-                ElevatedButton(
+                CineButtonComponente(
+                  text: 'Login',
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -72,34 +75,18 @@ class AuthScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    minimumSize: const Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                  ),
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(
+                CineButtonComponente(
+                  text: 'Cadastrar',
                   onPressed: () {
-                    // TODO: Navegar para a tela de cadastro
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SignUpPage(),
+                      ),
+                    );
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    minimumSize: const Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  child: const Text(
-                    'Cadastrar',
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                  ),
                 ),
               ],
             ),
