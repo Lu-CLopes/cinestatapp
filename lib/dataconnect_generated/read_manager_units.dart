@@ -70,7 +70,7 @@ class ReadManagerUnitsUnits {
     return json;
   }
 
-  ReadManagerUnitsUnits({
+  const ReadManagerUnitsUnits({
     required this.unitName,
     this.unitLocal,
     this.unitMacCapacity,
@@ -108,7 +108,7 @@ class ReadManagerUnitsUnitsUnitManager {
     return json;
   }
 
-  ReadManagerUnitsUnitsUnitManager({
+  const ReadManagerUnitsUnitsUnitManager({
     required this.userName,
   });
 }
@@ -144,7 +144,7 @@ class ReadManagerUnitsData {
     return json;
   }
 
-  ReadManagerUnitsData({
+  const ReadManagerUnitsData({
     required this.units,
   });
 }
@@ -179,7 +179,7 @@ class ReadManagerUnitsVariables {
     return json;
   }
 
-  ReadManagerUnitsVariables({
+  const ReadManagerUnitsVariables({
     required this.managerId,
   });
 }

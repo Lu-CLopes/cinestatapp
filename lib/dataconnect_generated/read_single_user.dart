@@ -58,7 +58,7 @@ class ReadSingleUserUser {
     return json;
   }
 
-  ReadSingleUserUser({
+  const ReadSingleUserUser({
     required this.userId,
     required this.userName,
     required this.userEmail,
@@ -97,7 +97,7 @@ class ReadSingleUserData {
     return json;
   }
 
-  ReadSingleUserData({
+  const ReadSingleUserData({
     this.user,
   });
 }
@@ -132,7 +132,7 @@ class ReadSingleUserVariables {
     return json;
   }
 
-  ReadSingleUserVariables({
+  const ReadSingleUserVariables({
     required this.id,
   });
 }

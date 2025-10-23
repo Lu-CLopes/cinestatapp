@@ -50,7 +50,7 @@ class CreateUnitUnitInsert {
     return json;
   }
 
-  CreateUnitUnitInsert({
+  const CreateUnitUnitInsert({
     required this.id,
   });
 }
@@ -84,7 +84,7 @@ class CreateUnitData {
     return json;
   }
 
-  CreateUnitData({
+  const CreateUnitData({
     required this.unit_insert,
   });
 }
@@ -135,7 +135,7 @@ class CreateUnitVariables {
     return json;
   }
 
-  CreateUnitVariables({
+  const CreateUnitVariables({
     required this.unitName,
     required this.unitLocal,
     required this.unitMacCapacity,

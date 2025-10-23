@@ -48,7 +48,7 @@ class CreateUserUserInsert {
     return json;
   }
 
-  CreateUserUserInsert({
+  const CreateUserUserInsert({
     required this.id,
   });
 }
@@ -82,7 +82,7 @@ class CreateUserData {
     return json;
   }
 
-  CreateUserData({
+  const CreateUserData({
     required this.user_insert,
   });
 }
@@ -125,7 +125,7 @@ class CreateUserVariables {
     return json;
   }
 
-  CreateUserVariables({
+  const CreateUserVariables({
     required this.userCreatedAt,
     required this.userName,
     required this.userEmail,

@@ -57,7 +57,7 @@ class ReadAllUsersUsers {
     return json;
   }
 
-  ReadAllUsersUsers({
+  const ReadAllUsersUsers({
     required this.userId,
     required this.userName,
     required this.userEmail,
@@ -96,7 +96,7 @@ class ReadAllUsersData {
     return json;
   }
 
-  ReadAllUsersData({
+  const ReadAllUsersData({
     required this.users,
   });
 }
