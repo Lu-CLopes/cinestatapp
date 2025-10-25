@@ -1,4 +1,3 @@
-
 import 'package:cinestatapp/view/auth_screen.dart';
 import 'package:cinestatapp/view/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +19,8 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
       ),
-      home: const AuthScreen(),
-      routes: {
-        '/main': (context) => const MainScreen(),
-      },
+      home: const MainScreen(),
+      routes: {'/main': (context) => const MainScreen()},
     );
   }
 }

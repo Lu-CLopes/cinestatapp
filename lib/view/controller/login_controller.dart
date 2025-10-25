@@ -1,13 +1,18 @@
 //import 'package:cinestatapp/dataconnect_generated/example.dart';
 import 'dart:developer';
+import 'package:cinestatapp/dataconnect_generated/example.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_data_connect/firebase_data_connect.dart';
 
 class LoginController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  // final dataConnect = FirebaseDataConnect.instanceFor(
+  //   connectorConfig: ExampleConnector.connectorConfig,
+  // );
   //final local_db.AppDatabase _db;
   //LoginController(this._db);
 

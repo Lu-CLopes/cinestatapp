@@ -1,6 +1,6 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=D:\projetos\flutter\flutter
-FLUTTER_APPLICATION_PATH=D:\projetos\cinestatapp
+FLUTTER_ROOT=/opt/homebrew/Caskroom/flutter/3.29.3/flutter
+FLUTTER_APPLICATION_PATH=/Users/luizalopes/Desktop/Puc/6 periodo/GestãoProj/cineStat/cinestatapp
 COCOAPODS_PARALLEL_CODE_SIGN=true
 FLUTTER_BUILD_DIR=build
 FLUTTER_BUILD_NAME=1.0.0

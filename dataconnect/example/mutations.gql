@@ -35,3 +35,46 @@ mutation CreateUnit(
 #mutation DeleteUser($id: UUID!) @auth(level: USER) {
 #  user_delete(id: $id)
 #}
+
+mutation CreateMovie(
+  $movieTitle: String!, 
+  $movieGenre: String!, 
+  $movieAgeClass: String!, 
+  $movieDuration: Int!, 
+  $movieDistrib: String!, 
+  $movieFormat: String!, 
+  $movieDirector: String!, 
+  $movieActive: Boolean!) 
+  @auth(level: USER)
+{ 
+  movie_insert(
+    data: { 
+      movieTitle: $movieTitle, 
+      movieGenre: $movieGenre, 
+      movieAgeClass: $movieAgeClass, 
+      movieDuration: $movieDuration, 
+      movieDistrib: $movieDistrib, 
+      movieFormat: $movieFormat, 
+      movieDirector: $movieDirector, 
+      movieActive: $movieActive
+    }
+  ) 
+}
+
+
+mutation CreateAudience(
+  $audienceUnitId: UUID!, 
+  $audienceAge: Int!, 
+  $audienceGender: String!, 
+  $audienceFormat: String!) 
+  @auth(level: USER)
+{ 
+  audience_insert(
+    data: { 
+        audienceAge: $audienceAge, 
+        audienceFormat: $audienceFormat, 
+        audienceGender: $audienceGender, 
+        audienceUnitId: $audienceUnitId
+    }
+  ) 
+}

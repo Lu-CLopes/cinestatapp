@@ -27,6 +27,26 @@ query ReadManagerUnits ($managerId: UUID!) @auth(level: USER){
   }
 }
 
+query ReadSingleMovie ($movieId: UUID!) @auth(level: USER){
+  movie(id: $movieId) {
+    movieTitle
+    movieGenre
+    movieAgeClass
+    movieDuration
+    movieDistrib
+    movieFormat
+    movieDirector
+    movieActive
+  }
+}
+
+query ReadUnitsAudience ($unitId: UUID!) @auth(level: USER){
+  audiences (where: { audienceUnit: { id: { eq: $unitId } } }) {
+    audienceAge
+    audienceGender
+    audienceFormat
+  }
+}
 
 
 
