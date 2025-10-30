@@ -1,3 +1,4 @@
+import 'package:cinestatapp/dataconnect_generated/example.dart';
 import 'package:flutter/material.dart';
 import '../components/widgets/cine_button_componente.dart';
 

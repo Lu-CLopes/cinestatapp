@@ -21,10 +21,7 @@ void main() async {
     log("Firebase already initialized or error: $e");
   }
 
-  // ExampleConnector.instance.dataConnect.useDataConnectEmulator(
-  //   "127.0.0.1",
-  //   9399,
-  // );
+  ExampleConnector.instance.dataConnect;
 
   runApp(const MyApp());
 }
