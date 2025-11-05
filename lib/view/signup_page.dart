@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../components/widgets/cine_button_componente.dart';
+import '../service/firebase/data_connect_service.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -54,14 +55,35 @@ class _SignUpPageState extends State<SignUpPage> {
         // Atualizar o display name
         await credential.user!.updateDisplayName(_nameController.text.trim());
         
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Cadastro realizado com sucesso!'),
-              backgroundColor: Colors.green,
-            ),
-          );
-          Navigator.pop(context);
+        // Criar usuário no backend via Data Connect
+        final dataConnectService = DataConnectService();
+        final created = await dataConnectService.createUser(
+          userId: credential.user!.uid,
+          userName: _nameController.text.trim(),
+          userEmail: _emailController.text.trim(),
+        );
+        
+        if (created != null) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Cadastro realizado com sucesso!'),
+                backgroundColor: Colors.green,
+              ),
+            );
+            Navigator.pop(context);
+          }
+        } else {
+          // Autenticação OK mas erro ao criar no backend
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Conta criada, mas houve erro ao sincronizar com o backend'),
+                backgroundColor: Colors.orange,
+              ),
+            );
+            Navigator.pop(context);
+          }
         }
       }
     } on FirebaseAuthException catch (e) {

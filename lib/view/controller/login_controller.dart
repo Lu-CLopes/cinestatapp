@@ -2,6 +2,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../../service/firebase/data_connect_service.dart';
 
 class LoginController {
   final TextEditingController emailController = TextEditingController();
@@ -30,6 +31,20 @@ class LoginController {
 
       if (user != null) {
         log('User validated');
+        
+        // Sincronizar usuário com backend (cria se não existir)
+        final dataConnectService = DataConnectService();
+        final synced = await dataConnectService.syncUserWithBackend();
+        
+        if (synced) {
+          // Se o usuário tem email, tenta buscar por email (mais confiável)
+          if (user.email != null) {
+            final userData = await dataConnectService.getUserDataByEmail(user.email!);
+            if (userData != null) {
+              log('Dados do usuário do backend: ${userData.toString()}');
+            }
+          }
+        }
 
         return user.uid;
       }
