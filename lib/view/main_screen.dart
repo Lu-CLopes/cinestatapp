@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../wave_clipper.dart';
+import '../components/widgets/cine_button_componente.dart';
+import 'unit_page.dart';
+import 'filmes_page.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -13,8 +16,8 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
-    const UnidadesScreen(),
-    const FilmesScreen(),
+    const UnidadePage(),
+    const FilmesPage(),
     const PipocasScreen(),
   ];
 
@@ -35,10 +38,7 @@ class _MainScreenState extends State<MainScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.grey[900],
-          title: const Text(
-            'Sair',
-            style: TextStyle(color: Colors.white),
-          ),
+          title: const Text('Sair', style: TextStyle(color: Colors.white)),
           content: const Text(
             'Tem certeza que deseja sair?',
             style: TextStyle(color: Colors.white),
@@ -55,16 +55,12 @@ class _MainScreenState extends State<MainScreen> {
               onPressed: () async {
                 await FirebaseAuth.instance.signOut();
                 if (mounted) {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/',
-                    (route) => false,
-                  );
+                  Navigator.of(
+                    context,
+                  ).pushNamedAndRemoveUntil('/', (route) => false);
                 }
               },
-              child: const Text(
-                'Sair',
-                style: TextStyle(color: Colors.red),
-              ),
+              child: const Text('Sair', style: TextStyle(color: Colors.red)),
             ),
           ],
         );
@@ -107,23 +103,17 @@ class _MainScreenState extends State<MainScreen> {
                       ],
                     ),
                   ),
-                  const Icon(
-                    Icons.theaters,
-                    color: Colors.black,
-                    size: 40,
-                  ),
+                  const Icon(Icons.theaters, color: Colors.black, size: 40),
                 ],
               ),
             ),
           ),
-          
+
           // Área de conteúdo
-          Expanded(
-            child: _screens[_selectedIndex],
-          ),
+          Expanded(child: _screens[_selectedIndex]),
         ],
       ),
-      
+
       // Barra de navegação inferior
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
@@ -137,63 +127,13 @@ class _MainScreenState extends State<MainScreen> {
             icon: Icon(Icons.location_on),
             label: 'Unidades',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.movie),
-            label: 'Filmes',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.movie), label: 'Filmes'),
           BottomNavigationBarItem(
             icon: Icon(Icons.local_dining),
             label: 'Pipocas',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.exit_to_app),
-            label: 'Sair',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.exit_to_app), label: 'Sair'),
         ],
-      ),
-    );
-  }
-}
-
-// Tela de Unidades
-class UnidadesScreen extends StatelessWidget {
-  const UnidadesScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
-      child: const Center(
-        child: Text(
-          'Unidades',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// Tela de Filmes
-class FilmesScreen extends StatelessWidget {
-  const FilmesScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
-      child: const Center(
-        child: Text(
-          'Filmes',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
       ),
     );
   }
