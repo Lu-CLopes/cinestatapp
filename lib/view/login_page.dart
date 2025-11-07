@@ -109,6 +109,7 @@ CineButtonComponente(text: 'Login', onPressed: () async {
                 final password = _controller.passwordController.text.trim();
                 
                 if (email.isEmpty || password.isEmpty) {
+                  if (!mounted) return;
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Preencha todos os campos'),  
@@ -119,6 +120,7 @@ CineButtonComponente(text: 'Login', onPressed: () async {
                 }
                 
                 if (!email.contains('@')) {
+                  if (!mounted) return;
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Digite um email válido'),
@@ -128,20 +130,33 @@ CineButtonComponente(text: 'Login', onPressed: () async {
                   return;
                 }
                 
-                final uid = await _controller.checkUser();
-                if (uid != "-1") {
+                try {
+                  final uid = await _controller.checkUser();
+                  if (!mounted) return; // Verificar se o widget ainda está montado
+                  
+                  if (uid != "-1") {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Login realizado com sucesso!'),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                    // Navegar para a tela principal
+                    Navigator.pushReplacementNamed(context, '/main');
+                  } else {
+                    if (!mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Email e/ou senha incorretos.'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
+                } catch (e) {
+                  if (!mounted) return;
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Login realizado com sucesso!'),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
-                  // Navegar para a tela principal
-                  Navigator.pushReplacementNamed(context, '/main');
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Email e/ou senha incorretos.'),
+                    SnackBar(
+                      content: Text('Erro ao fazer login: ${e.toString()}'),
                       backgroundColor: Colors.red,
                     ),
                   );

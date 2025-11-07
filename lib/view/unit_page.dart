@@ -1,5 +1,6 @@
-import 'package:cinestatapp/dataconnect_generated/example.dart';
+import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../components/widgets/cine_button_componente.dart';
 import '../service/firebase/data_connect_service.dart';
 
@@ -15,7 +16,9 @@ class _UnidadePageState extends State<UnidadePage> {
   final _nameController = TextEditingController();
   final _localController = TextEditingController();
   final _maxCapController = TextEditingController();
-  final _activeController = TextEditingController();
+
+  // Valor para dropdown
+  String? _selectedActive;
 
   bool _isLoading = false;
 
@@ -24,47 +27,115 @@ class _UnidadePageState extends State<UnidadePage> {
     _nameController.dispose();
     _localController.dispose();
     _maxCapController.dispose();
-    _activeController.dispose();
     super.dispose();
   }
 
   Future<void> _createUnit() async {
-    if (_formKey.currentState!.validate()) {
-      String name = _nameController.text;
-      String local = _localController.text;
-      String maxCap = _maxCapController.text;
-      String active = _activeController.text;
+    if (!_formKey.currentState!.validate()) return;
 
+    // Verificar se o usuário está logado
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Você precisa estar logado para criar uma unidade. Faça login e tente novamente.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    try {
+      final name = _nameController.text.trim();
+      final local = _localController.text.trim();
+      final maxCapStr = _maxCapController.text.trim();
+      final activeStr = _selectedActive ?? '';
+
+      // Validar campos obrigatórios
+      if (name.isEmpty || local.isEmpty || maxCapStr.isEmpty || activeStr.isEmpty) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Preencha todos os campos'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+        return;
+      }
+
+      // Converter capacidade máxima para int
+      final maxCap = int.tryParse(maxCapStr);
+      if (maxCap == null || maxCap <= 0) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Capacidade máxima deve ser um número válido'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+        return;
+      }
+
+      // Converter ativo para bool (dropdown retorna "Ativo" ou "Desativo")
+      final active = activeStr.toLowerCase() == 'ativo';
+
+      // Criar unidade no backend
       final dataConnectService = DataConnectService();
       final created = await dataConnectService.createUnit(
         unitName: name,
         unitLocal: local,
-        unitMacCapacity: int.parse(maxCap),
-        //unitManagerId: 'manager123', // Substitua pelo ID real do gerente
-        unitActive: active == 'Ativo' ? true : false,
+        unitMacCapacity: maxCap,
+        unitActive: active,
       );
 
       if (created != null && mounted) {
+        // Limpar campos após sucesso
+        _nameController.clear();
+        _localController.clear();
+        _maxCapController.clear();
+        // Resetar dropdown e formulário
+        setState(() {
+          _selectedActive = null;
+        });
+        // Resetar o formulário após limpar campos
+        Future.microtask(() {
+          _formKey.currentState?.reset();
+        });
+        // Mostrar mensagem de sucesso
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Unidade criada com sucesso!'),
             backgroundColor: Colors.green,
           ),
         );
-
-        // Navigate to main page and remove all previous routes
-        Navigator.of(
-          context,
-        ).pushNamedAndRemoveUntil('/main', (route) => false);
       } else if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Erro ao criar unidade'),
+            content: Text('Erro ao criar unidade. Verifique os dados e tente novamente. Veja o console para mais detalhes.'),
             backgroundColor: Colors.red,
+            duration: Duration(seconds: 5),
           ),
         );
       }
-
+    } catch (e, stackTrace) {
+      log('Erro ao criar unidade: $e');
+      log('Stack trace: $stackTrace');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro: $e'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      }
+    } finally {
       if (mounted) {
         setState(() => _isLoading = false);
       }
@@ -217,8 +288,11 @@ class _UnidadePageState extends State<UnidadePage> {
                   DropdownMenuItem(value: 'Ativo', child: Text('Ativo')),
                   DropdownMenuItem(value: 'Desativo', child: Text('Desativo')),
                 ],
+                value: _selectedActive,
                 onChanged: (value) {
-                  _activeController.text = value!;
+                  setState(() {
+                    _selectedActive = value;
+                  });
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {

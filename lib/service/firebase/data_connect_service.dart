@@ -149,20 +149,56 @@ class DataConnectService {
         return null;
       }
 
+      // Sincronizar usuário primeiro para garantir que existe no backend
+      // E obter o ID interno (UUID) retornado pela criação
+      String? backendUserId;
+      final synced = await syncUserWithBackend();
+      if (!synced) {
+        log('Failed to sync user with backend before creating unit');
+        return null;
+      }
+
+      // Tentar recriar o usuário para obter o ID interno (UUID) do backend
+      // Isso é necessário porque o backend retorna um UUID interno diferente do userId
+      try {
+        final createResult = await _connector
+            .createUser(
+              userCreatedAt: DateTime.now(),
+              userName: user.displayName ?? 'Usuário',
+              userEmail: user.email ?? '',
+            )
+            .execute();
+        
+        // O backend retorna o ID interno (UUID) mesmo que o usuário já exista
+        backendUserId = createResult.data.user_insert.id;
+        log('Backend user ID (UUID): $backendUserId');
+      } catch (e) {
+        log('Error getting backend user ID, will try to use Firebase UID: $e');
+        // Se falhar, tenta usar o Firebase UID diretamente
+        backendUserId = user.uid;
+      }
+
+      // O backend espera UUID para unitManagerId
+      // backendUserId já está definido (user.uid se falhar no try-catch)
+      final managerId = backendUserId;
+      log('Using managerId: $managerId');
+      log('Creating unit with params: name=$unitName, local=$unitLocal, capacity=$unitMacCapacity, active=$unitActive, managerId=$managerId');
+
       final result = await _connector
           .createUnit(
             unitName: unitName,
             unitLocal: unitLocal,
             unitMacCapacity: unitMacCapacity,
-            unitManagerId: user.uid,
+            unitManagerId: managerId,
             unitActive: unitActive,
           )
           .execute();
 
       log('Unit created in backend: ${result.data.unit_insert.id}');
       return result.data.unit_insert.id;
-    } catch (e) {
+    } catch (e, stackTrace) {
       log('Error creating unit in backend: $e');
+      log('Stack trace: $stackTrace');
       return null;
     }
   }
