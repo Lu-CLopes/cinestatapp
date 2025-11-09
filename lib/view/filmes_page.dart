@@ -50,9 +50,14 @@ class _FilmesPageState extends State<FilmesPage> {
       final activeStr = _selectedActive ?? '';
 
       // Validar campos obrigatórios
-      if (title.isEmpty || genre.isEmpty || ageClass.isEmpty || 
-          durationStr.isEmpty || distributor.isEmpty || format.isEmpty || 
-          director.isEmpty || activeStr.isEmpty) {
+      if (title.isEmpty ||
+          genre.isEmpty ||
+          ageClass.isEmpty ||
+          durationStr.isEmpty ||
+          distributor.isEmpty ||
+          format.isEmpty ||
+          director.isEmpty ||
+          activeStr.isEmpty) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -129,10 +134,7 @@ class _FilmesPageState extends State<FilmesPage> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Erro: $e'),
-            backgroundColor: Colors.red,
-          ),
+          SnackBar(content: Text('Erro: $e'), backgroundColor: Colors.red),
         );
       }
     } finally {
@@ -209,9 +211,7 @@ class _FilmesPageState extends State<FilmesPage> {
 
               // Genre
               DropdownButtonFormField<String>(
-              DropdownButtonFormField<String>(
                 decoration: const InputDecoration(
-                  labelText: 'Genero do filme',
                   labelText: 'Genero do filme',
                   labelStyle: TextStyle(color: Colors.grey),
                   prefixIcon: Icon(Icons.category, color: Colors.grey),
@@ -234,11 +234,12 @@ class _FilmesPageState extends State<FilmesPage> {
                   DropdownMenuItem(value: 'Terror', child: Text('Terror')),
                 ],
                 onChanged: (value) {
-                  _genreController.text = value!;
+                  setState(() {
+                    _selectedGenre = value;
+                  });
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Selecione o gênero do filme';
                     return 'Selecione o gênero do filme';
                   }
                   return null;
@@ -247,7 +248,6 @@ class _FilmesPageState extends State<FilmesPage> {
               const SizedBox(height: 16),
 
               // Age Class
-              DropdownButtonFormField<String>(
               DropdownButtonFormField<String>(
                 decoration: const InputDecoration(
                   labelText: 'Classificação indicativa',
@@ -261,8 +261,7 @@ class _FilmesPageState extends State<FilmesPage> {
                     borderSide: BorderSide(color: Colors.red),
                   ),
                 ),
-                dropdownColor: Colors
-                    .black, // cor do menu suspenso (ajuste conforme o tema)
+                dropdownColor: Colors.black,
                 style: const TextStyle(color: Colors.white),
                 items: const [
                   DropdownMenuItem(
@@ -275,12 +274,14 @@ class _FilmesPageState extends State<FilmesPage> {
                   DropdownMenuItem(value: '16 anos', child: Text('16 anos')),
                   DropdownMenuItem(value: '18 anos', child: Text('18 anos')),
                 ],
+                value: _selectedAgeClass,
                 onChanged: (value) {
-                  _ageClassController.text = value!;
+                  setState(() {
+                    _selectedAgeClass = value;
+                  });
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Selecione a classificação indicativa do filme';
                     return 'Selecione a classificação indicativa do filme';
                   }
                   return null;
@@ -307,20 +308,12 @@ class _FilmesPageState extends State<FilmesPage> {
                 style: const TextStyle(color: Colors.white),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Por favor, insira a duração';
+                    return 'Digite a duração do filme';
                   }
+
                   final duration = int.tryParse(value);
                   if (duration == null || duration <= 0) {
                     return 'Duração deve ser um número válido e positivo';
-                  }
-
-                  final capacity = int.tryParse(value);
-                  if (capacity == null) {
-                    return 'Digite um número válido';
-                  }
-
-                  if (capacity <= 0) {
-                    return 'A duração deve ser maior que zero';
                   }
 
                   return null;
@@ -330,9 +323,7 @@ class _FilmesPageState extends State<FilmesPage> {
 
               // Distribution
               DropdownButtonFormField<String>(
-              DropdownButtonFormField<String>(
                 decoration: const InputDecoration(
-                  labelText: 'Distribuidora do Filme',
                   labelText: 'Distribuidora do Filme',
                   labelStyle: TextStyle(color: Colors.grey),
                   prefixIcon: Icon(Icons.business, color: Colors.grey),
@@ -369,12 +360,14 @@ class _FilmesPageState extends State<FilmesPage> {
                     child: Text('Paramount Pictures'),
                   ),
                 ],
+                value: _selectedDistributor,
                 onChanged: (value) {
-                  _distributorController.text = value!;
+                  setState(() {
+                    _selectedDistributor = value;
+                  });
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Selecione o distribuidor do filme';
                     return 'Selecione o distribuidor do filme';
                   }
                   return null;
@@ -383,7 +376,6 @@ class _FilmesPageState extends State<FilmesPage> {
               const SizedBox(height: 16),
 
               // Formato
-              DropdownButtonFormField<String>(
               DropdownButtonFormField<String>(
                 decoration: const InputDecoration(
                   labelText: 'Formato do Filme',
@@ -405,11 +397,12 @@ class _FilmesPageState extends State<FilmesPage> {
                   DropdownMenuItem(value: '3D', child: Text('3D')),
                 ],
                 onChanged: (value) {
-                  _formatController.text = value!;
+                  setState(() {
+                    _selectedFormat = value;
+                  });
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Selecione o formato do filme';
                     return 'Selecione o formato do filme';
                   }
                   return null;
@@ -418,7 +411,6 @@ class _FilmesPageState extends State<FilmesPage> {
               const SizedBox(height: 16),
 
               // Director
-              DropdownButtonFormField<String>(
               DropdownButtonFormField<String>(
                 decoration: const InputDecoration(
                   labelText: 'Diretor',
@@ -457,8 +449,11 @@ class _FilmesPageState extends State<FilmesPage> {
                     child: Text('Quentin Tarantino'),
                   ),
                 ],
+                value: _selectedDirector,
                 onChanged: (value) {
-                  _directorController.text = value!;
+                  setState(() {
+                    _selectedDirector = value;
+                  });
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
