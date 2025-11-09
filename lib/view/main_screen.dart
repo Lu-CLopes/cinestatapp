@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../wave_clipper.dart';
-import '../components/widgets/cine_button_componente.dart';
 import 'unit_page.dart';
 import 'filmes_page.dart';
 
@@ -15,14 +14,25 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = [
-    const UnidadePage(),
-    const FilmesPage(),
-    const PipocasScreen(),
-  ];
+  late final List<Widget> _screens;
+
+  @override
+  void initState() {
+    super.initState();
+    _screens = [
+      HomeScreen(onNavigate: (index) {
+        setState(() {
+          _selectedIndex = index;
+        });
+      }),
+      const UnidadePage(),
+      const FilmesPage(),
+      const PipocasScreen(),
+    ];
+  }
 
   void _onItemTapped(int index) {
-    if (index == 3) {
+    if (index == 4) {
       // Botão Sair
       _showLogoutDialog();
     } else {
@@ -110,7 +120,11 @@ class _MainScreenState extends State<MainScreen> {
           ),
 
           // Área de conteúdo
-          Expanded(child: _screens[_selectedIndex]),
+          Expanded(
+            child: _selectedIndex < _screens.length
+                ? _screens[_selectedIndex]
+                : _screens[0], // Fallback para Home se índice inválido
+          ),
         ],
       ),
 
@@ -124,6 +138,10 @@ class _MainScreenState extends State<MainScreen> {
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.location_on),
             label: 'Unidades',
           ),
@@ -134,6 +152,135 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavigationBarItem(icon: Icon(Icons.exit_to_app), label: 'Sair'),
         ],
+      ),
+    );
+  }
+}
+
+// Tela inicial (Home/Dashboard)
+class HomeScreen extends StatelessWidget {
+  final void Function(int) onNavigate;
+
+  const HomeScreen({super.key, required this.onNavigate});
+
+  @override
+  Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+    
+    return Container(
+      color: Colors.black,
+      padding: const EdgeInsets.all(24.0),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 20),
+            // Saudação
+            Text(
+              'Bem-vindo${user?.displayName != null ? ", ${user!.displayName}" : ""}!',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              user?.email ?? '',
+              style: const TextStyle(
+                color: Colors.grey,
+                fontSize: 16,
+              ),
+            ),
+            const SizedBox(height: 40),
+            
+            // Cards de opções
+            Row(
+              children: [
+                Expanded(
+                  child: _buildOptionCard(
+                    context,
+                    icon: Icons.location_on,
+                    title: 'Unidades',
+                    description: 'Gerencie suas unidades',
+                    color: Colors.red,
+                    onTap: () => onNavigate(1),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: _buildOptionCard(
+                    context,
+                    icon: Icons.movie,
+                    title: 'Filmes',
+                    description: 'Cadastre filmes',
+                    color: Colors.red,
+                    onTap: () => onNavigate(2),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: _buildOptionCard(
+                    context,
+                    icon: Icons.local_dining,
+                    title: 'Pipocas',
+                    description: 'Gerencie produtos',
+                    color: Colors.red,
+                    onTap: () => onNavigate(3),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOptionCard(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String description,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.grey[900],
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.grey[800]!, width: 1),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(icon, color: color, size: 32),
+            const SizedBox(height: 12),
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              description,
+              style: TextStyle(
+                color: Colors.grey[400],
+                fontSize: 14,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

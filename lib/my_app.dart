@@ -19,8 +19,10 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
       ),
-      home: const MainScreen(),
-      routes: {'/main': (context) => const MainScreen()},
+      home: const AuthScreen(),
+      routes: {
+        '/main': (context) => const MainScreen(),
+      },
     );
   }
 }
