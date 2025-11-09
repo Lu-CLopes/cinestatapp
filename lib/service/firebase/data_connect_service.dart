@@ -241,27 +241,58 @@ class DataConnectService {
   Future<List<Map<String, dynamic>>> getAllMovies() async {
     try {
       final result = await _connector.readAllMovies().execute();
-
-      // Debug
-      log('Movies data: ${result.data.movies[0]}');
-      print('Movies data: ${result.data.movies[0]}');
-
-      final moviesList = result.data.movies;
-      if (moviesList == null) return [];
-
-      return moviesList
-          .map(
-            (movie) => {
-              'movieTitle': movie.movieTitle,
-              'movieGenre': movie.movieGenre,
-              'movieDuration': movie.movieDuration,
-              // outros campos se precisar
-            },
-          )
-          .toList();
+      return result.data.movies.map((movie) => movie.toJson()).toList();
     } catch (e) {
       log('Error fetching movies: $e');
       return [];
+    }
+  }
+
+  Future<Map<String, dynamic>?> getMovieById(String movieId) async {
+    try {
+      final result = await _connector.readSingleMovie(id: movieId).execute();
+
+      if (result.data.movie != null) {
+        return result.data.movie!.toJson();
+      }
+      return null;
+    } catch (e) {
+      log('Error fetching movie by ID ($movieId): $e');
+      return null;
+    }
+  }
+
+  Future<bool> updateMovie({
+    required String movieId,
+    required String movieTitle,
+    required String movieGenre,
+    required String movieAgeClass,
+    required int movieDuration,
+    required String movieDistrib,
+    required String movieFormat,
+    required String movieDirector,
+    required bool movieActive,
+  }) async {
+    try {
+      final result = await _connector
+          .updateMovie(
+            movieId: movieId,
+            movieTitle: movieTitle,
+            movieGenre: movieGenre,
+            movieAgeClass: movieAgeClass,
+            movieDuration: movieDuration,
+            movieDistrib: movieDistrib,
+            movieFormat: movieFormat,
+            movieDirector: movieDirector,
+            movieActive: movieActive,
+          )
+          .execute();
+
+      log('Movie updated in backend: ${result.data.movie_update}');
+      return true;
+    } catch (e) {
+      log('Error updating movie in backend: $e');
+      return false;
     }
   }
 }

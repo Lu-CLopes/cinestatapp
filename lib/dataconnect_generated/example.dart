@@ -7,7 +7,15 @@ part 'create_user.dart';
 
 part 'create_unit.dart';
 
+part 'update_unit.dart';
+
+part 'delete_unit.dart';
+
 part 'create_movie.dart';
+
+part 'update_movie.dart';
+
+part 'delete_movie.dart';
 
 part 'create_audience.dart';
 
@@ -18,6 +26,8 @@ part 'read_single_user.dart';
 part 'read_manager_units.dart';
 
 part 'read_all_movies.dart';
+
+part 'read_single_movie.dart';
 
 
 
@@ -38,8 +48,28 @@ class ExampleConnector {
   }
   
   
+  UpdateUnitVariablesBuilder updateUnit ({required String unitId, required String unitName, required String unitLocal, required int unitMacCapacity, required String unitManagerId, required bool unitActive, }) {
+    return UpdateUnitVariablesBuilder(dataConnect, unitId: unitId,unitName: unitName,unitLocal: unitLocal,unitMacCapacity: unitMacCapacity,unitManagerId: unitManagerId,unitActive: unitActive,);
+  }
+  
+  
+  DeleteUnitVariablesBuilder deleteUnit ({required String unitId, }) {
+    return DeleteUnitVariablesBuilder(dataConnect, unitId: unitId,);
+  }
+  
+  
   CreateMovieVariablesBuilder createMovie ({required String movieTitle, required String movieGenre, required String movieAgeClass, required int movieDuration, required String movieDistrib, required String movieFormat, required String movieDirector, required bool movieActive, }) {
     return CreateMovieVariablesBuilder(dataConnect, movieTitle: movieTitle,movieGenre: movieGenre,movieAgeClass: movieAgeClass,movieDuration: movieDuration,movieDistrib: movieDistrib,movieFormat: movieFormat,movieDirector: movieDirector,movieActive: movieActive,);
+  }
+  
+  
+  UpdateMovieVariablesBuilder updateMovie ({required String movieId, required String movieTitle, required String movieGenre, required String movieAgeClass, required int movieDuration, required String movieDistrib, required String movieFormat, required String movieDirector, required bool movieActive, }) {
+    return UpdateMovieVariablesBuilder(dataConnect, movieId: movieId,movieTitle: movieTitle,movieGenre: movieGenre,movieAgeClass: movieAgeClass,movieDuration: movieDuration,movieDistrib: movieDistrib,movieFormat: movieFormat,movieDirector: movieDirector,movieActive: movieActive,);
+  }
+  
+  
+  DeleteMovieVariablesBuilder deleteMovie ({required String movieId, }) {
+    return DeleteMovieVariablesBuilder(dataConnect, movieId: movieId,);
   }
   
   
@@ -67,6 +97,11 @@ class ExampleConnector {
     return ReadAllMoviesVariablesBuilder(dataConnect, );
   }
   
+  
+  ReadSingleMovieVariablesBuilder readSingleMovie ({required String id, }) {
+    return ReadSingleMovieVariablesBuilder(dataConnect, id: id,);
+  }
+  
 
   static ConnectorConfig connectorConfig = ConnectorConfig(
     'us-east4',
@@ -84,4 +119,3 @@ class ExampleConnector {
 
   FirebaseDataConnect dataConnect;
 }
-

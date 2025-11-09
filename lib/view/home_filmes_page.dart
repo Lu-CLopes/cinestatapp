@@ -4,6 +4,7 @@ import '../service/firebase/data_connect_service.dart';
 import '../wave_clipper.dart'; // Importando o clipper
 import '../components/widgets/movie_card.dart';
 import 'filmes_page.dart';
+import 'update_filmes_page.dart';
 
 class HomeFilmesPage extends StatefulWidget {
   const HomeFilmesPage({super.key});
@@ -17,6 +18,8 @@ class _HomeFilmesPageState extends State<HomeFilmesPage> {
   final _titleController = TextEditingController();
   final _durationController = TextEditingController();
   final _directorController = TextEditingController();
+
+  final movieId = 'ef8f3740cd9143968357b1adb68d732e';
 
   List<Map<String, dynamic>> _movies = [];
 
@@ -96,11 +99,23 @@ class _HomeFilmesPageState extends State<HomeFilmesPage> {
                   title: 'meu filme',
                   genre: 'terror',
                   duration: '120 mins',
-                  // onTap: () {
-                  //   setState(() {
-                  //     selectedMovieIndex = index;
-                  //   });
-                  // },
+                  onUpdate: movieId == null
+                      ? null
+                      : () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  UpdateFilmesPage(movieId: movieId),
+                            ),
+                          ).then((_) => _loadMovies()); // refresh after return
+                        },
+                  onRead: () => {
+                    // abrir página de detalhes
+                  },
+                  onDelete: () => {
+                    // chamar delete e atualizar lista
+                  },
                 );
               },
             ),
