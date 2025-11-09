@@ -168,7 +168,7 @@ class DataConnectService {
               userEmail: user.email ?? '',
             )
             .execute();
-        
+
         // O backend retorna o ID interno (UUID) mesmo que o usuário já exista
         backendUserId = createResult.data.user_insert.id;
         log('Backend user ID (UUID): $backendUserId');
@@ -182,7 +182,9 @@ class DataConnectService {
       // backendUserId já está definido (user.uid se falhar no try-catch)
       final managerId = backendUserId;
       log('Using managerId: $managerId');
-      log('Creating unit with params: name=$unitName, local=$unitLocal, capacity=$unitMacCapacity, active=$unitActive, managerId=$managerId');
+      log(
+        'Creating unit with params: name=$unitName, local=$unitLocal, capacity=$unitMacCapacity, active=$unitActive, managerId=$managerId',
+      );
 
       final result = await _connector
           .createUnit(
@@ -233,6 +235,33 @@ class DataConnectService {
     } catch (e) {
       log('Error creating movie in backend: $e');
       return null;
+    }
+  }
+
+  Future<List<Map<String, dynamic>>> getAllMovies() async {
+    try {
+      final result = await _connector.readAllMovies().execute();
+
+      // Debug
+      log('Movies data: ${result.data.movies[0]}');
+      print('Movies data: ${result.data.movies[0]}');
+
+      final moviesList = result.data.movies;
+      if (moviesList == null) return [];
+
+      return moviesList
+          .map(
+            (movie) => {
+              'movieTitle': movie.movieTitle,
+              'movieGenre': movie.movieGenre,
+              'movieDuration': movie.movieDuration,
+              // outros campos se precisar
+            },
+          )
+          .toList();
+    } catch (e) {
+      log('Error fetching movies: $e');
+      return [];
     }
   }
 }

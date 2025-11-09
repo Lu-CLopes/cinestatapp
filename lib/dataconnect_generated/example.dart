@@ -17,6 +17,8 @@ part 'read_single_user.dart';
 
 part 'read_manager_units.dart';
 
+part 'read_all_movies.dart';
+
 
 
 
@@ -58,6 +60,11 @@ class ExampleConnector {
   
   ReadManagerUnitsVariablesBuilder readManagerUnits ({required String managerId, }) {
     return ReadManagerUnitsVariablesBuilder(dataConnect, managerId: managerId,);
+  }
+  
+  
+  ReadAllMoviesVariablesBuilder readAllMovies () {
+    return ReadAllMoviesVariablesBuilder(dataConnect, );
   }
   
 

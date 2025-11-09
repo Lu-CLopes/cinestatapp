@@ -27,6 +27,20 @@ query ReadManagerUnits ($managerId: UUID!) @auth(level: USER){
   }
 }
 
+query ReadAllMovies @auth(level: USER) {
+  movie {
+    id
+    movieTitle
+    movieGenre
+    movieAgeClass
+    movieDuration
+    movieDistrib
+    movieFormat
+    movieDirector
+    movieActive
+  }
+}
+
 
 
 

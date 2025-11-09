@@ -1,3 +1,4 @@
+import 'package:cinestatapp/view/home_filmes_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../wave_clipper.dart';
@@ -20,13 +21,15 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     _screens = [
-      HomeScreen(onNavigate: (index) {
-        setState(() {
-          _selectedIndex = index;
-        });
-      }),
+      HomeScreen(
+        onNavigate: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+      ),
       const UnidadePage(),
-      const FilmesPage(),
+      const HomeFilmesPage(),
       const PipocasScreen(),
     ];
   }
@@ -137,10 +140,7 @@ class _MainScreenState extends State<MainScreen> {
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
             icon: Icon(Icons.location_on),
             label: 'Unidades',
@@ -166,7 +166,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
-    
+
     return Container(
       color: Colors.black,
       padding: const EdgeInsets.all(24.0),
@@ -187,13 +187,10 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               user?.email ?? '',
-              style: const TextStyle(
-                color: Colors.grey,
-                fontSize: 16,
-              ),
+              style: const TextStyle(color: Colors.grey, fontSize: 16),
             ),
             const SizedBox(height: 40),
-            
+
             // Cards de opções
             Row(
               children: [
@@ -274,10 +271,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               description,
-              style: TextStyle(
-                color: Colors.grey[400],
-                fontSize: 14,
-              ),
+              style: TextStyle(color: Colors.grey[400], fontSize: 14),
             ),
           ],
         ),
