@@ -64,6 +64,49 @@ class _HomeFilmesPageState extends State<HomeFilmesPage> {
     }
   }
 
+  Future<void> _deleteMovie(String movieId) async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Confirmar exclusão'),
+        content: const Text('Deseja realmente excluir este filme?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Não'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text('Sim'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirm != true) return;
+
+    final connector = DataConnectService();
+    final ok = await connector.deleteMovie(movieId);
+    if (!mounted) return;
+
+    if (ok) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Filme excluído com sucesso'),
+          backgroundColor: Colors.green,
+        ),
+      );
+      await _loadMovies();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Erro ao excluir filme'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -110,12 +153,8 @@ class _HomeFilmesPageState extends State<HomeFilmesPage> {
                             ),
                           ).then((_) => _loadMovies()); // refresh after return
                         },
-                  onRead: () => {
-                    // abrir página de detalhes
-                  },
-                  onDelete: () => {
-                    // chamar delete e atualizar lista
-                  },
+                  onRead: () => {},
+                  onDelete: () => {_deleteMovie(movieId)},
                 );
               },
             ),

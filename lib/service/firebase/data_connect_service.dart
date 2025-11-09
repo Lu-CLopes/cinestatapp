@@ -295,4 +295,16 @@ class DataConnectService {
       return false;
     }
   }
+
+  Future<bool> deleteMovie(String movieId) async {
+    try {
+      final result = await _connector.deleteMovie(movieId: movieId).execute();
+
+      log('Movie deleted in backend: ${result.data.movie_delete}');
+      return true;
+    } catch (e) {
+      log('Error deleting movie in backend: $e');
+      return false;
+    }
+  }
 }
