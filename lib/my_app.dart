@@ -1,4 +1,3 @@
-
 import 'package:cinestatapp/view/auth_screen.dart';
 import 'package:cinestatapp/view/main_screen.dart';
 import 'package:flutter/material.dart';

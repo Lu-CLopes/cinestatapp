@@ -274,3 +274,137 @@ final ref = ExampleConnector.instance.createUnit(
 ref.execute();
 ```
 
+
+### CreateMovie
+#### Required Arguments
+```dart
+String movieTitle = ...;
+String movieGenre = ...;
+String movieAgeClass = ...;
+int movieDuration = ...;
+String movieDistrib = ...;
+String movieFormat = ...;
+String movieDirector = ...;
+bool movieActive = ...;
+ExampleConnector.instance.createMovie(
+  movieTitle: movieTitle,
+  movieGenre: movieGenre,
+  movieAgeClass: movieAgeClass,
+  movieDuration: movieDuration,
+  movieDistrib: movieDistrib,
+  movieFormat: movieFormat,
+  movieDirector: movieDirector,
+  movieActive: movieActive,
+).execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `OperationResult<CreateMovieData, CreateMovieVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+final result = await ExampleConnector.instance.createMovie(
+  movieTitle: movieTitle,
+  movieGenre: movieGenre,
+  movieAgeClass: movieAgeClass,
+  movieDuration: movieDuration,
+  movieDistrib: movieDistrib,
+  movieFormat: movieFormat,
+  movieDirector: movieDirector,
+  movieActive: movieActive,
+);
+CreateMovieData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String movieTitle = ...;
+String movieGenre = ...;
+String movieAgeClass = ...;
+int movieDuration = ...;
+String movieDistrib = ...;
+String movieFormat = ...;
+String movieDirector = ...;
+bool movieActive = ...;
+
+final ref = ExampleConnector.instance.createMovie(
+  movieTitle: movieTitle,
+  movieGenre: movieGenre,
+  movieAgeClass: movieAgeClass,
+  movieDuration: movieDuration,
+  movieDistrib: movieDistrib,
+  movieFormat: movieFormat,
+  movieDirector: movieDirector,
+  movieActive: movieActive,
+).ref();
+ref.execute();
+```
+
+
+### CreateAudience
+#### Required Arguments
+```dart
+String audienceUnitId = ...;
+int audienceAge = ...;
+String audienceGender = ...;
+String audienceFormat = ...;
+ExampleConnector.instance.createAudience(
+  audienceUnitId: audienceUnitId,
+  audienceAge: audienceAge,
+  audienceGender: audienceGender,
+  audienceFormat: audienceFormat,
+).execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `OperationResult<CreateAudienceData, CreateAudienceVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+final result = await ExampleConnector.instance.createAudience(
+  audienceUnitId: audienceUnitId,
+  audienceAge: audienceAge,
+  audienceGender: audienceGender,
+  audienceFormat: audienceFormat,
+);
+CreateAudienceData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String audienceUnitId = ...;
+int audienceAge = ...;
+String audienceGender = ...;
+String audienceFormat = ...;
+
+final ref = ExampleConnector.instance.createAudience(
+  audienceUnitId: audienceUnitId,
+  audienceAge: audienceAge,
+  audienceGender: audienceGender,
+  audienceFormat: audienceFormat,
+).ref();
+ref.execute();
+```
+
