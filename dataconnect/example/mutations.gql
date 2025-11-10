@@ -131,6 +131,22 @@ mutation CreateAudience(
   ) 
 }
 
+mutation createProduct(
+  $productName: String!,
+  $productType: String!,
+  $productPrice: Float!,
+  $productActive: Boolean!
+) @auth(level: USER) {
+  product_insert(
+    data: {
+      productName: $productName,
+      productType: $productType,
+      productPrice: $productPrice,
+      productActive: $productActive
+    }
+  ) 
+}
+
 #mutation DeleteUser($id: UUID!) @auth(level: USER) {
 #  user_delete(id: $id)
 #}

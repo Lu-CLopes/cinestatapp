@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../wave_clipper.dart';
 import 'unit_page.dart';
-import 'filmes_page.dart';
+import 'pipocas_page.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -30,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
       const UnidadePage(),
       const HomeFilmesPage(),
-      const PipocasScreen(),
+      const PipocasPage(),
     ];
   }
 
@@ -274,28 +274,6 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(color: Colors.grey[400], fontSize: 14),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-// Tela de Pipocas
-class PipocasScreen extends StatelessWidget {
-  const PipocasScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
-      child: const Center(
-        child: Text(
-          'Pipocas',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
         ),
       ),
     );

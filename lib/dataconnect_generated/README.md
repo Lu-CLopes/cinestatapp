@@ -731,3 +731,60 @@ final ref = ExampleConnector.instance.createAudience(
 ref.execute();
 ```
 
+
+### createProduct
+#### Required Arguments
+```dart
+String productName = ...;
+String productType = ...;
+double productPrice = ...;
+bool productActive = ...;
+ExampleConnector.instance.createProduct(
+  productName: productName,
+  productType: productType,
+  productPrice: productPrice,
+  productActive: productActive,
+).execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `OperationResult<createProductData, createProductVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+final result = await ExampleConnector.instance.createProduct(
+  productName: productName,
+  productType: productType,
+  productPrice: productPrice,
+  productActive: productActive,
+);
+createProductData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String productName = ...;
+String productType = ...;
+double productPrice = ...;
+bool productActive = ...;
+
+final ref = ExampleConnector.instance.createProduct(
+  productName: productName,
+  productType: productType,
+  productPrice: productPrice,
+  productActive: productActive,
+).ref();
+ref.execute();
+```
+

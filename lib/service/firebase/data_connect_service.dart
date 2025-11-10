@@ -307,4 +307,40 @@ class DataConnectService {
       return false;
     }
   }
+
+  Future<bool> deleteUnit(String unitId) async {
+    try {
+      final result = await _connector.deleteUnit(unitId: unitId).execute();
+
+      log('Unit deleted in backend: ${result.data.unit_delete}');
+      return true;
+    } catch (e) {
+      log('Error deleting unit in backend: $e');
+      return false;
+    }
+  }
+
+  Future<bool> createProduct({
+    required String productName,
+    required String productType,
+    required double productPrice,
+    required bool productActive,
+  }) async {
+    try {
+      final result = await _connector
+          .createProduct(
+            productName: productName,
+            productType: productType,
+            productPrice: productPrice,
+            productActive: productActive,
+          )
+          .execute();
+
+      log('Product created in backend: ${result.data.product_insert.id}');
+      return true;
+    } catch (e) {
+      log('Error creating product in backend: $e');
+      return false;
+    }
+  }
 }

@@ -78,10 +78,6 @@ extend type Audience {
   ✨ Maximum of the `audienceAge` field in the `Audience` table.
   """
   audienceAge_max: Int @fdc_generated(from: "Audience.audienceAge", purpose: QUERY_MAX)
-  """
-  A generated field that is used for caching results in SDKs.
-  """
-  _id: ID! @fdc_generated(from: "Audience.id", purpose: GLOBAL_ID)
 }
 extend type AudienceProfile {
   """
@@ -198,10 +194,6 @@ extend type AudienceProfile {
   ✨ Maximum of the `profileAverageValue` field in the `AudienceProfile` table.
   """
   profileAverageValue_max: Float @fdc_generated(from: "AudienceProfile.profileAverageValue", purpose: QUERY_MAX)
-  """
-  A generated field that is used for caching results in SDKs.
-  """
-  _id: ID! @fdc_generated(from: "AudienceProfile.id", purpose: GLOBAL_ID)
 }
 extend type Indicator {
   """
@@ -396,10 +388,6 @@ extend type Indicator {
   ✨ Maximum of the `indicatorTicketsIncome` field in the `Indicator` table.
   """
   indicatorTicketsIncome_max: Float @fdc_generated(from: "Indicator.indicatorTicketsIncome", purpose: QUERY_MAX)
-  """
-  A generated field that is used for caching results in SDKs.
-  """
-  _id: ID! @fdc_generated(from: "Indicator.id", purpose: GLOBAL_ID)
 }
 extend type Movie {
   """
@@ -585,10 +573,6 @@ extend type Movie {
   ✨ Maximum of the `movieDuration` field in the `Movie` table.
   """
   movieDuration_max: Int @fdc_generated(from: "Movie.movieDuration", purpose: QUERY_MAX)
-  """
-  A generated field that is used for caching results in SDKs.
-  """
-  _id: ID! @fdc_generated(from: "Movie.id", purpose: GLOBAL_ID)
 }
 extend type Product {
   """
@@ -704,10 +688,6 @@ extend type Product {
   ✨ Maximum of the `productPrice` field in the `Product` table.
   """
   productPrice_max: Float @fdc_generated(from: "Product.productPrice", purpose: QUERY_MAX)
-  """
-  A generated field that is used for caching results in SDKs.
-  """
-  _id: ID! @fdc_generated(from: "Product.id", purpose: GLOBAL_ID)
 }
 extend type Sale {
   """
@@ -832,10 +812,6 @@ extend type Sale {
   ✨ Maximum of the `saleQuant` field in the `Sale` table.
   """
   saleQuant_max: Int @fdc_generated(from: "Sale.saleQuant", purpose: QUERY_MAX)
-  """
-  A generated field that is used for caching results in SDKs.
-  """
-  _id: ID! @fdc_generated(from: "Sale.id", purpose: GLOBAL_ID)
 }
 extend type Session {
   """
@@ -1046,10 +1022,6 @@ extend type Session {
   ✨ Maximum of the `sessionTicketsSold` field in the `Session` table.
   """
   sessionTicketsSold_max: Int @fdc_generated(from: "Session.sessionTicketsSold", purpose: QUERY_MAX)
-  """
-  A generated field that is used for caching results in SDKs.
-  """
-  _id: ID! @fdc_generated(from: "Session.id", purpose: GLOBAL_ID)
 }
 extend type Simulation {
   """
@@ -1174,10 +1146,6 @@ extend type Simulation {
   ✨ Maximum of the `simulationExpcIncome` field in the `Simulation` table.
   """
   simulationExpcIncome_max: Float @fdc_generated(from: "Simulation.simulationExpcIncome", purpose: QUERY_MAX)
-  """
-  A generated field that is used for caching results in SDKs.
-  """
-  _id: ID! @fdc_generated(from: "Simulation.id", purpose: GLOBAL_ID)
 }
 extend type Unit {
   """
@@ -1438,10 +1406,6 @@ extend type Unit {
   ✨ Maximum of the `unitMacCapacity` field in the `Unit` table.
   """
   unitMacCapacity_max: Int @fdc_generated(from: "Unit.unitMacCapacity", purpose: QUERY_MAX)
-  """
-  A generated field that is used for caching results in SDKs.
-  """
-  _id: ID! @fdc_generated(from: "Unit.id", purpose: GLOBAL_ID)
 }
 extend type User {
   """
@@ -1539,8 +1503,4 @@ extend type User {
   ✨ Maximum of the `userCreatedAt` field in the `User` table.
   """
   userCreatedAt_max: Date @fdc_generated(from: "User.userCreatedAt", purpose: QUERY_MAX)
-  """
-  A generated field that is used for caching results in SDKs.
-  """
-  _id: ID! @fdc_generated(from: "User.id", purpose: GLOBAL_ID)
 }

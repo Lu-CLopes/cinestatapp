@@ -19,6 +19,8 @@ part 'delete_movie.dart';
 
 part 'create_audience.dart';
 
+part 'create_product.dart';
+
 part 'read_all_users.dart';
 
 part 'read_single_user.dart';
@@ -78,6 +80,11 @@ class ExampleConnector {
   }
   
   
+  CreateProductVariablesBuilder createProduct ({required String productName, required String productType, required double productPrice, required bool productActive, }) {
+    return CreateProductVariablesBuilder(dataConnect, productName: productName,productType: productType,productPrice: productPrice,productActive: productActive,);
+  }
+  
+  
   ReadAllUsersVariablesBuilder readAllUsers () {
     return ReadAllUsersVariablesBuilder(dataConnect, );
   }
@@ -119,3 +126,4 @@ class ExampleConnector {
 
   FirebaseDataConnect dataConnect;
 }
+
