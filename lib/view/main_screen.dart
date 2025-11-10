@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../wave_clipper.dart';
 import 'unit_page.dart';
 import 'pipocas_page.dart';
+import 'audience_page.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -31,6 +32,7 @@ class _MainScreenState extends State<MainScreen> {
       const UnidadePage(),
       const HomeFilmesPage(),
       const PipocasPage(),
+      const AudiencePage(),
     ];
   }
 
@@ -228,6 +230,16 @@ class HomeScreen extends StatelessWidget {
                     description: 'Gerencie produtos',
                     color: Colors.red,
                     onTap: () => onNavigate(3),
+                  ),
+                ),
+                Expanded(
+                  child: _buildOptionCard(
+                    context,
+                    icon: Icons.local_dining,
+                    title: 'Audiências',
+                    description: 'Gerencie o público',
+                    color: Colors.red,
+                    onTap: () => onNavigate(4),
                   ),
                 ),
               ],
