@@ -1,8 +1,9 @@
 import 'package:cinestatapp/view/home_filmes_page.dart';
+import 'package:cinestatapp/view/home_units_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../wave_clipper.dart';
-import 'unit_page.dart';
+import 'home_units_page.dart';
 import 'pipocas_page.dart';
 import 'audience_page.dart';
 
@@ -29,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
           });
         },
       ),
-      const UnidadePage(),
+      const HomeUnitsPage(),
       const HomeFilmesPage(),
       const PipocasPage(),
       const AudiencePage(),
@@ -232,6 +233,7 @@ class HomeScreen extends StatelessWidget {
                     onTap: () => onNavigate(3),
                   ),
                 ),
+                const SizedBox(width: 16),
                 Expanded(
                   child: _buildOptionCard(
                     context,
