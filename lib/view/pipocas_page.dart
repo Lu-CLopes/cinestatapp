@@ -74,14 +74,18 @@ class _PipocasPageState extends State<PipocasPage> {
 
       // Criar filme no backend
       final dataConnectService = DataConnectService();
-      final createdId = await dataConnectService.createProduct(
+      final success = await dataConnectService.createProduct(
         productName: productName,
         productType: type,
         productPrice: price,
         productActive: active,
       );
 
-      if (createdId != null && mounted) {
+      if (!mounted) {
+        return;
+      }
+
+      if (success) {
         // Limpar campos após sucesso
         _productNameController.clear();
         _productPriceController.clear();
@@ -101,7 +105,7 @@ class _PipocasPageState extends State<PipocasPage> {
             backgroundColor: Colors.green,
           ),
         );
-      } else if (mounted) {
+      } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Erro ao cadastrar produto. Tente novamente.'),
