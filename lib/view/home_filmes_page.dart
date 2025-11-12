@@ -1,7 +1,6 @@
 // Tela de Filmes
 import 'package:flutter/material.dart';
 import '../service/firebase/data_connect_service.dart';
-import '../wave_clipper.dart'; // Importando o clipper
 import '../components/widgets/movie_card.dart';
 import 'filmes_page.dart';
 import 'update_filmes_page.dart';
@@ -14,46 +13,43 @@ class HomeFilmesPage extends StatefulWidget {
 }
 
 class _HomeFilmesPageState extends State<HomeFilmesPage> {
-  final _formKey = GlobalKey<FormState>();
-  final _titleController = TextEditingController();
-  final _durationController = TextEditingController();
-  final _directorController = TextEditingController();
-
-  final movieId = 'ef8f3740cd9143968357b1adb68d732e';
-
   List<Map<String, dynamic>> _movies = [];
+  bool _isLoading = false;
 
   @override
-  void dispose() {
-    _titleController.dispose();
-    _durationController.dispose();
-    _directorController.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    _loadMovies();
   }
 
   Future<void> _loadMovies() async {
+    if (!mounted) return;
+    setState(() {
+      _isLoading = true;
+    });
+
     try {
       final dataConnectService = DataConnectService();
       final movies = await dataConnectService.getAllMovies();
 
-      if (movies.isEmpty) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Nenhum filme encontrado.'),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
-        return;
-      }
       if (mounted) {
         setState(() {
           _movies = movies;
+          _isLoading = false;
         });
+
+        if (movies.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Nenhum filme encontrado.'),
+              backgroundColor: Colors.orange,
+            ),
+          );
+        }
       }
     } catch (e) {
       if (mounted) {
+        setState(() => _isLoading = false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Erro ao carregar filmes: $e'),
@@ -108,57 +104,118 @@ class _HomeFilmesPageState extends State<HomeFilmesPage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    //_loadMovies();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    Widget body;
+    if (_isLoading) {
+      body = const Center(
+        child: CircularProgressIndicator(color: Color(0xFF9B0000)),
+      );
+    } else if (_movies.isEmpty) {
+      body = const Center(
+        child: Text(
+          'Nenhum filme cadastrado.',
+          style: TextStyle(color: Colors.white70),
+        ),
+      );
+    } else {
+      body = GridView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 20,
+          childAspectRatio: 0.9, // ajustado pra card quadrado
+        ),
+        itemCount: _movies.length,
+        itemBuilder: (context, index) {
+          final movie = _movies[index];
+          final movieId = movie['id'] as String?;
+          final title = (movie['movieTitle'] ?? '') as String;
+          final genre = (movie['movieGenre'] ?? 'Sem gênero') as String;
+          final durationValue = movie['movieDuration'];
+          final duration = durationValue != null
+              ? '$durationValue min'
+              : 'Duração desconhecida';
+
+          return MovieCard(
+            title: title,
+            genre: genre,
+            duration: duration,
+            onUpdate: movieId == null
+                ? null
+                : () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => UpdateFilmesPage(movieId: movieId),
+                      ),
+                    ).then((updated) {
+                      if (updated == true) {
+                        _loadMovies();
+                      }
+                    });
+                  },
+            onRead: movieId == null
+                ? null
+                : () async {
+                    final data = await DataConnectService()
+                        .getMovieById(movieId);
+                    if (!mounted) return;
+                    if (data == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Não foi possível carregar os dados.'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                      return;
+                    }
+
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text(data['movieTitle'] ?? 'Filme'),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Gênero: ${data['movieGenre'] ?? '-'}'),
+                              Text(
+                                  'Classificação: ${data['movieAgeClass'] ?? '-'}'),
+                              Text(
+                                  'Duração: ${data['movieDuration'] ?? '-'} min'),
+                              Text(
+                                  'Distribuidora: ${data['movieDistrib'] ?? '-'}'),
+                              Text('Formato: ${data['movieFormat'] ?? '-'}'),
+                              Text('Diretor: ${data['movieDirector'] ?? '-'}'),
+                              Text(
+                                'Ativo: ${(data['movieActive'] ?? false) ? 'Sim' : 'Não'}',
+                              ),
+                            ],
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('Fechar'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+            onDelete: movieId == null ? null : () => _deleteMovie(movieId),
+          );
+        },
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
         children: [
           const SizedBox(height: 20),
-          Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 20,
-                childAspectRatio: 0.9, // ajustado pra card quadrado
-              ),
-              //itemCount: _movies.length, // sua lista de filmes
-              itemCount: 4,
-              itemBuilder: (context, index) {
-                // final movie = _movies[index];
-                // final title = movie['movieTitle'] ?? 'Título Desconhecido';
-                // final genre = movie['movieGenre'] ?? 'Gênero Desconhecido';
-                // final duration = movie['movieDuration'] != null
-                //     ? '${movie['movieDuration']} min'
-                //     : 'Duração Desconhecida';
-                return MovieCard(
-                  title: 'meu filme',
-                  genre: 'terror',
-                  duration: '120 mins',
-                  onUpdate: movieId == null
-                      ? null
-                      : () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) =>
-                                  UpdateFilmesPage(movieId: movieId),
-                            ),
-                          ).then((_) => _loadMovies()); // refresh after return
-                        },
-                  onRead: () => {},
-                  onDelete: () => {_deleteMovie(movieId)},
-                );
-              },
-            ),
-          ),
+          Expanded(child: body),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -166,7 +223,11 @@ class _HomeFilmesPageState extends State<HomeFilmesPage> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const FilmesPage()),
-          );
+          ).then((value) {
+            if (value == true) {
+              _loadMovies();
+            }
+          });
         },
         backgroundColor: const Color(0xFF9B0000),
         child: const Icon(Icons.add, color: Colors.white),
