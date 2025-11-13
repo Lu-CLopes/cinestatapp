@@ -160,6 +160,55 @@ ref.subscribe(...);
 ```
 
 
+### ReadManagerUnitsByAuth
+#### Required Arguments
+```dart
+String authId = ...;
+ExampleConnector.instance.readManagerUnitsByAuth(
+  authId: authId,
+).execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `QueryResult<ReadManagerUnitsByAuthData, ReadManagerUnitsByAuthVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+/// Result of a query request. Created to hold extra variables in the future.
+class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
+  QueryResult(super.dataConnect, super.data, super.ref);
+}
+
+final result = await ExampleConnector.instance.readManagerUnitsByAuth(
+  authId: authId,
+);
+ReadManagerUnitsByAuthData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String authId = ...;
+
+final ref = ExampleConnector.instance.readManagerUnitsByAuth(
+  authId: authId,
+).ref();
+ref.execute();
+
+ref.subscribe(...);
+```
+
+
 ### ReadAllMovies
 #### Required Arguments
 ```dart
@@ -244,6 +293,137 @@ String id = ...;
 final ref = ExampleConnector.instance.readSingleMovie(
   id: id,
 ).ref();
+ref.execute();
+
+ref.subscribe(...);
+```
+
+
+### ReadAudienceByUnit
+#### Required Arguments
+```dart
+String unitId = ...;
+ExampleConnector.instance.readAudienceByUnit(
+  unitId: unitId,
+).execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `QueryResult<ReadAudienceByUnitData, ReadAudienceByUnitVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+/// Result of a query request. Created to hold extra variables in the future.
+class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
+  QueryResult(super.dataConnect, super.data, super.ref);
+}
+
+final result = await ExampleConnector.instance.readAudienceByUnit(
+  unitId: unitId,
+);
+ReadAudienceByUnitData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String unitId = ...;
+
+final ref = ExampleConnector.instance.readAudienceByUnit(
+  unitId: unitId,
+).ref();
+ref.execute();
+
+ref.subscribe(...);
+```
+
+
+### ReadAllUnits
+#### Required Arguments
+```dart
+// No required arguments
+ExampleConnector.instance.readAllUnits().execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `QueryResult<ReadAllUnitsData, void>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+/// Result of a query request. Created to hold extra variables in the future.
+class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
+  QueryResult(super.dataConnect, super.data, super.ref);
+}
+
+final result = await ExampleConnector.instance.readAllUnits();
+ReadAllUnitsData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+final ref = ExampleConnector.instance.readAllUnits().ref();
+ref.execute();
+
+ref.subscribe(...);
+```
+
+
+### ReadAllProducts
+#### Required Arguments
+```dart
+// No required arguments
+ExampleConnector.instance.readAllProducts().execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `QueryResult<ReadAllProductsData, void>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+/// Result of a query request. Created to hold extra variables in the future.
+class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
+  QueryResult(super.dataConnect, super.data, super.ref);
+}
+
+final result = await ExampleConnector.instance.readAllProducts();
+ReadAllProductsData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+final ref = ExampleConnector.instance.readAllProducts().ref();
 ref.execute();
 
 ref.subscribe(...);

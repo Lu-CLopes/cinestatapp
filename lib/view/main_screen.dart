@@ -3,7 +3,6 @@ import 'package:cinestatapp/view/home_units_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../wave_clipper.dart';
-import 'home_units_page.dart';
 import 'pipocas_page.dart';
 import 'audience_page.dart';
 
@@ -38,7 +37,8 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _onItemTapped(int index) {
-    if (index == 4) {
+    final logoutIndex = _screens.length;
+    if (index == logoutIndex) {
       // Botão Sair
       _showLogoutDialog();
     } else {
@@ -153,6 +153,10 @@ class _MainScreenState extends State<MainScreen> {
             icon: Icon(Icons.local_dining),
             label: 'Pipocas',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people),
+            label: 'Público',
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.exit_to_app), label: 'Sair'),
         ],
       ),
@@ -237,7 +241,7 @@ class HomeScreen extends StatelessWidget {
                 Expanded(
                   child: _buildOptionCard(
                     context,
-                    icon: Icons.local_dining,
+                    icon: Icons.people,
                     title: 'Audiências',
                     description: 'Gerencie o público',
                     color: Colors.red,

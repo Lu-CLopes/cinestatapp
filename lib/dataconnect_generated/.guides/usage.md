@@ -9,8 +9,8 @@ ExampleConnector.instance.CreateMovie(createMovieVariables).execute();
 ExampleConnector.instance.UpdateMovie(updateMovieVariables).execute();
 ExampleConnector.instance.DeleteMovie(deleteMovieVariables).execute();
 ExampleConnector.instance.CreateAudience(createAudienceVariables).execute();
+ExampleConnector.instance.createProduct(createProductVariables).execute();
 ExampleConnector.instance.ReadAllUsers().execute();
-ExampleConnector.instance.ReadSingleUser(readSingleUserVariables).execute();
 
 ```
 

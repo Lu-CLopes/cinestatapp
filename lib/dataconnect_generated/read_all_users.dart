@@ -18,12 +18,14 @@ class ReadAllUsersVariablesBuilder {
 
 @immutable
 class ReadAllUsersUsers {
+  final String id;
   final String userId;
   final String userName;
   final String userEmail;
   final DateTime userCreatedAt;
   ReadAllUsersUsers.fromJson(dynamic json):
   
+  id = nativeFromJson<String>(json['id']),
   userId = nativeFromJson<String>(json['userId']),
   userName = nativeFromJson<String>(json['userName']),
   userEmail = nativeFromJson<String>(json['userEmail']),
@@ -38,18 +40,20 @@ class ReadAllUsersUsers {
     }
 
     final ReadAllUsersUsers otherTyped = other as ReadAllUsersUsers;
-    return userId == otherTyped.userId && 
+    return id == otherTyped.id && 
+    userId == otherTyped.userId && 
     userName == otherTyped.userName && 
     userEmail == otherTyped.userEmail && 
     userCreatedAt == otherTyped.userCreatedAt;
     
   }
   @override
-  int get hashCode => Object.hashAll([userId.hashCode, userName.hashCode, userEmail.hashCode, userCreatedAt.hashCode]);
+  int get hashCode => Object.hashAll([id.hashCode, userId.hashCode, userName.hashCode, userEmail.hashCode, userCreatedAt.hashCode]);
   
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = {};
+    json['id'] = nativeToJson<String>(id);
     json['userId'] = nativeToJson<String>(userId);
     json['userName'] = nativeToJson<String>(userName);
     json['userEmail'] = nativeToJson<String>(userEmail);
@@ -58,6 +62,7 @@ class ReadAllUsersUsers {
   }
 
   ReadAllUsersUsers({
+    required this.id,
     required this.userId,
     required this.userName,
     required this.userEmail,

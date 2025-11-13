@@ -20,12 +20,232 @@ class _PipocasPageState extends State<PipocasPage> {
   String? _selectedActive;
 
   bool _isLoading = false;
+  bool _isLoadingProducts = true;
+  List<Map<String, dynamic>> _products = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProducts();
+  }
 
   @override
   void dispose() {
     _productNameController.dispose();
     _productPriceController.dispose();
     super.dispose();
+  }
+
+  Future<void> _loadProducts() async {
+    setState(() => _isLoadingProducts = true);
+    try {
+      final dataConnectService = DataConnectService();
+      final items = await dataConnectService.getAllProducts();
+      if (!mounted) return;
+      setState(() {
+        _products = items;
+        _isLoadingProducts = false;
+      });
+    } catch (e) {
+      debugPrint('Erro ao carregar produtos: $e');
+      if (!mounted) return;
+      setState(() => _isLoadingProducts = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Erro ao carregar receitas acessórias: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  String _formatCurrency(double value) {
+    final formatted = value.toStringAsFixed(2).replaceAll('.', ',');
+    return 'R\$ $formatted';
+  }
+
+  Widget _buildRevenueSummary() {
+    if (_isLoadingProducts) {
+      return Container(
+        padding: const EdgeInsets.symmetric(vertical: 24),
+        alignment: Alignment.center,
+        child: const CircularProgressIndicator(color: Color(0xFF9B0000)),
+      );
+    }
+
+    if (_products.isEmpty) {
+      return const Text(
+        'Nenhuma receita acessória cadastrada ainda. Utilize o formulário abaixo para adicionar produtos.',
+        style: TextStyle(color: Colors.grey),
+      );
+    }
+
+    final totalRevenue = _products.fold<double>(
+      0,
+      (sum, product) => sum + ((product['price'] as num?)?.toDouble() ?? 0.0),
+    );
+    final activeCount = _products
+        .where((product) => product['active'] == true)
+        .length;
+
+    final Map<String, double> revenueByType = {};
+    for (final product in _products) {
+      final type = ((product['type'] as String?) ?? 'Outros').trim();
+      final price = ((product['price'] as num?)?.toDouble() ?? 0.0);
+      revenueByType.update(
+        type.isEmpty ? 'Outros' : type,
+        (value) => value + price,
+        ifAbsent: () => price,
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.grey[900],
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.grey[800]!),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: _buildMetric(
+                  label: 'Receita estimada',
+                  value: _formatCurrency(totalRevenue),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: _buildMetric(
+                  label: 'Produtos ativos',
+                  value: '$activeCount',
+                ),
+              ),
+            ],
+          ),
+        ),
+        if (revenueByType.isNotEmpty) ...[
+          const SizedBox(height: 12),
+          const Text(
+            'Receita por categoria',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: revenueByType.entries
+                .map(
+                  (entry) => Chip(
+                    backgroundColor: Colors.grey[850],
+                    label: Text(
+                      '${entry.key} (${_formatCurrency(entry.value)})',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                )
+                .toList(),
+          ),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildProductsList() {
+    if (_isLoadingProducts) {
+      return const SizedBox.shrink();
+    }
+
+    if (_products.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: _products.length,
+      separatorBuilder: (context, index) => const SizedBox(height: 12),
+      itemBuilder: (context, index) {
+        final product = _products[index];
+        final active = product['active'] == true;
+        final price = ((product['price'] as num?)?.toDouble() ?? 0.0);
+        return Container(
+          decoration: BoxDecoration(
+            color: Colors.grey[900],
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.grey[850]!),
+          ),
+          child: ListTile(
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 12,
+            ),
+            title: Text(
+              product['name'] as String? ?? 'Produto',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 6),
+                Text(
+                  'Categoria: ${(product['type'] as String?) ?? '-'}',
+                  style: const TextStyle(color: Colors.grey),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Preço: ${_formatCurrency(price)}',
+                  style: const TextStyle(color: Colors.grey),
+                ),
+              ],
+            ),
+            trailing: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  active ? Icons.check_circle : Icons.cancel,
+                  color: active ? Colors.green : Colors.red,
+                  size: 20,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  active ? 'Ativo' : 'Inativo',
+                  style: TextStyle(
+                    color: active ? Colors.green : Colors.red,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildMetric({required String label, required String value}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(label, style: const TextStyle(color: Colors.grey)),
+      ],
+    );
   }
 
   Future<void> _createProduct() async {
@@ -55,13 +275,13 @@ class _PipocasPageState extends State<PipocasPage> {
         return;
       }
 
-      // Converter duração para int
-      final price = double.tryParse(productPriceStr);
+      // Converter preço para double
+      final price = double.tryParse(productPriceStr.replaceAll(',', '.'));
       if (price == null || price <= 0) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Duração deve ser um número válido'),
+              content: Text('Preço deve ser um número válido e positivo'),
               backgroundColor: Colors.red,
             ),
           );
@@ -72,7 +292,7 @@ class _PipocasPageState extends State<PipocasPage> {
       // Converter ativo para bool
       final active = activeStr.toLowerCase() == 'ativo';
 
-      // Criar filme no backend
+      // Criar produto no backend
       final dataConnectService = DataConnectService();
       final success = await dataConnectService.createProduct(
         productName: productName,
@@ -98,6 +318,8 @@ class _PipocasPageState extends State<PipocasPage> {
         Future.microtask(() {
           _formKey.currentState?.reset();
         });
+        await _loadProducts();
+        if (!mounted) return;
         // Mostrar mensagem de sucesso
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -150,7 +372,7 @@ class _PipocasPageState extends State<PipocasPage> {
               const Icon(Icons.movie, size: 80, color: Colors.red),
               const SizedBox(height: 10),
               const Text(
-                'Cadastre seu Produto',
+                'Receitas Acessórias',
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
@@ -160,11 +382,35 @@ class _PipocasPageState extends State<PipocasPage> {
               ),
               const SizedBox(height: 8),
               const Text(
-                'Adicione produtos aqui',
+                'Gerencie pipocas, combos e promoções',
                 style: TextStyle(fontSize: 18, color: Colors.grey),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 40),
+              const Text(
+                'Receitas acessórias cadastradas',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 12),
+              _buildRevenueSummary(),
+              const SizedBox(height: 16),
+              _buildProductsList(),
+              const SizedBox(height: 32),
+              const Divider(color: Colors.white24, thickness: 0.4),
+              const SizedBox(height: 24),
+              const Text(
+                'Cadastrar novo produto',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 16),
 
               // Name
               TextFormField(
@@ -249,7 +495,7 @@ class _PipocasPageState extends State<PipocasPage> {
                     return 'Digite o preço do produto';
                   }
 
-                  final price = double.tryParse(value);
+                  final price = double.tryParse(value.replaceAll(',', '.'));
                   if (price == null || price <= 0) {
                     return 'Preço deve ser um número válido e positivo';
                   }
@@ -280,7 +526,6 @@ class _PipocasPageState extends State<PipocasPage> {
                   DropdownMenuItem(value: 'Ativo', child: Text('Ativo')),
                   DropdownMenuItem(value: 'Desativo', child: Text('Desativo')),
                 ],
-                value: _selectedActive,
                 onChanged: (value) {
                   setState(() {
                     _selectedActive = value;
