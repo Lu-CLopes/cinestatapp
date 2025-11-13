@@ -1,3 +1,4 @@
+import 'package:cinestatapp/view/SugestionPage.dart';
 import 'package:cinestatapp/view/auth_screen.dart';
 import 'package:cinestatapp/view/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       home: const AuthScreen(),
       routes: {
         '/main': (context) => const MainScreen(),
+        '/sugestions': (context) =>  SugestionPage(),
       },
     );
   }

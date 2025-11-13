@@ -1,3 +1,4 @@
+import 'package:cinestatapp/view/SugestionPage.dart';
 import 'package:cinestatapp/view/home_filmes_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,6 +34,7 @@ class _MainScreenState extends State<MainScreen> {
       const HomeFilmesPage(),
       const PipocasPage(),
       const AudiencePage(),
+      const SugestionPage(),
     ];
   }
 
@@ -243,6 +245,21 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+               Expanded(
+                  child: _buildOptionCard(
+                    context,
+                    icon: Icons.computer,
+                    title: 'Sugestões de rogramação',
+                    description: 'Gerencie a programação do mês',
+                    color: Colors.red,
+                    onTap: () => Navigator.pushNamed(context, "/sugestions"),
+                  ),
+                ),
+               ],
             ),
           ],
         ),

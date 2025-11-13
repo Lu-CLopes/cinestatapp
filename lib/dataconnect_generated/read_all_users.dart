@@ -63,6 +63,7 @@ class ReadAllUsersUsers {
     required this.userEmail,
     required this.userCreatedAt,
   });
+  get id => null;
 }
 
 @immutable

@@ -97,6 +97,7 @@ class ReadAllMoviesMovies {
     this.movieDirector,
     this.movieActive,
   });
+  get id => null;
 }
 
 @immutable

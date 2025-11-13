@@ -77,6 +77,7 @@ class ReadManagerUnitsUnits {
     this.unitManager,
     this.unitActive,
   });
+  get id => null;
 }
 
 @immutable
