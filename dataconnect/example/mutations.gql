@@ -33,6 +33,30 @@ mutation CreateUnit(
   ) 
 }
 
+mutation updateUnit(
+    $unitId: UUID!,
+    $unitName: String!,
+    $unitLocal: String!,
+    $unitMacCapacity: Int!,
+    $unitManagerId: UUID!,
+    $unitActive: Boolean!
+) @auth(level: USER) {
+  unit_update(
+    id: $unitId,
+    data: {
+      unitName: $unitName,
+      unitLocal: $unitLocal,
+      unitMacCapacity: $unitMacCapacity,
+      unitManagerId: $unitManagerId,
+      unitActive: $unitActive
+    }
+  ) 
+}
+
+mutation DeleteUnit($unitId: UUID!) @auth(level: USER) {
+  unit_delete(id: $unitId)
+}
+
 mutation CreateMovie(
   $movieTitle: String!, 
   $movieGenre: String!, 
@@ -58,6 +82,37 @@ mutation CreateMovie(
   ) 
 }
 
+# ...existing mutations...
+
+mutation UpdateMovie(
+  $movieId: UUID!,
+  $movieTitle: String!,
+  $movieGenre: String!,
+  $movieAgeClass: String!,
+  $movieDuration: Int!,
+  $movieDistrib: String!,
+  $movieFormat: String!,
+  $movieDirector: String!,
+  $movieActive: Boolean!
+) @auth(level: USER) {
+  movie_update(
+    id: $movieId,
+    data: {
+      movieTitle: $movieTitle,
+      movieGenre: $movieGenre,
+      movieAgeClass: $movieAgeClass,
+      movieDuration: $movieDuration,
+      movieDistrib: $movieDistrib,
+      movieFormat: $movieFormat,
+      movieDirector: $movieDirector,
+      movieActive: $movieActive
+    }
+  ) 
+}
+
+mutation DeleteMovie($movieId: UUID!) @auth(level: USER) {
+  movie_delete(id: $movieId)
+}
 
 mutation CreateAudience(
   $audienceUnitId: UUID!, 
@@ -72,6 +127,22 @@ mutation CreateAudience(
         audienceFormat: $audienceFormat, 
         audienceGender: $audienceGender, 
         audienceUnitId: $audienceUnitId
+    }
+  ) 
+}
+
+mutation createProduct(
+  $productName: String!,
+  $productType: String!,
+  $productPrice: Float!,
+  $productActive: Boolean!
+) @auth(level: USER) {
+  product_insert(
+    data: {
+      productName: $productName,
+      productType: $productType,
+      productPrice: $productPrice,
+      productActive: $productActive
     }
   ) 
 }

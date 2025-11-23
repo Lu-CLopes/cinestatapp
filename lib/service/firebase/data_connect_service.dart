@@ -43,6 +43,7 @@ class DataConnectService {
         final user = result.data.user!;
         return {
           'id': user.userId,
+          'backendId': user.id,
           'name': user.userName,
           'email': user.userEmail,
           'createdAt': user.userCreatedAt,
@@ -84,6 +85,7 @@ class DataConnectService {
           .map(
             (user) => {
               'id': user.userId,
+              'backendId': user.id,
               'name': user.userName,
               'email': user.userEmail,
               'createdAt': user.userCreatedAt,
@@ -136,6 +138,46 @@ class DataConnectService {
     }
   }
 
+  Future<String?> _getBackendUserId({bool createIfMissing = true}) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      log('No authenticated user to resolve backend ID');
+      return null;
+    }
+
+    try {
+      Map<String, dynamic>? userData;
+      if (user.email != null && user.email!.isNotEmpty) {
+        userData = await getUserDataByEmail(user.email!);
+      }
+      userData ??= await getUserData(user.uid);
+
+      final backendId = userData?['backendId'] as String?;
+      if (backendId != null && backendId.isNotEmpty) {
+        return backendId;
+      }
+
+      if (!createIfMissing) {
+        return null;
+      }
+
+      final result = await _connector
+          .createUser(
+            userCreatedAt: DateTime.now(),
+            userName: user.displayName ?? 'Usuário',
+            userEmail: user.email ?? '',
+          )
+          .execute();
+
+      log('Created backend user to resolve ID: ${result.data.user_insert.id}');
+      return result.data.user_insert.id;
+    } catch (e, stackTrace) {
+      log('Error resolving backend user ID: $e');
+      log('Stack trace: $stackTrace');
+      return null;
+    }
+  }
+
   Future<String?> createUnit({
     required String unitName,
     required String unitLocal,
@@ -150,36 +192,18 @@ class DataConnectService {
       }
 
       // Sincronizar usuário primeiro para garantir que existe no backend
-      // E obter o ID interno (UUID) retornado pela criação
-      String? backendUserId;
       final synced = await syncUserWithBackend();
       if (!synced) {
         log('Failed to sync user with backend before creating unit');
         return null;
       }
 
-      // Tentar recriar o usuário para obter o ID interno (UUID) do backend
-      // Isso é necessário porque o backend retorna um UUID interno diferente do userId
-      try {
-        final createResult = await _connector
-            .createUser(
-              userCreatedAt: DateTime.now(),
-              userName: user.displayName ?? 'Usuário',
-              userEmail: user.email ?? '',
-            )
-            .execute();
-
-        // O backend retorna o ID interno (UUID) mesmo que o usuário já exista
-        backendUserId = createResult.data.user_insert.id;
-        log('Backend user ID (UUID): $backendUserId');
-      } catch (e) {
-        log('Error getting backend user ID, will try to use Firebase UID: $e');
-        // Se falhar, tenta usar o Firebase UID diretamente
-        backendUserId = user.uid;
+      final backendUserId = await _getBackendUserId();
+      if (backendUserId == null) {
+        log('Unable to resolve backend user ID to create unit');
+        return null;
       }
 
-      // O backend espera UUID para unitManagerId
-      // backendUserId já está definido (user.uid se falhar no try-catch)
       final managerId = backendUserId;
       log('Using managerId: $managerId');
       log(
@@ -202,6 +226,37 @@ class DataConnectService {
       log('Error creating unit in backend: $e');
       log('Stack trace: $stackTrace');
       return null;
+    }
+  }
+
+  Future<List<Map<String, dynamic>>> getUnitsForCurrentManager() async {
+    try {
+      await syncUserWithBackend();
+      final backendUserId = await _getBackendUserId(createIfMissing: false);
+      if (backendUserId == null) {
+        log('No backend user ID available to load manager units');
+        return [];
+      }
+
+      final result =
+          await _connector.readManagerUnits(managerId: backendUserId).execute();
+
+      return result.data.units
+          .map(
+            (unit) => {
+              'id': unit.id,
+              'name': unit.unitName,
+              'local': unit.unitLocal,
+              'capacity': unit.unitMacCapacity,
+              'active': unit.unitActive ?? false,
+              'managerName': unit.unitManager?.userName,
+            },
+          )
+          .toList();
+    } catch (e, stackTrace) {
+      log('Error fetching manager units: $e');
+      log('Stack trace: $stackTrace');
+      return [];
     }
   }
 
@@ -241,27 +296,145 @@ class DataConnectService {
   Future<List<Map<String, dynamic>>> getAllMovies() async {
     try {
       final result = await _connector.readAllMovies().execute();
-
-      // Debug
-      log('Movies data: ${result.data.movies[0]}');
-      print('Movies data: ${result.data.movies[0]}');
-
-      final moviesList = result.data.movies;
-      if (moviesList == null) return [];
-
-      return moviesList
+      return result.data.movies
           .map(
             (movie) => {
+              'id': movie.id,
               'movieTitle': movie.movieTitle,
               'movieGenre': movie.movieGenre,
+              'movieAgeClass': movie.movieAgeClass,
               'movieDuration': movie.movieDuration,
-              // outros campos se precisar
+              'movieDistrib': movie.movieDistrib,
+              'movieFormat': movie.movieFormat,
+              'movieDirector': movie.movieDirector,
+              'movieActive': movie.movieActive,
             },
           )
           .toList();
     } catch (e) {
       log('Error fetching movies: $e');
       return [];
+    }
+  }
+
+  Future<Map<String, dynamic>?> getMovieById(String movieId) async {
+    try {
+      final result = await _connector.readSingleMovie(id: movieId).execute();
+
+      if (result.data.movie != null) {
+        return result.data.movie!.toJson();
+      }
+      return null;
+    } catch (e) {
+      log('Error fetching movie by ID ($movieId): $e');
+      return null;
+    }
+  }
+
+  Future<bool> updateMovie({
+    required String movieId,
+    required String movieTitle,
+    required String movieGenre,
+    required String movieAgeClass,
+    required int movieDuration,
+    required String movieDistrib,
+    required String movieFormat,
+    required String movieDirector,
+    required bool movieActive,
+  }) async {
+    try {
+      final result = await _connector
+          .updateMovie(
+            movieId: movieId,
+            movieTitle: movieTitle,
+            movieGenre: movieGenre,
+            movieAgeClass: movieAgeClass,
+            movieDuration: movieDuration,
+            movieDistrib: movieDistrib,
+            movieFormat: movieFormat,
+            movieDirector: movieDirector,
+            movieActive: movieActive,
+          )
+          .execute();
+
+      log('Movie updated in backend: ${result.data.movie_update}');
+      return true;
+    } catch (e) {
+      log('Error updating movie in backend: $e');
+      return false;
+    }
+  }
+
+  Future<bool> deleteMovie(String movieId) async {
+    try {
+      final result = await _connector.deleteMovie(movieId: movieId).execute();
+
+      log('Movie deleted in backend: ${result.data.movie_delete}');
+      return true;
+    } catch (e) {
+      log('Error deleting movie in backend: $e');
+      return false;
+    }
+  }
+
+  Future<bool> deleteUnit(String unitId) async {
+    try {
+      final result = await _connector.deleteUnit(unitId: unitId).execute();
+
+      log('Unit deleted in backend: ${result.data.unit_delete}');
+      return true;
+    } catch (e) {
+      log('Error deleting unit in backend: $e');
+      return false;
+    }
+  }
+
+  Future<String?> createAudience({
+    required String unitId,
+    required int audienceAge,
+    required String audienceGender,
+    required String audienceFormat,
+  }) async {
+    try {
+      final result = await _connector
+          .createAudience(
+            audienceUnitId: unitId,
+            audienceAge: audienceAge,
+            audienceGender: audienceGender,
+            audienceFormat: audienceFormat,
+          )
+          .execute();
+
+      log('Audience created in backend: ${result.data.audience_insert.id}');
+      return result.data.audience_insert.id;
+    } catch (e, stackTrace) {
+      log('Error creating audience in backend: $e');
+      log('Stack trace: $stackTrace');
+      return null;
+    }
+  }
+
+  Future<bool> createProduct({
+    required String productName,
+    required String productType,
+    required double productPrice,
+    required bool productActive,
+  }) async {
+    try {
+      final result = await _connector
+          .createProduct(
+            productName: productName,
+            productType: productType,
+            productPrice: productPrice,
+            productActive: productActive,
+          )
+          .execute();
+
+      log('Product created in backend: ${result.data.product_insert.id}');
+      return true;
+    } catch (e) {
+      log('Error creating product in backend: $e');
+      return false;
     }
   }
 }
