@@ -27,9 +27,17 @@ part 'read_single_user.dart';
 
 part 'read_manager_units.dart';
 
+part 'read_manager_units_by_auth.dart';
+
 part 'read_all_movies.dart';
 
 part 'read_single_movie.dart';
+
+part 'read_audience_by_unit.dart';
+
+part 'read_all_units.dart';
+
+part 'read_all_products.dart';
 
 
 
@@ -100,6 +108,11 @@ class ExampleConnector {
   }
   
   
+  ReadManagerUnitsByAuthVariablesBuilder readManagerUnitsByAuth ({required String authId, }) {
+    return ReadManagerUnitsByAuthVariablesBuilder(dataConnect, authId: authId,);
+  }
+  
+  
   ReadAllMoviesVariablesBuilder readAllMovies () {
     return ReadAllMoviesVariablesBuilder(dataConnect, );
   }
@@ -107,6 +120,21 @@ class ExampleConnector {
   
   ReadSingleMovieVariablesBuilder readSingleMovie ({required String id, }) {
     return ReadSingleMovieVariablesBuilder(dataConnect, id: id,);
+  }
+  
+  
+  ReadAudienceByUnitVariablesBuilder readAudienceByUnit ({required String unitId, }) {
+    return ReadAudienceByUnitVariablesBuilder(dataConnect, unitId: unitId,);
+  }
+  
+  
+  ReadAllUnitsVariablesBuilder readAllUnits () {
+    return ReadAllUnitsVariablesBuilder(dataConnect, );
+  }
+  
+  
+  ReadAllProductsVariablesBuilder readAllProducts () {
+    return ReadAllProductsVariablesBuilder(dataConnect, );
   }
   
 
@@ -126,4 +154,3 @@ class ExampleConnector {
 
   FirebaseDataConnect dataConnect;
 }
-

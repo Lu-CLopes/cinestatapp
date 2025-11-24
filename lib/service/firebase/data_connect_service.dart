@@ -114,10 +114,7 @@ class DataConnectService {
         userData = await getUserDataByEmail(user.email!);
       }
 
-      // Se não encontrou por email, tenta por ID
-      if (userData == null) {
-        userData = await getUserData(user.uid);
-      }
+      userData ??= await getUserData(user.uid);
 
       // Se não existe, cria
       if (userData == null) {
@@ -232,16 +229,53 @@ class DataConnectService {
   Future<List<Map<String, dynamic>>> getUnitsForCurrentManager() async {
     try {
       await syncUserWithBackend();
-      final backendUserId = await _getBackendUserId(createIfMissing: false);
-      if (backendUserId == null) {
-        log('No backend user ID available to load manager units');
-        return [];
+      final backendUserId = await _getBackendUserId();
+      final firebaseUid = FirebaseAuth.instance.currentUser?.uid;
+      final firebaseEmail = FirebaseAuth.instance.currentUser?.email
+          ?.toLowerCase()
+          .trim();
+
+      List units = [];
+
+      if (backendUserId != null) {
+        final result = await _connector
+            .readManagerUnits(managerId: backendUserId)
+            .execute();
+        units = result.data.units;
       }
 
-      final result =
-          await _connector.readManagerUnits(managerId: backendUserId).execute();
+      if (units.isEmpty && firebaseUid != null && firebaseUid.isNotEmpty) {
+        try {
+          final fallbackResult = await _connector
+              .readManagerUnitsByAuth(authId: firebaseUid)
+              .execute();
+          units = fallbackResult.data.units;
+        } catch (e) {
+          log('Fallback load of manager units by auth uid failed: $e');
+        }
+      }
 
-      return result.data.units
+      if (units.isEmpty) {
+        try {
+          final legacyResult = await _connector.readAllUnits().execute();
+          final legacyUnits = firebaseEmail == null
+              ? legacyResult.data.units
+              : legacyResult.data.units.where((unit) {
+                  final managerEmail = unit.unitManager?.userEmail
+                      .toLowerCase()
+                      .trim();
+                  return managerEmail == null || managerEmail == firebaseEmail;
+                }).toList();
+
+          if (legacyUnits.isNotEmpty) {
+            units = legacyUnits;
+          }
+        } catch (e) {
+          log('Legacy load of units without manager linkage failed: $e');
+        }
+      }
+
+      return units
           .map(
             (unit) => {
               'id': unit.id,
@@ -414,6 +448,29 @@ class DataConnectService {
     }
   }
 
+  Future<List<Map<String, dynamic>>> getAudienceByUnit(String unitId) async {
+    try {
+      final result = await _connector
+          .readAudienceByUnit(unitId: unitId)
+          .execute();
+
+      return result.data.audiences
+          .map(
+            (audience) => {
+              'id': audience.id,
+              'age': audience.audienceAge,
+              'genre': audience.audienceGender,
+              'format': audience.audienceFormat,
+            },
+          )
+          .toList();
+    } catch (e, stackTrace) {
+      log('Error fetching audience for unit $unitId: $e');
+      log('Stack trace: $stackTrace');
+      return [];
+    }
+  }
+
   Future<bool> createProduct({
     required String productName,
     required String productType,
@@ -435,6 +492,28 @@ class DataConnectService {
     } catch (e) {
       log('Error creating product in backend: $e');
       return false;
+    }
+  }
+
+  Future<List<Map<String, dynamic>>> getAllProducts() async {
+    try {
+      final result = await _connector.readAllProducts().execute();
+
+      return result.data.products
+          .map(
+            (product) => {
+              'id': product.id,
+              'name': product.productName,
+              'type': product.productType,
+              'price': product.productPrice,
+              'active': product.productActive ?? false,
+            },
+          )
+          .toList();
+    } catch (e, stackTrace) {
+      log('Error fetching products: $e');
+      log('Stack trace: $stackTrace');
+      return [];
     }
   }
 }

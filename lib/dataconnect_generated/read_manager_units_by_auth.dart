@@ -1,37 +1,37 @@
 part of 'example.dart';
 
-class ReadManagerUnitsVariablesBuilder {
-  String managerId;
+class ReadManagerUnitsByAuthVariablesBuilder {
+  String authId;
 
   final FirebaseDataConnect _dataConnect;
-  ReadManagerUnitsVariablesBuilder(this._dataConnect, {required  this.managerId,});
-  Deserializer<ReadManagerUnitsData> dataDeserializer = (dynamic json)  => ReadManagerUnitsData.fromJson(jsonDecode(json));
-  Serializer<ReadManagerUnitsVariables> varsSerializer = (ReadManagerUnitsVariables vars) => jsonEncode(vars.toJson());
-  Future<QueryResult<ReadManagerUnitsData, ReadManagerUnitsVariables>> execute() {
+  ReadManagerUnitsByAuthVariablesBuilder(this._dataConnect, {required  this.authId,});
+  Deserializer<ReadManagerUnitsByAuthData> dataDeserializer = (dynamic json)  => ReadManagerUnitsByAuthData.fromJson(jsonDecode(json));
+  Serializer<ReadManagerUnitsByAuthVariables> varsSerializer = (ReadManagerUnitsByAuthVariables vars) => jsonEncode(vars.toJson());
+  Future<QueryResult<ReadManagerUnitsByAuthData, ReadManagerUnitsByAuthVariables>> execute() {
     return ref().execute();
   }
 
-  QueryRef<ReadManagerUnitsData, ReadManagerUnitsVariables> ref() {
-    ReadManagerUnitsVariables vars= ReadManagerUnitsVariables(managerId: managerId,);
-    return _dataConnect.query("ReadManagerUnits", dataDeserializer, varsSerializer, vars);
+  QueryRef<ReadManagerUnitsByAuthData, ReadManagerUnitsByAuthVariables> ref() {
+    ReadManagerUnitsByAuthVariables vars= ReadManagerUnitsByAuthVariables(authId: authId,);
+    return _dataConnect.query("ReadManagerUnitsByAuth", dataDeserializer, varsSerializer, vars);
   }
 }
 
 @immutable
-class ReadManagerUnitsUnits {
+class ReadManagerUnitsByAuthUnits {
   final String id;
   final String unitName;
   final String? unitLocal;
   final int? unitMacCapacity;
-  final ReadManagerUnitsUnitsUnitManager? unitManager;
+  final ReadManagerUnitsByAuthUnitsUnitManager? unitManager;
   final bool? unitActive;
-  ReadManagerUnitsUnits.fromJson(dynamic json):
+  ReadManagerUnitsByAuthUnits.fromJson(dynamic json):
   
   id = nativeFromJson<String>(json['id']),
   unitName = nativeFromJson<String>(json['unitName']),
   unitLocal = json['unitLocal'] == null ? null : nativeFromJson<String>(json['unitLocal']),
   unitMacCapacity = json['unitMacCapacity'] == null ? null : nativeFromJson<int>(json['unitMacCapacity']),
-  unitManager = json['unitManager'] == null ? null : ReadManagerUnitsUnitsUnitManager.fromJson(json['unitManager']),
+  unitManager = json['unitManager'] == null ? null : ReadManagerUnitsByAuthUnitsUnitManager.fromJson(json['unitManager']),
   unitActive = json['unitActive'] == null ? null : nativeFromJson<bool>(json['unitActive']);
   @override
   bool operator ==(Object other) {
@@ -42,7 +42,7 @@ class ReadManagerUnitsUnits {
       return false;
     }
 
-    final ReadManagerUnitsUnits otherTyped = other as ReadManagerUnitsUnits;
+    final ReadManagerUnitsByAuthUnits otherTyped = other as ReadManagerUnitsByAuthUnits;
     return id == otherTyped.id && 
     unitName == otherTyped.unitName && 
     unitLocal == otherTyped.unitLocal && 
@@ -74,7 +74,7 @@ class ReadManagerUnitsUnits {
     return json;
   }
 
-  ReadManagerUnitsUnits({
+  ReadManagerUnitsByAuthUnits({
     required this.id,
     required this.unitName,
     this.unitLocal,
@@ -85,9 +85,9 @@ class ReadManagerUnitsUnits {
 }
 
 @immutable
-class ReadManagerUnitsUnitsUnitManager {
+class ReadManagerUnitsByAuthUnitsUnitManager {
   final String userName;
-  ReadManagerUnitsUnitsUnitManager.fromJson(dynamic json):
+  ReadManagerUnitsByAuthUnitsUnitManager.fromJson(dynamic json):
   
   userName = nativeFromJson<String>(json['userName']);
   @override
@@ -99,7 +99,7 @@ class ReadManagerUnitsUnitsUnitManager {
       return false;
     }
 
-    final ReadManagerUnitsUnitsUnitManager otherTyped = other as ReadManagerUnitsUnitsUnitManager;
+    final ReadManagerUnitsByAuthUnitsUnitManager otherTyped = other as ReadManagerUnitsByAuthUnitsUnitManager;
     return userName == otherTyped.userName;
     
   }
@@ -113,18 +113,18 @@ class ReadManagerUnitsUnitsUnitManager {
     return json;
   }
 
-  ReadManagerUnitsUnitsUnitManager({
+  ReadManagerUnitsByAuthUnitsUnitManager({
     required this.userName,
   });
 }
 
 @immutable
-class ReadManagerUnitsData {
-  final List<ReadManagerUnitsUnits> units;
-  ReadManagerUnitsData.fromJson(dynamic json):
+class ReadManagerUnitsByAuthData {
+  final List<ReadManagerUnitsByAuthUnits> units;
+  ReadManagerUnitsByAuthData.fromJson(dynamic json):
   
   units = (json['units'] as List<dynamic>)
-        .map((e) => ReadManagerUnitsUnits.fromJson(e))
+        .map((e) => ReadManagerUnitsByAuthUnits.fromJson(e))
         .toList();
   @override
   bool operator ==(Object other) {
@@ -135,7 +135,7 @@ class ReadManagerUnitsData {
       return false;
     }
 
-    final ReadManagerUnitsData otherTyped = other as ReadManagerUnitsData;
+    final ReadManagerUnitsByAuthData otherTyped = other as ReadManagerUnitsByAuthData;
     return units == otherTyped.units;
     
   }
@@ -149,18 +149,18 @@ class ReadManagerUnitsData {
     return json;
   }
 
-  ReadManagerUnitsData({
+  ReadManagerUnitsByAuthData({
     required this.units,
   });
 }
 
 @immutable
-class ReadManagerUnitsVariables {
-  final String managerId;
+class ReadManagerUnitsByAuthVariables {
+  final String authId;
   @Deprecated('fromJson is deprecated for Variable classes as they are no longer required for deserialization.')
-  ReadManagerUnitsVariables.fromJson(Map<String, dynamic> json):
+  ReadManagerUnitsByAuthVariables.fromJson(Map<String, dynamic> json):
   
-  managerId = nativeFromJson<String>(json['managerId']);
+  authId = nativeFromJson<String>(json['authId']);
   @override
   bool operator ==(Object other) {
     if(identical(this, other)) {
@@ -170,22 +170,22 @@ class ReadManagerUnitsVariables {
       return false;
     }
 
-    final ReadManagerUnitsVariables otherTyped = other as ReadManagerUnitsVariables;
-    return managerId == otherTyped.managerId;
+    final ReadManagerUnitsByAuthVariables otherTyped = other as ReadManagerUnitsByAuthVariables;
+    return authId == otherTyped.authId;
     
   }
   @override
-  int get hashCode => managerId.hashCode;
+  int get hashCode => authId.hashCode;
   
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = {};
-    json['managerId'] = nativeToJson<String>(managerId);
+    json['authId'] = nativeToJson<String>(authId);
     return json;
   }
 
-  ReadManagerUnitsVariables({
-    required this.managerId,
+  ReadManagerUnitsByAuthVariables({
+    required this.authId,
   });
 }
 

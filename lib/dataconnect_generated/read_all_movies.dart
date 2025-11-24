@@ -18,6 +18,7 @@ class ReadAllMoviesVariablesBuilder {
 
 @immutable
 class ReadAllMoviesMovies {
+  final String id;
   final String movieTitle;
   final String? movieGenre;
   final String? movieAgeClass;
@@ -28,6 +29,7 @@ class ReadAllMoviesMovies {
   final bool? movieActive;
   ReadAllMoviesMovies.fromJson(dynamic json):
   
+  id = nativeFromJson<String>(json['id']),
   movieTitle = nativeFromJson<String>(json['movieTitle']),
   movieGenre = json['movieGenre'] == null ? null : nativeFromJson<String>(json['movieGenre']),
   movieAgeClass = json['movieAgeClass'] == null ? null : nativeFromJson<String>(json['movieAgeClass']),
@@ -46,7 +48,8 @@ class ReadAllMoviesMovies {
     }
 
     final ReadAllMoviesMovies otherTyped = other as ReadAllMoviesMovies;
-    return movieTitle == otherTyped.movieTitle && 
+    return id == otherTyped.id && 
+    movieTitle == otherTyped.movieTitle && 
     movieGenre == otherTyped.movieGenre && 
     movieAgeClass == otherTyped.movieAgeClass && 
     movieDuration == otherTyped.movieDuration && 
@@ -57,11 +60,12 @@ class ReadAllMoviesMovies {
     
   }
   @override
-  int get hashCode => Object.hashAll([movieTitle.hashCode, movieGenre.hashCode, movieAgeClass.hashCode, movieDuration.hashCode, movieDistrib.hashCode, movieFormat.hashCode, movieDirector.hashCode, movieActive.hashCode]);
+  int get hashCode => Object.hashAll([id.hashCode, movieTitle.hashCode, movieGenre.hashCode, movieAgeClass.hashCode, movieDuration.hashCode, movieDistrib.hashCode, movieFormat.hashCode, movieDirector.hashCode, movieActive.hashCode]);
   
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = {};
+    json['id'] = nativeToJson<String>(id);
     json['movieTitle'] = nativeToJson<String>(movieTitle);
     if (movieGenre != null) {
       json['movieGenre'] = nativeToJson<String?>(movieGenre);
@@ -88,6 +92,7 @@ class ReadAllMoviesMovies {
   }
 
   ReadAllMoviesMovies({
+    required this.id,
     required this.movieTitle,
     this.movieGenre,
     this.movieAgeClass,

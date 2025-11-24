@@ -1,5 +1,6 @@
 query ReadAllUsers @auth(level: USER){
   users {
+    id
     userId
     userName
     userEmail
@@ -9,6 +10,7 @@ query ReadAllUsers @auth(level: USER){
 
 query ReadSingleUser($id: UUID!) @auth(level: USER) {
   user(id : $id) {
+    id
     userId
     userName
     userEmail
@@ -17,6 +19,20 @@ query ReadSingleUser($id: UUID!) @auth(level: USER) {
 }
 query ReadManagerUnits ($managerId: UUID!) @auth(level: USER){
   units (where: { unitManager: { id: { eq: $managerId } } }) {
+    id
+    unitName
+    unitLocal
+    unitMacCapacity
+    unitManager {
+      userName
+    }
+    unitActive
+  }
+}
+
+query ReadManagerUnitsByAuth($authId: String!) @auth(level: USER, insecureReason: "Allows managers to load units by Firebase auth UID"){
+  units (where: { unitManager: { userId: { eq: $authId } } }) {
+    id
     unitName
     unitLocal
     unitMacCapacity
@@ -29,6 +45,7 @@ query ReadManagerUnits ($managerId: UUID!) @auth(level: USER){
 
 query ReadAllMovies @auth(level: USER){
   movies{
+    id
     movieTitle
     movieGenre
     movieAgeClass
@@ -51,6 +68,40 @@ query readSingleMovie($id: UUID!) @auth(level: USER) {
     movieFormat
     movieDirector
     movieActive
+  }
+}
+
+query ReadAudienceByUnit($unitId: UUID!) @auth(level: USER) {
+  audiences(where: { audienceUnit: { id: { eq: $unitId } } }) {
+    id
+    audienceAge
+    audienceGender
+    audienceFormat
+  }
+}
+
+query ReadAllUnits @auth(level: USER, insecureReason: "Allows managers to load legacy units without owner metadata"){
+  units {
+    id
+    unitName
+    unitLocal
+    unitMacCapacity
+    unitActive
+    unitManager {
+      userName
+      userEmail
+      id
+    }
+  }
+}
+
+query ReadAllProducts @auth(level: USER, insecureReason: "Allows managers to view accessory revenue products"){
+  products {
+    id
+    productName
+    productType
+    productPrice
+    productActive
   }
 }
 

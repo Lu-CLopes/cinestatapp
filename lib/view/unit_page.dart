@@ -114,6 +114,7 @@ class _UnidadePageState extends State<UnidadePage> {
             backgroundColor: Colors.green,
           ),
         );
+        Navigator.pop(context, true);
       } else if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
