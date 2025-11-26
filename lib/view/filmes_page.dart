@@ -1,10 +1,12 @@
 // Tela de Filmes
+import 'package:cinestatapp/view/schedule_page.dart';
 import 'package:flutter/material.dart';
 import '../components/widgets/cine_button_componente.dart';
 import '../service/firebase/data_connect_service.dart';
 
 class FilmesPage extends StatefulWidget {
-  const FilmesPage({super.key});
+  final List<Map<String, dynamic>> Filmes;
+  const FilmesPage({super.key,required this.Filmes});
 
   @override
   State<FilmesPage> createState() => _FilmesPageState();
@@ -25,6 +27,55 @@ class _FilmesPageState extends State<FilmesPage> {
   String? _selectedActive;
 
   bool _isLoading = false;
+  List<Map<String, dynamic>> _movies = [];
+  /// Gera um cronograma simples de sessões usando os filmes ativos
+  List<Map<String, dynamic>> _gerarCronograma({required int dias}) {
+    if (_movies.isEmpty) return [];
+
+    // Filtra apenas filmes ativos
+    final filmesAtivos = _movies
+        .where((m) => (m['movieActive'] ?? false) == true)
+        .toList();
+
+    if (filmesAtivos.isEmpty) return [];
+
+    final agora = DateTime.now();
+
+    // Horários fixos por dia
+    const slots = [
+      TimeOfDay(hour: 15, minute: 0),
+      TimeOfDay(hour: 18, minute: 0),
+      TimeOfDay(hour: 21, minute: 0),
+    ];
+
+    final List<Map<String, dynamic>> cronograma = [];
+    int movieIndex = 0;
+
+    for (int d = 0; d < dias; d++) {
+      final dia = agora.add(Duration(days: d));
+
+      for (final slot in slots) {
+        final filme = filmesAtivos[movieIndex % filmesAtivos.length];
+        movieIndex++;
+
+        final DateTime dataHorario = DateTime(
+          dia.year,
+          dia.month,
+          dia.day,
+          slot.hour,
+          slot.minute,
+        );
+
+        cronograma.add({
+          'datetime': dataHorario,
+          'movie': filme,
+          'hour': slot,
+        });
+      }
+    }
+
+    return cronograma;
+  }
 
   @override
   void dispose() {
@@ -149,7 +200,49 @@ class _FilmesPageState extends State<FilmesPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        title: const Text('Filmes',style:TextStyle(color:Colors.white)),
+        backgroundColor: Colors.black,
+        iconTheme: const IconThemeData(color: Colors.white),
+        actions: [
+
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.schedule),
+            onSelected: (value) {
+              int dias = 7;
+              if (value == 'mes') dias = 30;
+              final cronograma = _gerarCronograma(dias: dias);
+
+
+              if (cronograma.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content:
+                    Text('Não foi possível gerar cronograma (sem filmes ativos).'),
+                    backgroundColor: Colors.orange,
+                  ),
+                );
+                return;
+              }
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => SchedulePage(schedule: cronograma),
+                ),
+              );
+            },
+            itemBuilder: (context) => const [
+              PopupMenuItem(
+                value: 'semana',
+                child: Text('Sugerir para 7 dias'),
+              ),
+              PopupMenuItem(
+                value: 'mes',
+                child: Text('Sugerir para 30 dias'),
+              ),
+            ],
+          ),
+        ],
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),

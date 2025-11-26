@@ -4,6 +4,7 @@ import '../service/firebase/data_connect_service.dart';
 import '../components/widgets/movie_card.dart';
 import 'filmes_page.dart';
 import 'update_filmes_page.dart';
+import 'schedule_page.dart'; // ajuste o path se estiver em outra pasta
 
 class HomeFilmesPage extends StatefulWidget {
   const HomeFilmesPage({super.key});
@@ -20,6 +21,54 @@ class _HomeFilmesPageState extends State<HomeFilmesPage> {
   void initState() {
     super.initState();
     _loadMovies();
+  }
+  /// Gera um cronograma simples de sessões usando os filmes ativos
+  List<Map<String, dynamic>> _gerarCronograma({required int dias}) {
+    if (_movies.isEmpty) return [];
+
+    // Filtra apenas filmes ativos
+    final filmesAtivos = _movies
+        .where((m) => (m['movieActive'] ?? false) == true)
+        .toList();
+
+    if (filmesAtivos.isEmpty) return [];
+
+    final agora = DateTime.now();
+
+    // Horários fixos por dia
+    const slots = [
+      TimeOfDay(hour: 15, minute: 0),
+      TimeOfDay(hour: 18, minute: 0),
+      TimeOfDay(hour: 21, minute: 0),
+    ];
+
+    final List<Map<String, dynamic>> cronograma = [];
+    int movieIndex = 0;
+
+    for (int d = 0; d < dias; d++) {
+      final dia = agora.add(Duration(days: d));
+
+      for (final slot in slots) {
+        final filme = filmesAtivos[movieIndex % filmesAtivos.length];
+        movieIndex++;
+
+        final DateTime dataHorario = DateTime(
+          dia.year,
+          dia.month,
+          dia.day,
+          slot.hour,
+          slot.minute,
+        );
+
+        cronograma.add({
+          'datetime': dataHorario,
+          'movie': filme,
+          'hour': slot,
+        });
+      }
+    }
+
+    return cronograma;
   }
 
   Future<void> _loadMovies() async {
@@ -218,19 +267,85 @@ class _HomeFilmesPageState extends State<HomeFilmesPage> {
           Expanded(child: body),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const FilmesPage()),
-          ).then((value) {
-            if (value == true) {
-              _loadMovies();
-            }
-          });
-        },
-        backgroundColor: const Color(0xFF9B0000),
-        child: const Icon(Icons.add, color: Colors.white),
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // botao schedule
+          FloatingActionButton(
+            heroTag: "btnSchedule",
+            backgroundColor: const Color(0xFF9B0000),
+            child: const Icon(Icons.schedule, color: Colors.white),
+            onPressed: () async {
+              if (_movies.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Nenhum filme cadastrado para sugerir cronograma.'),
+                    backgroundColor: Colors.orange,
+                  ),
+                );
+                return;
+              }
+
+              // Popup para escolher o período
+              final String? escolha = await showDialog<String>(
+                context: context,
+                builder: (ctx) {
+                  return SimpleDialog(
+                    title: const Text('Gerar cronograma para:'),
+                    children: [
+                      SimpleDialogOption(
+                        onPressed: () => Navigator.pop(ctx, 'semana'),
+                        child: const Text('7 dias'),
+                      ),
+                      SimpleDialogOption(
+                        onPressed: () => Navigator.pop(ctx, 'mes'),
+                        child: const Text('30 dias'),
+                      ),
+                    ],
+                  );
+                },
+              );
+
+              if (escolha == null) return;
+
+              int dias = escolha == 'mes' ? 30 : 7;
+
+              final cronograma = _gerarCronograma(dias: dias);
+
+              if (cronograma.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Não há filmes ativos para gerar cronograma.'),
+                    backgroundColor: Colors.orange,
+                  ),
+                );
+                return;
+              }
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => SchedulePage(schedule: cronograma),
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 12),
+          // BOTÃO DE +
+          FloatingActionButton(
+            heroTag: "btnAddMovie",
+            backgroundColor: const Color(0xFF9B0000),
+            child: const Icon(Icons.add, color: Colors.white),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const FilmesPage(Filmes: [])),
+              ).then((value) {
+                if (value == true) _loadMovies();
+              });
+            },
+          ),
+        ],
       ),
     );
   }

@@ -317,7 +317,7 @@ class _SugestionPageState extends State<SugestionPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const FilmesPage()),
+            MaterialPageRoute(builder: (context) => const FilmesPage(Filmes: [],)),
           ).then((value) {
             if (value == true) {
               _loadMovies();
