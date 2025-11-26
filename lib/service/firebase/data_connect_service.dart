@@ -495,6 +495,37 @@ class DataConnectService {
     }
   }
 
+  Future<List<Map<String, dynamic>>> getAudienceForCurrentManager() async {
+    try {
+      // Pega as unidades do gerente atual
+      final units = await getUnitsForCurrentManager();
+
+      if (units.isEmpty) {
+        log('Nenhuma unidade encontrada para o gerente atual.');
+        return [];
+      }
+
+      final List<Map<String, dynamic>> allAudience = [];
+
+      // Para cada unidade, pega a audiência e soma tudo
+      for (final unit in units) {
+        final unitId = unit['id'] as String?;
+        if (unitId == null || unitId.isEmpty) continue;
+
+        final audience = await getAudienceByUnit(unitId);
+        allAudience.addAll(audience);
+      }
+
+      log('Audiência total carregada: ${allAudience.length}');
+      return allAudience;
+    } catch (e, stackTrace) {
+      log('Error fetching audience for current manager: $e');
+      log('Stack trace: $stackTrace');
+      return [];
+    }
+  }
+
+
   Future<List<Map<String, dynamic>>> getAllProducts() async {
     try {
       final result = await _connector.readAllProducts().execute();

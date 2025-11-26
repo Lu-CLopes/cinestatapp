@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import '../components/widgets/cine_button_componente.dart';
 import '../service/firebase/data_connect_service.dart';
+import '../service/movie_performance_simulator.dart';
 
 class FilmesPage extends StatefulWidget {
   const FilmesPage({super.key});
@@ -25,6 +26,7 @@ class _FilmesPageState extends State<FilmesPage> {
   String? _selectedActive;
 
   bool _isLoading = false;
+  bool _isSimulating = false; // ⬅️ novo
 
   @override
   void dispose() {
@@ -140,6 +142,130 @@ class _FilmesPageState extends State<FilmesPage> {
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
+      }
+    }
+  }
+
+  Future<void> _simulateMovie() async {
+    final service = DataConnectService();
+    final audience = await service.getAudienceForCurrentManager();
+
+    // Usa as validações do formulário (vai exigir os campos preenchidos)
+    if (!_formKey.currentState!.validate()) return;
+
+    final title = _titleController.text.trim();
+    final genre = _selectedGenre ?? '';
+    final ageClass = _selectedAgeClass ?? '';
+    final durationStr = _durationController.text.trim();
+    final format = _selectedFormat ?? '';
+
+    final duration = int.tryParse(durationStr);
+    if (duration == null || duration <= 0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Duração deve ser um número válido'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    setState(() => _isSimulating = true);
+
+    try {
+      final service = DataConnectService();
+      // Pega a audiência agregada de TODAS as unidades do gerente
+      final audience = await service.getAudienceForCurrentManager();
+
+      if (!mounted) return;
+
+      if (audience.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Nenhum dado de público encontrado para simulação.\nCadastre público em "Cadastre seu Público".',
+            ),
+            backgroundColor: Colors.orange,
+          ),
+        );
+        return;
+      }
+
+      final simulator = MoviePerformanceSimulator();
+      final result = simulator.simulate(
+        genre: genre,
+        format: format,
+        ageClassLabel: ageClass,
+        durationMinutes: duration,
+        audience: audience,
+      );
+
+      final det = result.detalhes;
+
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: const Color(0xFF121212),
+            title: Text(
+              'Simulação para "$title"',
+              style: const TextStyle(color: Colors.white),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Score geral: ${result.score.toStringAsFixed(1)} / 100',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Nível: ${result.nivel}',
+                  style: const TextStyle(color: Colors.white70),
+                ),
+                const Divider(color: Colors.white24),
+                Text(
+                  'Gênero: ${det['genreScore']?.toStringAsFixed(1)}%',
+                  style: const TextStyle(color: Colors.white70),
+                ),
+                Text(
+                  'Formato: ${det['formatScore']?.toStringAsFixed(1)}%',
+                  style: const TextStyle(color: Colors.white70),
+                ),
+                Text(
+                  'Compatibilidade de idade: ${det['ageScore']?.toStringAsFixed(1)}%',
+                  style: const TextStyle(color: Colors.white70),
+                ),
+                Text(
+                  'Duração: ${det['durationScore']?.toStringAsFixed(1)}%',
+                  style: const TextStyle(color: Colors.white70),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Fechar'),
+              ),
+            ],
+          );
+        },
+      );
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Erro ao simular desempenho: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _isSimulating = false);
       }
     }
   }
@@ -498,7 +624,6 @@ class _FilmesPageState extends State<FilmesPage> {
                   return null;
                 },
               ),
-              const SizedBox(height: 16),
 
               // Button to add Movie
               // Botão de Cadastro
@@ -513,6 +638,18 @@ class _FilmesPageState extends State<FilmesPage> {
                       )
                     : null,
               ),
+              CineButtonComponente(
+                text: _isSimulating ? 'Simulando...' : 'Simular desempenho',
+                onPressed: _isSimulating ? () {} : _simulateMovie,
+                textStyle: _isSimulating
+                    ? const TextStyle(
+                  color: Colors.grey,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                )
+                    : null,
+              ),
+              const SizedBox(height: 16),
               const SizedBox(height: 16),
             ],
           ),
