@@ -22,11 +22,38 @@ class _PipocasPageState extends State<PipocasPage> {
   bool _isLoading = false;
   bool _isLoadingProducts = true;
   List<Map<String, dynamic>> _products = [];
+  
+  // Vendas
+  List<Map<String, dynamic>> _sessions = [];
+  List<Map<String, dynamic>> _units = [];
+  List<Map<String, dynamic>> _movies = [];
+
+  List<Map<String, dynamic>> get _rankedProducts {
+    final sorted = List<Map<String, dynamic>>.from(_products)
+      ..sort((a, b) => _productScore(b).compareTo(_productScore(a)));
+    return sorted;
+  }
+
+  List<Map<String, dynamic>> get _rankedCombos {
+    final combos = _products.where((product) {
+      final type = (product['type'] as String?)?.toLowerCase() ?? '';
+      return type.contains('combo') || type.contains('promo');
+    }).toList()
+      ..sort((a, b) => _productScore(b).compareTo(_productScore(a)));
+    return combos;
+  }
+
+  double _productScore(Map<String, dynamic> product) {
+    return ((product['totalQuantity'] as num?)?.toDouble() ?? 0.0);
+  }
 
   @override
   void initState() {
     super.initState();
     _loadProducts();
+    _loadSessions();
+    _loadUnits();
+    _loadMovies();
   }
 
   @override
@@ -59,6 +86,45 @@ class _PipocasPageState extends State<PipocasPage> {
     }
   }
 
+  Future<void> _loadSessions() async {
+    try {
+      final dataConnectService = DataConnectService();
+      final items = await dataConnectService.getAllSessions();
+      if (!mounted) return;
+      setState(() {
+        _sessions = items;
+      });
+    } catch (e) {
+      debugPrint('Erro ao carregar sessões: $e');
+    }
+  }
+
+  Future<void> _loadUnits() async {
+    try {
+      final dataConnectService = DataConnectService();
+      final items = await dataConnectService.getUnitsForCurrentManager();
+      if (!mounted) return;
+      setState(() {
+        _units = items;
+      });
+    } catch (e) {
+      debugPrint('Erro ao carregar unidades: $e');
+    }
+  }
+
+  Future<void> _loadMovies() async {
+    try {
+      final dataConnectService = DataConnectService();
+      final items = await dataConnectService.getAllMovies();
+      if (!mounted) return;
+      setState(() {
+        _movies = items;
+      });
+    } catch (e) {
+      debugPrint('Erro ao carregar filmes: $e');
+    }
+  }
+
   String _formatCurrency(double value) {
     final formatted = value.toStringAsFixed(2).replaceAll('.', ',');
     return 'R\$ $formatted';
@@ -82,7 +148,7 @@ class _PipocasPageState extends State<PipocasPage> {
 
     final totalRevenue = _products.fold<double>(
       0,
-      (sum, product) => sum + ((product['price'] as num?)?.toDouble() ?? 0.0),
+      (sum, product) => sum + ((product['totalRevenue'] as num?)?.toDouble() ?? 0.0),
     );
     final activeCount = _products
         .where((product) => product['active'] == true)
@@ -154,76 +220,148 @@ class _PipocasPageState extends State<PipocasPage> {
     );
   }
 
-  Widget _buildProductsList() {
-    if (_isLoadingProducts) {
+  Widget _buildRankingSection() {
+    if (_isLoadingProducts || _products.isEmpty) {
       return const SizedBox.shrink();
     }
 
-    if (_products.isEmpty) {
-      return const SizedBox.shrink();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Ranking de produtos',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 12),
+        _buildRankingList(
+          _rankedProducts,
+          emptyMessage: 'Cadastre produtos para ver o ranking.',
+          showPosition: true,
+        ),
+        const SizedBox(height: 24),
+        const Text(
+          'Ranking de combos e promoções',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 12),
+        _buildRankingList(
+          _rankedCombos,
+          emptyMessage: 'Cadastre combos ou promoções para ver o ranking.',
+          showPosition: true,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRankingList(
+    List<Map<String, dynamic>> items, {
+    required String emptyMessage,
+    bool showPosition = false,
+  }) {
+    if (items.isEmpty) {
+      return Text(
+        emptyMessage,
+        style: const TextStyle(color: Colors.grey),
+      );
     }
 
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: _products.length,
-      separatorBuilder: (context, index) => const SizedBox(height: 12),
+      itemCount: items.length,
+      separatorBuilder: (context, index) => const SizedBox(height: 10),
       itemBuilder: (context, index) {
-        final product = _products[index];
-        final active = product['active'] == true;
-        final price = ((product['price'] as num?)?.toDouble() ?? 0.0);
+        final product = items[index];
+        final rank = index + 1;
+        final price = _formatCurrency(
+          ((product['price'] as num?)?.toDouble() ?? 0.0),
+        );
+        final type = (product['type'] as String?) ?? '-';
         return Container(
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.grey[900],
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: Colors.grey[850]!),
           ),
-          child: ListTile(
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 12,
-            ),
-            title: Text(
-              product['name'] as String? ?? 'Produto',
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 6),
-                Text(
-                  'Categoria: ${(product['type'] as String?) ?? '-'}',
-                  style: const TextStyle(color: Colors.grey),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Preço: ${_formatCurrency(price)}',
-                  style: const TextStyle(color: Colors.grey),
-                ),
-              ],
-            ),
-            trailing: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  active ? Icons.check_circle : Icons.cancel,
-                  color: active ? Colors.green : Colors.red,
-                  size: 20,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  active ? 'Ativo' : 'Inativo',
-                  style: TextStyle(
-                    color: active ? Colors.green : Colors.red,
-                    fontSize: 12,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              if (showPosition) ...[
+                CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.red,
+                  child: Text(
+                    '$rank',
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
+                const SizedBox(width: 16),
               ],
-            ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      product['name'] as String? ?? 'Produto',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Categoria: $type',
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Vendas: ${(product['totalQuantity'] ?? 0).toString()} unidades',
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const Text(
+                    'Preço',
+                    style: TextStyle(color: Colors.grey, fontSize: 12),
+                  ),
+                  Text(
+                    price,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  const Text(
+                    'Receita total',
+                    style: TextStyle(color: Colors.grey, fontSize: 12),
+                  ),
+                  Text(
+                    _formatCurrency(
+                      ((product['totalRevenue'] as num?)?.toDouble() ?? 0.0),
+                    ),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         );
       },
@@ -246,6 +384,432 @@ class _PipocasPageState extends State<PipocasPage> {
         Text(label, style: const TextStyle(color: Colors.grey)),
       ],
     );
+  }
+
+  Future<void> _showSaleDialog() async {
+    final saleFormKey = GlobalKey<FormState>();
+    String? selectedProductId;
+    String? selectedSessionId;
+    final quantityController = TextEditingController();
+    final revenueController = TextEditingController();
+    bool createNewSession = false;
+    String? selectedUnitId;
+    String? selectedMovieId;
+    final sessionDateController = TextEditingController(
+      text: '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}',
+    );
+    final sessionHourController = TextEditingController(
+      text: '${DateTime.now().hour.toString().padLeft(2, '0')}:${DateTime.now().minute.toString().padLeft(2, '0')}',
+    );
+    final sessionTicketsController = TextEditingController();
+    final sessionRevenueController = TextEditingController();
+
+    await showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setDialogState) => AlertDialog(
+          backgroundColor: Colors.grey[900],
+          title: const Text(
+            'Registrar Venda',
+            style: TextStyle(color: Colors.white),
+          ),
+          contentPadding: const EdgeInsets.fromLTRB(24, 20, 24, 24),
+          content: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.9,
+            child: SingleChildScrollView(
+              child: Form(
+                key: saleFormKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                  CheckboxListTile(
+                    title: const Text(
+                      'Criar nova sessão',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    value: createNewSession,
+                    onChanged: (value) {
+                      setDialogState(() {
+                        createNewSession = value ?? false;
+                      });
+                    },
+                    activeColor: Colors.red,
+                  ),
+                  if (createNewSession) ...[
+                    DropdownButtonFormField<String>(
+                      decoration: const InputDecoration(
+                        labelText: 'Unidade',
+                        labelStyle: TextStyle(color: Colors.grey),
+                        border: OutlineInputBorder(),
+                      ),
+                      dropdownColor: Colors.black,
+                      style: const TextStyle(color: Colors.white, fontSize: 14),
+                      isExpanded: true,
+                      items: _units.map((unit) {
+                        return DropdownMenuItem(
+                          value: unit['id'] as String,
+                          child: Text(
+                            unit['name'] as String? ?? '',
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setDialogState(() {
+                          selectedUnitId = value;
+                        });
+                      },
+                      validator: (value) {
+                        if (createNewSession && (value == null || value.isEmpty)) {
+                          return 'Selecione uma unidade';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    DropdownButtonFormField<String>(
+                      decoration: const InputDecoration(
+                        labelText: 'Filme',
+                        labelStyle: TextStyle(color: Colors.grey),
+                        border: OutlineInputBorder(),
+                      ),
+                      dropdownColor: Colors.black,
+                      style: const TextStyle(color: Colors.white, fontSize: 14),
+                      isExpanded: true,
+                      items: _movies.map((movie) {
+                        return DropdownMenuItem(
+                          value: movie['id'] as String,
+                          child: Text(
+                            movie['movieTitle'] as String? ?? '',
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setDialogState(() {
+                          selectedMovieId = value;
+                        });
+                      },
+                      validator: (value) {
+                        if (createNewSession && (value == null || value.isEmpty)) {
+                          return 'Selecione um filme';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: sessionDateController,
+                      decoration: const InputDecoration(
+                        labelText: 'Data da sessão (DD/MM/AAAA)',
+                        labelStyle: TextStyle(color: Colors.grey),
+                        border: OutlineInputBorder(),
+                      ),
+                      style: const TextStyle(color: Colors.white),
+                      validator: (value) {
+                        if (createNewSession && (value == null || value.isEmpty)) {
+                          return 'Digite a data';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: sessionHourController,
+                      decoration: const InputDecoration(
+                        labelText: 'Hora da sessão (HH:MM)',
+                        labelStyle: TextStyle(color: Colors.grey),
+                        border: OutlineInputBorder(),
+                      ),
+                      style: const TextStyle(color: Colors.white),
+                      validator: (value) {
+                        if (createNewSession && (value == null || value.isEmpty)) {
+                          return 'Digite a hora';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'Bilheteria (opcional)',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    TextFormField(
+                      controller: sessionTicketsController,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        labelText: 'Ingressos vendidos',
+                        labelStyle: TextStyle(color: Colors.grey),
+                        border: OutlineInputBorder(),
+                        hintText: 'Ex: 150',
+                      ),
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: sessionRevenueController,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        labelText: 'Receita de ingressos (R\$)',
+                        labelStyle: TextStyle(color: Colors.grey),
+                        border: OutlineInputBorder(),
+                        hintText: 'Ex: 3000.00',
+                      ),
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    const SizedBox(height: 16),
+                  ] else ...[
+                    if (_sessions.isEmpty)
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[900],
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.grey[800]!),
+                        ),
+                        child: const Text(
+                          'Nenhuma sessão cadastrada. Marque "Criar nova sessão" para continuar.',
+                          style: TextStyle(color: Colors.grey, fontSize: 14),
+                        ),
+                      )
+                    else
+                      DropdownButtonFormField<String>(
+                        decoration: const InputDecoration(
+                          labelText: 'Sessão',
+                          labelStyle: TextStyle(color: Colors.grey),
+                          border: OutlineInputBorder(),
+                        ),
+                        dropdownColor: Colors.black,
+                        style: const TextStyle(color: Colors.white, fontSize: 14),
+                        isExpanded: true,
+                        items: _sessions.map((session) {
+                          final date = session['date'] as DateTime;
+                          final hour = session['hour'] as DateTime;
+                          final movie = session['movieTitle'] as String? ?? '';
+                          final unit = session['unitName'] as String? ?? '';
+                          final dateStr = '${date.day}/${date.month}/${date.year}';
+                          final hourStr = '${hour.hour.toString().padLeft(2, '0')}:${hour.minute.toString().padLeft(2, '0')}';
+                          final displayText = '$movie\n$unit - $dateStr $hourStr';
+                          return DropdownMenuItem(
+                            value: session['id'] as String,
+                            child: Text(
+                              displayText,
+                              style: const TextStyle(fontSize: 13),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          setDialogState(() {
+                            selectedSessionId = value;
+                          });
+                        },
+                        validator: (value) {
+                          if (!createNewSession && (value == null || value.isEmpty)) {
+                            return 'Selecione uma sessão';
+                          }
+                          return null;
+                        },
+                      ),
+                    const SizedBox(height: 16),
+                  ],
+                  DropdownButtonFormField<String>(
+                    decoration: const InputDecoration(
+                      labelText: 'Produto',
+                      labelStyle: TextStyle(color: Colors.grey),
+                      border: OutlineInputBorder(),
+                    ),
+                    dropdownColor: Colors.black,
+                    style: const TextStyle(color: Colors.white, fontSize: 14),
+                    isExpanded: true,
+                    items: _products.map((product) {
+                      return DropdownMenuItem(
+                        value: product['id'] as String,
+                        child: Text(
+                          product['name'] as String? ?? '',
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setDialogState(() {
+                        selectedProductId = value;
+                      });
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Selecione um produto';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: quantityController,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'Quantidade vendida',
+                      labelStyle: TextStyle(color: Colors.grey),
+                      border: OutlineInputBorder(),
+                    ),
+                    style: const TextStyle(color: Colors.white),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Digite a quantidade';
+                      }
+                      final qty = int.tryParse(value);
+                      if (qty == null || qty <= 0) {
+                        return 'Quantidade deve ser um número positivo';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: revenueController,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'Receita líquida (opcional)',
+                      labelStyle: TextStyle(color: Colors.grey),
+                      border: OutlineInputBorder(),
+                    ),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () async {
+                if (!saleFormKey.currentState!.validate()) return;
+                Navigator.pop(context);
+                await _createSale(
+                  productId: selectedProductId!,
+                  sessionId: selectedSessionId,
+                  unitId: selectedUnitId,
+                  movieId: selectedMovieId,
+                  quantity: int.parse(quantityController.text),
+                  revenue: revenueController.text.isNotEmpty
+                      ? double.tryParse(revenueController.text.replaceAll(',', '.'))
+                      : null,
+                  createNewSession: createNewSession,
+                  sessionDateStr: sessionDateController.text,
+                  sessionHourStr: sessionHourController.text,
+                  sessionTickets: sessionTicketsController.text.isNotEmpty
+                      ? int.tryParse(sessionTicketsController.text)
+                      : null,
+                  sessionRevenue: sessionRevenueController.text.isNotEmpty
+                      ? double.tryParse(sessionRevenueController.text.replaceAll(',', '.'))
+                      : null,
+                );
+              },
+              child: const Text('Registrar'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _createSale({
+    required String productId,
+    String? sessionId,
+    String? unitId,
+    String? movieId,
+    required int quantity,
+    double? revenue,
+    required bool createNewSession,
+    String? sessionDateStr,
+    String? sessionHourStr,
+    int? sessionTickets,
+    double? sessionRevenue,
+  }) async {
+    try {
+      final dataConnectService = DataConnectService();
+      String? finalSessionId = sessionId;
+
+      if (createNewSession && unitId != null && movieId != null) {
+        final dateParts = sessionDateStr!.split('/');
+        final hourParts = sessionHourStr!.split(':');
+        final sessionDate = DateTime(
+          int.parse(dateParts[2]),
+          int.parse(dateParts[1]),
+          int.parse(dateParts[0]),
+        );
+        final sessionHour = DateTime(
+          sessionDate.year,
+          sessionDate.month,
+          sessionDate.day,
+          int.parse(hourParts[0]),
+          int.parse(hourParts[1]),
+        );
+
+        finalSessionId = await dataConnectService.createSession(
+          movieId: movieId,
+          unitId: unitId,
+          sessionDate: sessionDate,
+          sessionHour: sessionHour,
+          ticketsSold: sessionTickets,
+          netValue: sessionRevenue,
+        );
+
+        if (finalSessionId == null) {
+          throw Exception('Falha ao criar sessão');
+        }
+      }
+
+      if (finalSessionId == null) {
+        throw Exception('Sessão não selecionada');
+      }
+
+      final saleId = await dataConnectService.createSale(
+        productId: productId,
+        sessionId: finalSessionId,
+        saleDate: DateTime.now(),
+        quantity: quantity,
+        netValue: revenue,
+      );
+
+      if (saleId == null) {
+        throw Exception('Falha ao criar venda');
+      }
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Venda registrada com sucesso!'),
+            backgroundColor: Colors.green,
+          ),
+        );
+        _loadProducts();
+        _loadSessions();
+        // Notifica a tela de filmes para recarregar o ranking
+        // (será atualizado quando o usuário voltar para a tela de filmes)
+      }
+    } catch (e) {
+      debugPrint('Erro ao registrar venda: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro ao registrar venda: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 
   Future<void> _createProduct() async {
@@ -398,7 +962,12 @@ class _PipocasPageState extends State<PipocasPage> {
               const SizedBox(height: 12),
               _buildRevenueSummary(),
               const SizedBox(height: 16),
-              _buildProductsList(),
+              _buildRankingSection(),
+              const SizedBox(height: 24),
+              CineButtonComponente(
+                text: 'Registrar Venda',
+                onPressed: _showSaleDialog,
+              ),
               const SizedBox(height: 32),
               const Divider(color: Colors.white24, thickness: 0.4),
               const SizedBox(height: 24),
@@ -458,6 +1027,8 @@ class _PipocasPageState extends State<PipocasPage> {
                   DropdownMenuItem(value: 'Comida', child: Text('Comida')),
                   DropdownMenuItem(value: 'Bebida', child: Text('Bebida')),
                   DropdownMenuItem(value: 'Snack', child: Text('Snack')),
+                  DropdownMenuItem(value: 'Combo', child: Text('Combo')),
+                  DropdownMenuItem(value: 'Promoção', child: Text('Promoção')),
                 ],
                 onChanged: (value) {
                   setState(() {

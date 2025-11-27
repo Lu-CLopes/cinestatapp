@@ -21,6 +21,10 @@ part 'create_audience.dart';
 
 part 'create_product.dart';
 
+part 'create_session.dart';
+
+part 'create_sale.dart';
+
 part 'read_all_users.dart';
 
 part 'read_single_user.dart';
@@ -38,6 +42,8 @@ part 'read_audience_by_unit.dart';
 part 'read_all_units.dart';
 
 part 'read_all_products.dart';
+
+part 'read_all_sessions.dart';
 
 
 
@@ -93,6 +99,16 @@ class ExampleConnector {
   }
   
   
+  CreateSessionVariablesBuilder createSession ({required String sessionMovieId, required String sessionUnitId, required DateTime sessionDate, required DateTime sessionHour, }) {
+    return CreateSessionVariablesBuilder(dataConnect, sessionMovieId: sessionMovieId,sessionUnitId: sessionUnitId,sessionDate: sessionDate,sessionHour: sessionHour,);
+  }
+  
+  
+  CreateSaleVariablesBuilder createSale ({required String saleProductId, required String saleSessionId, required DateTime saleDate, required int saleQuant, }) {
+    return CreateSaleVariablesBuilder(dataConnect, saleProductId: saleProductId,saleSessionId: saleSessionId,saleDate: saleDate,saleQuant: saleQuant,);
+  }
+  
+  
   ReadAllUsersVariablesBuilder readAllUsers () {
     return ReadAllUsersVariablesBuilder(dataConnect, );
   }
@@ -135,6 +151,11 @@ class ExampleConnector {
   
   ReadAllProductsVariablesBuilder readAllProducts () {
     return ReadAllProductsVariablesBuilder(dataConnect, );
+  }
+  
+  
+  ReadAllSessionsVariablesBuilder readAllSessions () {
+    return ReadAllSessionsVariablesBuilder(dataConnect, );
   }
   
 

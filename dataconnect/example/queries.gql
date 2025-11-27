@@ -102,6 +102,28 @@ query ReadAllProducts @auth(level: USER, insecureReason: "Allows managers to vie
     productType
     productPrice
     productActive
+    sales_on_saleProduct {
+      saleQuant
+      saleNetValue
+    }
+  }
+}
+
+query ReadAllSessions @auth(level: USER, insecureReason: "Allows managers to load sessions for manual sales registration"){
+  sessions(orderBy: { sessionDate: DESC }) {
+    id
+    sessionDate
+    sessionHour
+    sessionNetValue
+    sessionTicketsSold
+    sessionMovie {
+      id
+      movieTitle
+    }
+    sessionUnit {
+      id
+      unitName
+    }
   }
 }
 

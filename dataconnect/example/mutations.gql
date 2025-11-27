@@ -147,6 +147,44 @@ mutation createProduct(
   ) 
 }
 
+mutation CreateSession(
+  $sessionMovieId: UUID!,
+  $sessionUnitId: UUID!,
+  $sessionDate: Date!,
+  $sessionHour: Date!,
+  $sessionTicketsSold: Int,
+  $sessionNetValue: Float
+) @auth(level: USER, insecureReason: "Allows managers to register manual sessions") {
+  session_insert(
+    data: {
+      sessionMovieId: $sessionMovieId,
+      sessionUnitId: $sessionUnitId,
+      sessionDate: $sessionDate,
+      sessionHour: $sessionHour,
+      sessionTicketsSold: $sessionTicketsSold,
+      sessionNetValue: $sessionNetValue
+    }
+  )
+}
+
+mutation CreateSale(
+  $saleProductId: UUID!,
+  $saleSessionId: UUID!,
+  $saleDate: Date!,
+  $saleQuant: Int!,
+  $saleNetValue: Float
+) @auth(level: USER, insecureReason: "Allows managers to register manual accessory sales") {
+  sale_insert(
+    data: {
+      saleProductId: $saleProductId,
+      saleSessionId: $saleSessionId,
+      saleDate: $saleDate,
+      saleQuant: $saleQuant,
+      saleNetValue: $saleNetValue
+    }
+  )
+}
+
 #mutation DeleteUser($id: UUID!) @auth(level: USER) {
 #  user_delete(id: $id)
 #}

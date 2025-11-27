@@ -23,13 +23,17 @@ class ReadAllProductsProducts {
   final String? productType;
   final double? productPrice;
   final bool? productActive;
+  final List<ReadAllProductsProductsSalesOnSaleProduct> sales_on_saleProduct;
   ReadAllProductsProducts.fromJson(dynamic json):
   
   id = nativeFromJson<String>(json['id']),
   productName = nativeFromJson<String>(json['productName']),
   productType = json['productType'] == null ? null : nativeFromJson<String>(json['productType']),
   productPrice = json['productPrice'] == null ? null : nativeFromJson<double>(json['productPrice']),
-  productActive = json['productActive'] == null ? null : nativeFromJson<bool>(json['productActive']);
+  productActive = json['productActive'] == null ? null : nativeFromJson<bool>(json['productActive']),
+  sales_on_saleProduct = (json['sales_on_saleProduct'] as List<dynamic>)
+        .map((e) => ReadAllProductsProductsSalesOnSaleProduct.fromJson(e))
+        .toList();
   @override
   bool operator ==(Object other) {
     if(identical(this, other)) {
@@ -44,11 +48,12 @@ class ReadAllProductsProducts {
     productName == otherTyped.productName && 
     productType == otherTyped.productType && 
     productPrice == otherTyped.productPrice && 
-    productActive == otherTyped.productActive;
+    productActive == otherTyped.productActive && 
+    sales_on_saleProduct == otherTyped.sales_on_saleProduct;
     
   }
   @override
-  int get hashCode => Object.hashAll([id.hashCode, productName.hashCode, productType.hashCode, productPrice.hashCode, productActive.hashCode]);
+  int get hashCode => Object.hashAll([id.hashCode, productName.hashCode, productType.hashCode, productPrice.hashCode, productActive.hashCode, sales_on_saleProduct.hashCode]);
   
 
   Map<String, dynamic> toJson() {
@@ -64,6 +69,7 @@ class ReadAllProductsProducts {
     if (productActive != null) {
       json['productActive'] = nativeToJson<bool?>(productActive);
     }
+    json['sales_on_saleProduct'] = sales_on_saleProduct.map((e) => e.toJson()).toList();
     return json;
   }
 
@@ -73,6 +79,50 @@ class ReadAllProductsProducts {
     this.productType,
     this.productPrice,
     this.productActive,
+    required this.sales_on_saleProduct,
+  });
+}
+
+@immutable
+class ReadAllProductsProductsSalesOnSaleProduct {
+  final int? saleQuant;
+  final double? saleNetValue;
+  ReadAllProductsProductsSalesOnSaleProduct.fromJson(dynamic json):
+  
+  saleQuant = json['saleQuant'] == null ? null : nativeFromJson<int>(json['saleQuant']),
+  saleNetValue = json['saleNetValue'] == null ? null : nativeFromJson<double>(json['saleNetValue']);
+  @override
+  bool operator ==(Object other) {
+    if(identical(this, other)) {
+      return true;
+    }
+    if(other.runtimeType != runtimeType) {
+      return false;
+    }
+
+    final ReadAllProductsProductsSalesOnSaleProduct otherTyped = other as ReadAllProductsProductsSalesOnSaleProduct;
+    return saleQuant == otherTyped.saleQuant && 
+    saleNetValue == otherTyped.saleNetValue;
+    
+  }
+  @override
+  int get hashCode => Object.hashAll([saleQuant.hashCode, saleNetValue.hashCode]);
+  
+
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> json = {};
+    if (saleQuant != null) {
+      json['saleQuant'] = nativeToJson<int?>(saleQuant);
+    }
+    if (saleNetValue != null) {
+      json['saleNetValue'] = nativeToJson<double?>(saleNetValue);
+    }
+    return json;
+  }
+
+  ReadAllProductsProductsSalesOnSaleProduct({
+    this.saleQuant,
+    this.saleNetValue,
   });
 }
 

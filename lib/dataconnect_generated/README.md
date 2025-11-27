@@ -429,6 +429,47 @@ ref.execute();
 ref.subscribe(...);
 ```
 
+
+### ReadAllSessions
+#### Required Arguments
+```dart
+// No required arguments
+ExampleConnector.instance.readAllSessions().execute();
+```
+
+
+
+#### Return Type
+`execute()` returns a `QueryResult<ReadAllSessionsData, void>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+/// Result of a query request. Created to hold extra variables in the future.
+class QueryResult<Data, Variables> extends OperationResult<Data, Variables> {
+  QueryResult(super.dataConnect, super.data, super.ref);
+}
+
+final result = await ExampleConnector.instance.readAllSessions();
+ReadAllSessionsData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+final ref = ExampleConnector.instance.readAllSessions().ref();
+ref.execute();
+
+ref.subscribe(...);
+```
+
 ## Mutations
 
 ### CreateUser
@@ -964,6 +1005,167 @@ final ref = ExampleConnector.instance.createProduct(
   productType: productType,
   productPrice: productPrice,
   productActive: productActive,
+).ref();
+ref.execute();
+```
+
+
+### CreateSession
+#### Required Arguments
+```dart
+String sessionMovieId = ...;
+String sessionUnitId = ...;
+DateTime sessionDate = ...;
+DateTime sessionHour = ...;
+ExampleConnector.instance.createSession(
+  sessionMovieId: sessionMovieId,
+  sessionUnitId: sessionUnitId,
+  sessionDate: sessionDate,
+  sessionHour: sessionHour,
+).execute();
+```
+
+#### Optional Arguments
+We return a builder for each query. For CreateSession, we created `CreateSessionBuilder`. For queries and mutations with optional parameters, we return a builder class.
+The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
+```dart
+class CreateSessionVariablesBuilder {
+  ...
+   CreateSessionVariablesBuilder sessionTicketsSold(int? t) {
+   _sessionTicketsSold.value = t;
+   return this;
+  }
+  CreateSessionVariablesBuilder sessionNetValue(double? t) {
+   _sessionNetValue.value = t;
+   return this;
+  }
+
+  ...
+}
+ExampleConnector.instance.createSession(
+  sessionMovieId: sessionMovieId,
+  sessionUnitId: sessionUnitId,
+  sessionDate: sessionDate,
+  sessionHour: sessionHour,
+)
+.sessionTicketsSold(sessionTicketsSold)
+.sessionNetValue(sessionNetValue)
+.execute();
+```
+
+#### Return Type
+`execute()` returns a `OperationResult<CreateSessionData, CreateSessionVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+final result = await ExampleConnector.instance.createSession(
+  sessionMovieId: sessionMovieId,
+  sessionUnitId: sessionUnitId,
+  sessionDate: sessionDate,
+  sessionHour: sessionHour,
+);
+CreateSessionData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String sessionMovieId = ...;
+String sessionUnitId = ...;
+DateTime sessionDate = ...;
+DateTime sessionHour = ...;
+
+final ref = ExampleConnector.instance.createSession(
+  sessionMovieId: sessionMovieId,
+  sessionUnitId: sessionUnitId,
+  sessionDate: sessionDate,
+  sessionHour: sessionHour,
+).ref();
+ref.execute();
+```
+
+
+### CreateSale
+#### Required Arguments
+```dart
+String saleProductId = ...;
+String saleSessionId = ...;
+DateTime saleDate = ...;
+int saleQuant = ...;
+ExampleConnector.instance.createSale(
+  saleProductId: saleProductId,
+  saleSessionId: saleSessionId,
+  saleDate: saleDate,
+  saleQuant: saleQuant,
+).execute();
+```
+
+#### Optional Arguments
+We return a builder for each query. For CreateSale, we created `CreateSaleBuilder`. For queries and mutations with optional parameters, we return a builder class.
+The builder pattern allows Data Connect to distinguish between fields that haven't been set and fields that have been set to null. A field can be set by calling its respective setter method like below:
+```dart
+class CreateSaleVariablesBuilder {
+  ...
+   CreateSaleVariablesBuilder saleNetValue(double? t) {
+   _saleNetValue.value = t;
+   return this;
+  }
+
+  ...
+}
+ExampleConnector.instance.createSale(
+  saleProductId: saleProductId,
+  saleSessionId: saleSessionId,
+  saleDate: saleDate,
+  saleQuant: saleQuant,
+)
+.saleNetValue(saleNetValue)
+.execute();
+```
+
+#### Return Type
+`execute()` returns a `OperationResult<CreateSaleData, CreateSaleVariables>`
+```dart
+/// Result of an Operation Request (query/mutation).
+class OperationResult<Data, Variables> {
+  OperationResult(this.dataConnect, this.data, this.ref);
+  Data data;
+  OperationRef<Data, Variables> ref;
+  FirebaseDataConnect dataConnect;
+}
+
+final result = await ExampleConnector.instance.createSale(
+  saleProductId: saleProductId,
+  saleSessionId: saleSessionId,
+  saleDate: saleDate,
+  saleQuant: saleQuant,
+);
+CreateSaleData data = result.data;
+final ref = result.ref;
+```
+
+#### Getting the Ref
+Each builder returns an `execute` function, which is a helper function that creates a `Ref` object, and executes the underlying operation.
+An example of how to use the `Ref` object is shown below:
+```dart
+String saleProductId = ...;
+String saleSessionId = ...;
+DateTime saleDate = ...;
+int saleQuant = ...;
+
+final ref = ExampleConnector.instance.createSale(
+  saleProductId: saleProductId,
+  saleSessionId: saleSessionId,
+  saleDate: saleDate,
+  saleQuant: saleQuant,
 ).ref();
 ref.execute();
 ```

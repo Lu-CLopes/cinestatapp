@@ -351,6 +351,42 @@ class DataConnectService {
     }
   }
 
+  Future<Map<String, Map<String, dynamic>>> getMovieBoxOfficeStats() async {
+    try {
+      final sessionsResult = await _connector.readAllSessions().execute();
+      final Map<String, Map<String, dynamic>> stats = {};
+
+      for (final session in sessionsResult.data.sessions) {
+        final movieId = session.sessionMovie.id;
+        final ticketsSold = session.sessionTicketsSold ?? 0;
+        final netValue = session.sessionNetValue ?? 0.0;
+
+        if (!stats.containsKey(movieId)) {
+          stats[movieId] = {
+            'movieId': movieId,
+            'movieTitle': session.sessionMovie.movieTitle,
+            'totalTickets': 0,
+            'totalRevenue': 0.0,
+            'sessionCount': 0,
+          };
+        }
+
+        stats[movieId]!['totalTickets'] =
+            (stats[movieId]!['totalTickets'] as int) + ticketsSold;
+        stats[movieId]!['totalRevenue'] =
+            (stats[movieId]!['totalRevenue'] as double) + netValue;
+        stats[movieId]!['sessionCount'] =
+            (stats[movieId]!['sessionCount'] as int) + 1;
+      }
+
+      return stats;
+    } catch (e, stackTrace) {
+      log('Error fetching movie box office stats: $e');
+      log('Stack trace: $stackTrace');
+      return {};
+    }
+  }
+
   Future<Map<String, dynamic>?> getMovieById(String movieId) async {
     try {
       final result = await _connector.readSingleMovie(id: movieId).execute();
@@ -499,21 +535,115 @@ class DataConnectService {
     try {
       final result = await _connector.readAllProducts().execute();
 
-      return result.data.products
-          .map(
-            (product) => {
-              'id': product.id,
-              'name': product.productName,
-              'type': product.productType,
-              'price': product.productPrice,
-              'active': product.productActive ?? false,
-            },
-          )
-          .toList();
+      return result.data.products.map((product) {
+        final price = product.productPrice ?? 0;
+        final sales = product.sales_on_saleProduct;
+        int totalQuantity = 0;
+        double totalRevenue = 0;
+        for (final sale in sales) {
+          final quantity = sale.saleQuant ?? 0;
+          final netValue = sale.saleNetValue;
+          totalQuantity += quantity;
+          if (netValue != null) {
+            totalRevenue += netValue;
+          } else {
+            totalRevenue += price * quantity;
+          }
+        }
+
+        return {
+          'id': product.id,
+          'name': product.productName,
+          'type': product.productType,
+          'price': price,
+          'active': product.productActive ?? false,
+          'totalQuantity': totalQuantity,
+          'totalRevenue': totalRevenue,
+        };
+      }).toList();
     } catch (e, stackTrace) {
       log('Error fetching products: $e');
       log('Stack trace: $stackTrace');
       return [];
+    }
+  }
+
+  Future<List<Map<String, dynamic>>> getAllSessions() async {
+    try {
+      final result = await _connector.readAllSessions().execute();
+      return result.data.sessions.map((session) {
+        return {
+          'id': session.id,
+          'date': session.sessionDate,
+          'hour': session.sessionHour,
+          'movieTitle': session.sessionMovie.movieTitle,
+          'unitName': session.sessionUnit.unitName,
+          'ticketsSold': session.sessionTicketsSold,
+          'netValue': session.sessionNetValue,
+        };
+      }).toList();
+    } catch (e, stackTrace) {
+      log('Error fetching sessions: $e');
+      log('Stack trace: $stackTrace');
+      return [];
+    }
+  }
+
+  Future<String?> createSession({
+    required String movieId,
+    required String unitId,
+    required DateTime sessionDate,
+    required DateTime sessionHour,
+    int? ticketsSold,
+    double? netValue,
+  }) async {
+    try {
+      final builder = _connector.createSession(
+        sessionMovieId: movieId,
+        sessionUnitId: unitId,
+        sessionDate: sessionDate,
+        sessionHour: sessionHour,
+      );
+      if (ticketsSold != null) {
+        builder.sessionTicketsSold(ticketsSold);
+      }
+      if (netValue != null) {
+        builder.sessionNetValue(netValue);
+      }
+      final result = await builder.execute();
+      log('Session created in backend: ${result.data.session_insert.id}');
+      return result.data.session_insert.id;
+    } catch (e, stackTrace) {
+      log('Error creating session in backend: $e');
+      log('Stack trace: $stackTrace');
+      return null;
+    }
+  }
+
+  Future<String?> createSale({
+    required String productId,
+    required String sessionId,
+    required DateTime saleDate,
+    required int quantity,
+    double? netValue,
+  }) async {
+    try {
+      final builder = _connector.createSale(
+        saleProductId: productId,
+        saleSessionId: sessionId,
+        saleDate: saleDate,
+        saleQuant: quantity,
+      );
+      if (netValue != null) {
+        builder.saleNetValue(netValue);
+      }
+      final result = await builder.execute();
+      log('Sale created in backend: ${result.data.sale_insert.id}');
+      return result.data.sale_insert.id;
+    } catch (e, stackTrace) {
+      log('Error creating sale in backend: $e');
+      log('Stack trace: $stackTrace');
+      return null;
     }
   }
 }

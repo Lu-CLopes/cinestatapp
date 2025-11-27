@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../wave_clipper.dart';
 import 'pipocas_page.dart';
 import 'audience_page.dart';
+import 'support_page.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -249,6 +250,22 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            const SizedBox(height: 16),
+            _buildOptionCard(
+              context,
+              icon: Icons.support_agent,
+              title: 'Suporte e Contato',
+              description: 'Entre em contato conosco',
+              color: Colors.red,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SupportPage(),
+                  ),
+                );
+              },
             ),
           ],
         ),
